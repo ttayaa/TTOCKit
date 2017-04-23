@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
 
 
 
-    s.source       = { :git => "https://github.com/ttayaa/TTSource.git", :tag => "#{s.version}" }
+    s.source       = { :git => "https://github.com/ttayaa/TTSource.git", :tag => "v#{s.version}" }
 
 
     s.source_files  = "TTSource/**/*.{h,m,mm}"

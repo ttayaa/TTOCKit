@@ -7,11 +7,11 @@ s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
 s.author       = { "ttayaa" => "2087154267@qq.com" }
 s.platform     = :ios, '8.0'
 s.source       = { :git => 'https://git.oschina.net/ttayaa/TTSource.git', :tag => "1.0.0" }
-s.source_files  = 'Sources/**/*.{h,m,mm}'    #源码
+s.source_files  = 'TTSource/**/*.{h,m,mm}'    #源码
 s.requires_arc = true       #是否需要arc
 
-s.vendored_frameworks = 'Sources/**/*.{framework}'
-s.vendored_libraries = 'Sources/**/*.{a}'         #.a静态库
+s.vendored_frameworks = 'TTSource/**/*.{framework}'
+s.vendored_libraries = 'TTSource/**/*.{a}'         #.a静态库
 s.resource = 'Sources/**/*.{png,xib,storyboard,plist,der,js,json,strings,imageset,xcassets}'
 # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
 

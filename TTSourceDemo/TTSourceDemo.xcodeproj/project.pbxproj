@@ -839,7 +839,7 @@
 		187A1E831EAC808F002CA124 /* SignalActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignalActionSheet.m; sourceTree = "<group>"; };
 		187A1E851EAC808F002CA124 /* SignalWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignalWebView.h; sourceTree = "<group>"; };
 		187A1E861EAC808F002CA124 /* SignalWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignalWebView.m; sourceTree = "<group>"; };
-		187A1F901EAC80CA002CA124 /* TTSource.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TTSource.podspec; path = ../../TTSource.podspec; sourceTree = "<group>"; };
+		187A1F901EAC80CA002CA124 /* TTSource.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TTSource.podspec; path = ../../TTSource.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		187A1F921EAC810E002CA124 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		187A1F941EAC8122002CA124 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		187A1F961EAC8156002CA124 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };

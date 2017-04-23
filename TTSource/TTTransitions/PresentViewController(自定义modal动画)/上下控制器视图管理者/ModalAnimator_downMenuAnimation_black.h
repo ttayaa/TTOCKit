@@ -6,7 +6,7 @@
 //  Copyright © 2016年 丰硕汽车. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface ModalAnimator_downMenuAnimation_black : NSObject<UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning>
 /** 显示出来的控制器View的尺寸(目标控制器View的尺寸)*/

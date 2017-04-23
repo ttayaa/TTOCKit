@@ -6,7 +6,7 @@
 //  Copyright © 2016年 ttayaa All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface ModalAnimator_downMenuAnimation_clear : NSObject<UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning>
 

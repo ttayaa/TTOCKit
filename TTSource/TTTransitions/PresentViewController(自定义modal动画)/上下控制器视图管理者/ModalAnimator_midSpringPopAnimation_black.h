@@ -6,7 +6,7 @@
 //  Copyright © 2016年 丰硕聊天. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface ModalAnimator_midSpringPopAnimation_black : NSObject<UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning>
 

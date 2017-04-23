@@ -35,8 +35,6 @@
 
 #import "TTRefresh.h"
 
-#import "TTDataConfig.h"
-
 #endif
 
 

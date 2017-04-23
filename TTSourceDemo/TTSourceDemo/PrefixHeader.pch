@@ -1,0 +1,14 @@
+//
+//  PrefixHeader.pch
+//  TTSourceDemo
+//
+//  Created by apple on 2017/4/23.
+//  Copyright © 2017年 ttayaa. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "TTSourceConfig.h"
+
+#endif /* PrefixHeader_pch */

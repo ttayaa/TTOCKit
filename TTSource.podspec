@@ -37,23 +37,9 @@ Pod::Spec.new do |s|
 
     s.requires_arc = true
 
-    s.subspec 'TTSource' do |ttSource|
-    
-    
-        ttSource.dependency 'Masonry'  #TTControllerCategory
-    
-        #TTLunchConfig
-        ttSource.frameworks = 'CoreTelephony' #讯飞SDK
-        ttSource.libraries = 'z'  #, 'bz2.1.0' #lib            #讯飞SDK
-        ttSource.dependency 'BaiduMapAPI'
-        ttSource.dependency 'AliPay', '~> 2.1.2'
-        ttSource.dependency 'UMengUShare/UI'
-        ttSource.dependency 'UMengUShare/Social/Sina'
-        ttSource.dependency 'UMengUShare/Social/WeChat'
-        ttSource.dependency 'UMengUShare/Social/QQ'
-        ttSource.dependency 'UMengUShare/Social/SMS'
-        ttSource.dependency 'UMengUShare/Social/TencentWeibo'
-    
+    s.subspec 'TTControllerCategory' do |ss|
+        
+        ss.dependency 'Masonry'  #TTControllerCategory
     end
     
 

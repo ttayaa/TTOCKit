@@ -6,7 +6,7 @@ s.homepage     = "https://github.com/ttayaa/TTSource"
 s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
 s.author       = { "ttayaa" => "2087154267@qq.com" }
 s.platform     = :ios, '8.0'
-s.source       = { :git => 'https://git.oschina.net/ttayaa/TTSource.git', :tag => s.version }
+s.source       = { :git => 'https://github.com/ttayaa/TTSource', :tag => s.version }
 s.source_files  = 'TTSource/**/*.{h,m,mm}'    #源码
 s.requires_arc = true       #是否需要arc
 

@@ -17,6 +17,9 @@
 #endif
 
 
+static BOOL TTDeallocLog;
+
+
 @implementation UIViewController (LogDealloc)
 /**
  *  将所有的方法交换到这个分类来释放
@@ -33,19 +36,24 @@
     Method LogDealloc_viewWillDisappear = class_getInstanceMethod(self,@selector(LogDealloc_viewWillDisappear:));
     method_exchangeImplementations(viewWillDisappear, LogDealloc_viewWillDisappear);
 }
-//#elif TARGET_OS_IPHONE//真机
-//+ (void)load{
-//
-//}
 
-//#endif
 
 static BOOL logswith;
 
 
+-(void)openDeallocLog:(BOOL)isopen
+{
+    if (isopen) {
+        TTDeallocLog = YES;
+    }
+    else
+    {
+        TTDeallocLog = NO;
+    }
+}
+
 -(void)LogDealloc_viewWillDisappear:(BOOL)animated
 {
-//    if (TTConfigOpenVcDeallocLog) {
     
         //处理相册不选择图片的闪退问题
         if ([NSStringFromClass([self class]) isEqualToString:@"PLPhotoTileViewController"])
@@ -57,7 +65,6 @@ static BOOL logswith;
             logswith = YES;
         }
         
-//    }
     
    
     [self LogDealloc_viewWillDisappear:animated];
@@ -70,17 +77,20 @@ static BOOL logswith;
  */
 - (void)LogDealloc_dealloc
 {
-//    if (TTConfigOpenVcDeallocLog) {
+    
         if(logswith)
         {
-            ttLog(@"LogDealloc_dealloc ****** %@",self);
-            //    [self.view endEditing:YES];
-            [[NSNotificationCenter defaultCenter] removeObserver:self];
+            if (TTDeallocLog) {
+                
+                ttLog(@"LogDealloc_dealloc ****** %@",self);
             
-            [self.view endEditing:YES];
+            }
             
+                [[NSNotificationCenter defaultCenter] removeObserver:self];
+                
+                [self.view endEditing:YES];
+
         }
-//    }
     
   
     [self LogDealloc_dealloc];

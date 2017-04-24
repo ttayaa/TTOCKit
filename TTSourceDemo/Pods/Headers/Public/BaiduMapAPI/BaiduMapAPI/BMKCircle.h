@@ -1,1 +1,0 @@
-../../../../BaiduMapAPI/Release-universal/BaiduMapAPI.framework/Headers/BMKCircle.h

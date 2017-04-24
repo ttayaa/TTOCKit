@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 
 
-static BOOL TTConfigOpenVcDeallocLog;
 
 
 @interface UIViewController (LogDealloc)
 
-
+-(void)openDeallocLog:(BOOL)isopen;
 
 @end

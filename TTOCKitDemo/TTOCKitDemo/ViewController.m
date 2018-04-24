@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-#import "TTKitConfig.h"
+#import "TTOCKitConfig.h"
 
 #import "tetController.h"
 
@@ -20,6 +20,31 @@
 @end
 
 @implementation ViewController
++(void)load
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(DoScanResult:) name:@"KNOTIFICATION_ScanResult" object:nil];
+}
+
++(void)DoScanResult:(NSNotification *)noty
+{
+
+    NSDictionary *dict = noty.object;
+
+    UIViewController *ScanVc = dict[@"ScanVc"];
+    //将扫码控制器pop掉
+    [ScanVc dismissViewControllerAnimated:YES completion:nil];
+    [ScanVc.navigationController popViewControllerAnimated:NO];
+
+    //获取二维码中的字符串
+    NSString *codestr = dict[@"ScanValue"];
+
+    CommonProgressShowTip(codestr, 3)
+    
+    if ([codestr containsString:@"www"]||[codestr containsString:@"com"]) {
+        [self jumpWithUrl:codestr];
+    }
+    
+}
 
 
 -(void)viewWillAppear:(BOOL)animated
@@ -92,22 +117,45 @@ TTSignal(present)
         
     }];
 }
+
 TTSignal(web)
+{
+    [self jumpWithUrl:@"https://www.baidu.com/"];
+}
+
+-(void)jumpWithUrl:(NSString *)url
 {
     TTWebController *web = [[TTWebController alloc] init];
     //        web.HTMLString = self.ttReflashModel.messages[indexPath.row].content;
     web.url =@"https://www.baidu.com/";
     web.wkwebBackgroundColor = TTGrayColor(200);
     
-//    web.backIconName = @"backicon";
+    //    web.backIconName = @"backicon";
     web.prograssColor = [UIColor redColor];
     web.prograssbgColor = [UIColor whiteColor];
     //        web.navTitle = self.ttReflashModel.messages[indexPath.row].title;
-    web.navTitle = @"关于我们";
+    web.navTitle = @"网址";
     web.isAlwaysTitle = YES;
     web.navTitleColor = [UIColor blueColor];
     [self.navigationController pushViewController:web animated:YES];
 }
++(void)jumpWithUrl:(NSString *)url
+{
+    TTWebController *web = [[TTWebController alloc] init];
+    //        web.HTMLString = self.ttReflashModel.messages[indexPath.row].content;
+    web.url =@"https://www.baidu.com/";
+    web.wkwebBackgroundColor = TTGrayColor(200);
+    
+    //    web.backIconName = @"backicon";
+    web.prograssColor = [UIColor redColor];
+    web.prograssbgColor = [UIColor whiteColor];
+    //        web.navTitle = self.ttReflashModel.messages[indexPath.row].title;
+    web.navTitle = @"网址";
+    web.isAlwaysTitle = YES;
+    web.navTitleColor = [UIColor blueColor];
+    [hKeyWindow.rootViewController presentViewController:web animated:YES completion:nil];
+}
+
 TTSignal(alphaBar)
 {
     [self TTNVAlphaBar:TTAlphaNaviBarStyle2 BarColor:[UIColor redColor] bindScrollView:self.tableView];
@@ -143,7 +191,9 @@ TTSignal(network)
 
 TTSignal(ColorBar)
 {
-    [self.navigationController TTPushViewController:@"TTQRScanController" animated:YES SetupParms:^(UIViewController *vc, NSMutableDictionary *dict) {
+    
+    
+    [self.navigationController TTPushViewController:[[UIStoryboard storyboardWithName:@"TTQRScan" bundle:nil] instantiateViewControllerWithIdentifier:@"TTQRScanController"] animated:YES SetupParms:^(UIViewController *vc, NSMutableDictionary *dict) {
         
     } callback:^(id parameter) {
         

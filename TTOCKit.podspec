@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
     s.name         = "TTOCKit"
-    s.version      = "1.0.7"
+    s.version      = "1.0.8"
     s.summary      = " mvc."
     s.description  = <<-DESC
                 easy to mvc.
@@ -37,8 +37,56 @@ Pod::Spec.new do |s|
     end
     
     s.subspec 'TTTools' do |ss|
-        ss.source_files = 'TTOCKit/TTTools/**/*.{h,m,mm}'
-        ss.dependency 'SDWebImage'
+        ss.source_files = 'TTOCKit/TTTools/TTTools.h'
+        
+        
+        ss.subspec 'TTBtnArrSelected' do |sss|
+            sss.source_files = 'TTOCKit/TTTools/TTBtnArrSelected/**/*.{h,m,mm}'
+
+        end
+        ss.subspec 'TTQRScanController' do |sss|
+            sss.source_files = 'TTOCKit/TTTools/TTQRScanController/**/*.{h,m,mm}'
+
+        end
+        ss.subspec 'TTPhotoBrowser' do |sss|
+            sss.source_files = 'TTOCKit/TTTools/TTPhotoBrowser/**/*.{h,m,mm}'
+            sss.dependency 'SDWebImage'
+        end
+        ss.subspec 'TTNSStringCategory' do |sss|
+             sss.source_files = 'TTOCKit/TTTools/TTNSStringCategory/**/*.{h,m,mm}'
+        end
+        ss.subspec 'TTPlaceholderPlace' do |sss|
+            sss.source_files = 'TTOCKit/TTTools/TTPlaceholderPlace/**/*.{h,m,mm}'
+
+        end
+        ss.subspec 'TTNumberTF' do |sss|
+            sss.source_files = 'TTOCKit/TTTools/TTNumberTF/**/*.{h,m,mm}'
+
+        end
+        ss.subspec 'TTProgress' do |sss|
+            sss.source_files = 'TTOCKit/TTTools/TTProgress/**/*.{h,m,mm}'
+
+        end
+        ss.subspec 'TTLimitTextField' do |sss|
+            sss.source_files = 'TTOCKit/TTTools/TTLimitTextField/**/*.{h,m,mm}'
+
+        end
+        ss.subspec 'TTAlertView' do |sss|
+            sss.source_files = 'TTOCKit/TTTools/TTAlertView/**/*.{h,m,mm}'
+
+        end
+        ss.subspec 'TTWebView' do |sss|
+            sss.source_files = 'TTOCKit/TTTools/TTWebView/**/*.{h,m,mm}'
+
+        end
+        ss.subspec 'TTLogVcDealloc' do |sss|
+            sss.source_files = 'TTOCKit/TTTools/TTLogVcDealloc/**/*.{h,m,mm}'
+
+        end
+        ss.subspec 'TTButtonInnerRect' do |sss|
+            sss.source_files = 'TTOCKit/TTTools/TTButtonInnerRect/**/*.{h,m,mm}'
+
+        end
     end
     
     s.subspec 'TTNetwork' do |ss|

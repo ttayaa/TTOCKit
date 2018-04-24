@@ -95,6 +95,7 @@
 		1898F61D208F1D0200647FC9 /* NavigationBarPop_push_Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898F5D0208F1D0200647FC9 /* NavigationBarPop_push_Manager.m */; };
 		1898F61E208F1D0200647FC9 /* PopAnimator_upTpdownAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898F5D1208F1D0200647FC9 /* PopAnimator_upTpdownAnimation.m */; };
 		1898F620208F1D8200647FC9 /* TTOCKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 1898F61F208F1D8200647FC9 /* TTOCKit.podspec */; };
+		1898F626208F1FF200647FC9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898F625208F1FF200647FC9 /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -275,6 +276,8 @@
 		1898F5D3208F1D0200647FC9 /* NavigationBarPop_push_Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarPop_push_Manager.h; sourceTree = "<group>"; };
 		1898F5D4208F1D0200647FC9 /* PopAnimator_upTpdownAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopAnimator_upTpdownAnimation.h; sourceTree = "<group>"; };
 		1898F61F208F1D8200647FC9 /* TTOCKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TTOCKit.podspec; path = ../../TTOCKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		1898F624208F1FF200647FC9 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ../../../../.Trash/TTKitDemo/TTKitDemo/ViewController.h; sourceTree = "<group>"; };
+		1898F625208F1FF200647FC9 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = ../../../../.Trash/TTKitDemo/TTKitDemo/ViewController.m; sourceTree = "<group>"; };
 		3B2045AFD3AF51BF34B7798C /* Pods-TTOCKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTOCKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TTOCKitDemo/Pods-TTOCKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		3C36CB8E65BF660ED72AA1DF /* libPods-TTOCKitDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TTOCKitDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE465CB0BF6252462AB40D23 /* Pods-TTOCKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTOCKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TTOCKitDemo/Pods-TTOCKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -317,6 +320,8 @@
 				1898F50A208F1D0100647FC9 /* TTOCKit */,
 				1898F508208F1CCE00647FC9 /* AppDelegate.h */,
 				1898F507208F1CCD00647FC9 /* AppDelegate.m */,
+				1898F624208F1FF200647FC9 /* ViewController.h */,
+				1898F625208F1FF200647FC9 /* ViewController.m */,
 				1898F4FE208F1CC300647FC9 /* TableViewCel2.h */,
 				1898F4F6208F1CC200647FC9 /* TableViewCel2.m */,
 				1898F4F5208F1CC200647FC9 /* TableViewCel2.xib */,
@@ -1037,6 +1042,7 @@
 				1898F5D7208F1D0200647FC9 /* UIViewController+AlphaBar.m in Sources */,
 				1898F5FC208F1D0200647FC9 /* UIImage+KVNEmpty.m in Sources */,
 				1898F601208F1D0200647FC9 /* TTAlertView.m in Sources */,
+				1898F626208F1FF200647FC9 /* ViewController.m in Sources */,
 				1898F615208F1D0200647FC9 /* ModalAnimator_midAnimation.m in Sources */,
 				1898F5EB208F1D0200647FC9 /* TTScanQRCodeResultDEMO.m in Sources */,
 				1898F509208F1CCE00647FC9 /* AppDelegate.m in Sources */,

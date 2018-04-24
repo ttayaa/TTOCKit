@@ -276,6 +276,8 @@
 		1898F39E208EDD2000647FC9 /* TTQRScanController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TTQRScanController.bundle; sourceTree = "<group>"; };
 		1898F3A0208F03AB00647FC9 /* TTKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TTKit.podspec; path = ../../TTKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		1898F3A4208F056F00647FC9 /* TTKitConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTKitConfig.h; sourceTree = "<group>"; };
+		1898F3A6208F0C0200647FC9 /* TTTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTTools.h; sourceTree = "<group>"; };
+		1898F3A9208F0D8700647FC9 /* TTNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTNetwork.h; sourceTree = "<group>"; };
 		364E2B6AD678D9AA4CF0A710 /* Pods-TTKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TTKitDemo/Pods-TTKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		62955859058A9B28B07C7329 /* Pods-TTKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TTKitDemo/Pods-TTKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		AF56E97F04EB23D0ADCE1108 /* Pods_TTKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TTKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -481,6 +483,7 @@
 		1898F2AD208DD1F400647FC9 /* TTTools */ = {
 			isa = PBXGroup;
 			children = (
+				1898F3A6208F0C0200647FC9 /* TTTools.h */,
 				1898F394208EDB6B00647FC9 /* TTBtnArrSelected */,
 				1898F390208ED68300647FC9 /* TTNSStringCategory */,
 				1898F38C208ED3BD00647FC9 /* TTPlaceholderPlace */,
@@ -603,8 +606,8 @@
 			isa = PBXGroup;
 			children = (
 				1898F2DA208DD1F400647FC9 /* TTTextfield.h */,
-				1898F2DB208DD1F400647FC9 /* NSString+TTTextField.h */,
 				1898F2DC208DD1F400647FC9 /* TTTextfield.m */,
+				1898F2DB208DD1F400647FC9 /* NSString+TTTextField.h */,
 				1898F2DD208DD1F400647FC9 /* NSString+TTTextField.m */,
 			);
 			path = TTLimitTextField;
@@ -613,8 +616,8 @@
 		1898F2DE208DD1F400647FC9 /* TTAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				1898F2DF208DD1F400647FC9 /* TTAlertView.m */,
 				1898F2E0208DD1F400647FC9 /* TTAlertView.h */,
+				1898F2DF208DD1F400647FC9 /* TTAlertView.m */,
 			);
 			path = TTAlertView;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				1898F300208DD1F400647FC9 /* NSDictionary+tt.m */,
 				1898F301208DD1F400647FC9 /* NSObject+tt_PrintProperty.h */,
 				1898F305208DD1F400647FC9 /* NSObject+tt_PrintProperty.m */,
+				1898F3A9208F0D8700647FC9 /* TTNetwork.h */,
 			);
 			path = TTNetwork;
 			sourceTree = "<group>";

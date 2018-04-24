@@ -7,14 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "TTWebController.h"
-#import "TTVM.h"
-#import "TTSignal.h"
-#import "TTRouter.h"
+
+#import "TTKitConfig.h"
+
 #import "tetController.h"
-#import "TTMacros.h"
-#import "TTControllerCategoryHeader.h"
-#import "DBProgress.h"
 
 #import "testmodel.h"
 

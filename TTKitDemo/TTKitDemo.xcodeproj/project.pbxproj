@@ -418,9 +418,9 @@
 		1898F28A208DD1F400647FC9 /* NBarClick(导航栏点击) */ = {
 			isa = PBXGroup;
 			children = (
+				1898F292208DD1F400647FC9 /* UIViewController+NVBarClick.h */,
 				1898F28B208DD1F400647FC9 /* UIViewController+NVBarClick.m */,
 				1898F28C208DD1F400647FC9 /* FBShimmering */,
-				1898F292208DD1F400647FC9 /* UIViewController+NVBarClick.h */,
 			);
 			path = "NBarClick(导航栏点击)";
 			sourceTree = "<group>";

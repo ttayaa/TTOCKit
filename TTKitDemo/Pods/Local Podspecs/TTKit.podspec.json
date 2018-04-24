@@ -1,0 +1,83 @@
+{
+  "name": "TTKit",
+  "version": "1.0.4",
+  "summary": "mvc.",
+  "description": "easy to mvc.",
+  "homepage": "https://github.com/ttayaa/TTKit",
+  "license": {
+    "type": "MIT",
+    "file": "FILE_LICENSE"
+  },
+  "authors": {
+    "ttayaa": "2087154267@qq.com"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source": {
+    "git": "https://github.com/ttayaa/TTKit.git",
+    "tag": "v1.0.4"
+  },
+  "source_files": "TTKit/**/*.{h,m,mm}",
+  "resources": "TTKit/**/*.{png,xib,storyboard,plist,der,js,json,strings,imageset,xcassets}",
+  "requires_arc": true,
+  "subspecs": [
+    {
+      "name": "All",
+      "source_files": "TTKit/**/*.{h,m,mm}",
+      "dependencies": {
+        "SDWebImage": [
+
+        ],
+        "AFNetworking": [
+
+        ],
+        "YYModel": [
+
+        ]
+      }
+    },
+    {
+      "name": "TTControllerCategory",
+      "source_files": "TTKit/TTControllerCategory/**/*.{h,m,mm}"
+    },
+    {
+      "name": "TTMVVM",
+      "source_files": "TTKit/TTMVVM/**/*.{h,m,mm}"
+    },
+    {
+      "name": "TTTools",
+      "source_files": "TTKit/TTTools/**/*.{h,m,mm}",
+      "dependencies": {
+        "SDWebImage": [
+
+        ]
+      }
+    },
+    {
+      "name": "TTNetwork",
+      "source_files": "TTKit/TTNetwork/**/*.{h,m,mm}",
+      "dependencies": {
+        "AFNetworking": [
+
+        ],
+        "YYModel": [
+
+        ]
+      }
+    },
+    {
+      "name": "TTSignal",
+      "source_files": "TTKit/TTSignal/**/*.{h,m,mm}"
+    },
+    {
+      "name": "TTRouter",
+      "source_files": "TTKit/TTRouter/**/*.{h,m,mm}",
+      "dependencies": {
+        "YYModel": [
+
+        ]
+      }
+    }
+  ]
+}

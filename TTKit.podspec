@@ -19,21 +19,14 @@ Pod::Spec.new do |s|
     s.author       = { "ttayaa" => "2087154267@qq.com" }
     s.platform     = :ios, "8.0"
     s.source       = { :git => "https://github.com/ttayaa/TTKit.git", :tag => "v#{s.version}" }
-    #s.source_files  = "TTSource/**/*.{h,m,mm}"
+    s.source_files  = "TTKit/**/*.{h,m,mm}"
     
     s.resource  = "TTKit/**/*.{png,xib,storyboard,plist,der,js,json,strings,imageset,xcassets}"
     s.requires_arc = true
     
     
-    #s.source_files = 'TTKit/TTKitConfig.h'
+    s.source_files = 'TTKit/TTKitHeader/TTKitConfig.h'
     
-    
-    s.subspec 'All' do |ss|
-        ss.source_files = 'TTKit/**/*.{h,m,mm}'
-        ss.dependency 'SDWebImage'
-        ss.dependency 'AFNetworking'
-        ss.dependency 'YYModel'
-    end
     
     s.subspec 'TTControllerCategory' do |ss|
         ss.source_files = 'TTKit/TTControllerCategory/**/*.{h,m,mm}'

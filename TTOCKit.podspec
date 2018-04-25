@@ -39,7 +39,10 @@ Pod::Spec.new do |s|
     s.subspec 'TTTools' do |ss|
         ss.source_files = 'TTOCKit/TTTools/TTTools.h'
         
-        
+        ss.subspec 'TTCommonTools' do |sss|
+            sss.source_files = 'TTOCKit/TTTools/TTCommonTools/**/*.{h,m,mm}'
+            
+        end
         ss.subspec 'TTBtnArrSelected' do |sss|
             sss.source_files = 'TTOCKit/TTTools/TTBtnArrSelected/**/*.{h,m,mm}'
 

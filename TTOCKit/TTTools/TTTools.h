@@ -22,4 +22,6 @@
 #import "TTWebController.h"
 #import "UIViewController+LogDealloc.h"
 #import "UIButton+TTLayout.h"
+#import "UIView+cell.h"
+#import "UIView+TTframe.h"
 #endif /* TTTools */

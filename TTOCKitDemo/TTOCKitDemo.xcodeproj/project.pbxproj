@@ -360,11 +360,11 @@
 		18BC1B7E2093082200D703F1 /* TTNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				18BC1B7F2093082200D703F1 /* NetDataModel.h */,
 				18BC1B802093082200D703F1 /* NetChangeTools服务器切换 */,
-				18BC1B932093082200D703F1 /* NSObject+tt_PrintProperty.h */,
-				18BC1B942093082200D703F1 /* NetDataModel.m */,
 				18BC1B952093082200D703F1 /* TTNetwork.h */,
+				18BC1B7F2093082200D703F1 /* NetDataModel.h */,
+				18BC1B942093082200D703F1 /* NetDataModel.m */,
+				18BC1B932093082200D703F1 /* NSObject+tt_PrintProperty.h */,
 				18BC1B962093082200D703F1 /* NSObject+tt_PrintProperty.m */,
 			);
 			path = TTNetwork;

@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
     s.name         = "TTOCKit"
-    s.version      = "1.0.9"
+    s.version      = "1.0.10"
     s.summary      = " mvc."
     s.description  = <<-DESC
                 easy to mvc.
@@ -94,6 +94,7 @@ Pod::Spec.new do |s|
     
     s.subspec 'TTNetwork' do |ss|
         ss.source_files = 'TTOCKit/TTNetwork/**/*.{h,m,mm}'
+        ss.resource = 'TTOCKit/TTNetwork/**/*.{png,storyboard,xib,plist,der,js.json,strings,xcassets,imageset}'
         ss.dependency 'AFNetworking'
         ss.dependency 'YYModel'
     end

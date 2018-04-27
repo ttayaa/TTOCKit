@@ -10,7 +10,7 @@
 #define TTSignal_h
 #import "UIView+TTSignal.h"
 #define TTSignal(SignalName) \
-- (void)TTSignal_##SignalName:(id)object
+- (void)TTSignal_##SignalName:(UIView *)object
 #endif /* TTSignal_h */
 
 

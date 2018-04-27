@@ -21,7 +21,7 @@
 
 @implementation NavigationBarPop_push_Manager
 
-static NSInteger AnimationType;
+static NSInteger TTRouterAnimationType;
 static NavigationBarPop_push_Manager *NavigationManage;
 
 +(void)load
@@ -33,7 +33,7 @@ static NavigationBarPop_push_Manager *NavigationManage;
 +(void)manageUseAnimationType:(NaviBarAnimationType)type NavigationController:(UINavigationController *)NavigationController
 {
     NavigationController.delegate = NavigationManage;
-    AnimationType = type;
+    TTRouterAnimationType = type;
 
 }
 
@@ -63,19 +63,19 @@ static NavigationBarPop_push_Manager *NavigationManage;
 {
     if (operation == UINavigationControllerOperationPush) {
         
-        if (AnimationType == NaviBarAnimationRootVcViewUpDown)
+        if (TTRouterAnimationType == NaviBarAnimationRootVcViewUpDown)
             return self.pushAnimator;
-        if (AnimationType == NaviBarAnimationRootVcOnlyPushUp)
+        if (TTRouterAnimationType == NaviBarAnimationRootVcOnlyPushUp)
             return self.pushAnimator;
        
         
             return nil;
         
     }else if (operation == UINavigationControllerOperationPop){
-        if (AnimationType == NaviBarAnimationRootVcViewUpDown)
+        if (TTRouterAnimationType == NaviBarAnimationRootVcViewUpDown)
             return self.popAnimator;
         
-        if (AnimationType == NaviBarAnimationRootVcOnlyPopDown)
+        if (TTRouterAnimationType == NaviBarAnimationRootVcOnlyPopDown)
             return self.popAnimator;
         
             return nil;

@@ -176,14 +176,25 @@ TTSignal(alphaBar)
 TTSignal(network)
 {
 
-    [testmodel POST_default:@"/auth/login" CacheIf:0 IsShowHud:1 parameters:^(testmodel *ParmsModel) {
-        ParmsModel.login = @"13471045617";
-        ParmsModel.password = @"asdasd";
-    } success:^(BOOL isCatch, testmodel *model, NSMutableArray<testmodel *> *modelArr, id responseObject) {
+//    [testmodel POST_default:@"/auth/login" CacheIf:0 IsShowHud:1 parameters:^(testmodel *ParmsModel) {
+//        ParmsModel.login = @"13471045617";
+//        ParmsModel.password = @"asdasd";
+//    } success:^(BOOL isCatch, testmodel *model, NSMutableArray<testmodel *> *modelArr, id responseObject) {
+//
+//    } failure:^(NSError *error, NSString *errorStr, NSString *status) {
+////        CommonProgressShowTip(errorStr, 5)
+//        CommonProgressError(errorStr)
+//    }];
+    
+    [testmodel POST_HeadLoad:@"/message/list" ParmsBlock:^(testmodel *ParmsModel) {
+        //消息类型。0-所有消息，-2:个人信息;4:系统消息;-1:系统公告
+        ParmsModel.messageType = @"-1";
+        //0：未读，1：已读，-1或不传：所有
+        ParmsModel.read = @"-1";
+    } reflashScrollView:self.tableView arrKeyBlock:^(testmodel *model) {
         
-    } failure:^(NSError *error, NSString *errorStr, NSString *status) {
-//        CommonProgressShowTip(errorStr, 5)
-        CommonProgressError(errorStr)
+    } loadfinish:^(BOOL isSsucess) {
+        
     }];
     
 }

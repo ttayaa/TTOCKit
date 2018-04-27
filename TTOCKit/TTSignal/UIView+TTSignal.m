@@ -127,10 +127,6 @@ static UIControlEvents allEventControls = -1;
 
 -(NSString *)clickSignalName{
     
-    //    if ([self isKindOfClass:[UITableViewCell class]] || [self isKindOfClass:[UICollectionViewCell class]] ) {
-    //
-    //        return nil;
-    //    }
     return objc_getAssociatedObject(self, @selector(clickSignalName));
 }
 
@@ -227,6 +223,20 @@ static UIControlEvents allEventControls = -1;
 -(UICollectionView *)collectionView{
     
     return objc_getAssociatedObject(self, @selector(collectionView));
+}
+
+
+-(void)setTableViewCell:(UITableViewCell *)TableViewCell{
+    objc_setAssociatedObject(self, @selector(TableViewCell), TableViewCell, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+-(UITableViewCell *)TableViewCell{
+    return objc_getAssociatedObject(self, @selector(TableViewCell));
+}
+-(void)setCollectionViewCell:(UICollectionViewCell *)CollectionViewCell{
+    objc_setAssociatedObject(self, @selector(CollectionViewCell), CollectionViewCell, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+-(UICollectionViewCell *)CollectionViewCell{
+    return objc_getAssociatedObject(self, @selector(CollectionViewCell));
 }
 
 #pragma -mark the task in execution with targetObject
@@ -374,7 +384,7 @@ static UIControlEvents allEventControls = -1;
             self.mu_ViewController = (UIViewController*)nextResponder;
             name = [self nameWithInstance:self responder:nextResponder];
             if (name.length > 0) {
-                name = [name stringByReplacingOccurrencesOfString:@"_" withString:@""];
+                name = [name substringFromIndex:1];
                 return name;
                 
             }
@@ -385,9 +395,10 @@ static UIControlEvents allEventControls = -1;
             UITableViewHeaderFooterView *headerFooterView = (UITableViewHeaderFooterView *)nextResponder;
             self.innerSection                             = headerFooterView.tag;
         }
+        
         name = [self nameWithInstance:self responder:nextResponder];
         if (name.length > 0) {
-            name = [name stringByReplacingOccurrencesOfString:@"_" withString:@""];
+            name = [name substringFromIndex:1];
             NSString *selectorString = [havedSignal stringByAppendingString:name];
             selectorString = [NSString stringWithFormat:@"%@:",selectorString];
             if ([nextResponder respondsToSelector:NSSelectorFromString(selectorString)]) {
@@ -395,6 +406,19 @@ static UIControlEvents allEventControls = -1;
             }
             return name;
         }
+        //来到这里说明
+        //获取当前控件属性名字失败,那么判断它是不是cell的第一层控件,如果是是说明再往下事件传递就通过cell了
+        //这里判断用户有没有在当前控制器或者在本身中写信号宏
+        if([nextResponder isKindOfClass:[UITableViewCell class]])
+        {
+            SEL cellSEL = NSSelectorFromString([NSString stringWithFormat:@"%@%@:",havedSignal,NSStringFromClass(nextResponder.class)]);
+            if([self.viewController respondsToSelector:cellSEL]||[((UITableViewCell *)nextResponder) respondsToSelector:cellSEL])
+            {
+                ((UITableViewCell *)nextResponder).clickSignalName = NSStringFromClass(nextResponder.class);
+            }
+        }
+        
+        
         nextResponder = nextResponder.nextResponder;
     }
     return name;
@@ -408,6 +432,7 @@ static UIControlEvents allEventControls = -1;
     if ([subViews isKindOfClass:[UITableViewCell class]]) {
         
         UITableViewCell *cell = (UITableViewCell *)subViews;
+        self.TableViewCell = cell;
         
         if (@available(iOS 11.0, *)) {
             UITableView *tableView = (UITableView *)cell.superview;
@@ -423,6 +448,7 @@ static UIControlEvents allEventControls = -1;
     }else{
         
         UICollectionViewCell *cell = (UICollectionViewCell *)subViews;
+        self.CollectionViewCell = cell;
         
         UICollectionView *collectionView = (UICollectionView *)cell.superview;
         
@@ -455,8 +481,8 @@ static UIControlEvents allEventControls = -1;
         return;
         
     }
-    if ([self.mu_ViewController respondsToSelector:selctor]) {
-        action(self.mu_ViewController,selctor,self);
+    if ([self.viewController respondsToSelector:selctor]) {
+        action(self.viewController,selctor,self);
     }
     
     //指定在cell里执行
@@ -531,7 +557,7 @@ static UIControlEvents allEventControls = -1;
                 
                 if ([subview isKindOfClass:[UISwitch class]]&&subview.clickSignalName.length == 0) {//处理UISwitch
                     NSString *name = [subview dymaicSignalName];
-                    name = [name stringByReplacingOccurrencesOfString:@"_" withString:@""];
+//                    name = [name stringByReplacingOccurrencesOfString:@"_" withString:@""];
                     subview.clickSignalName = name;
                     return hitTestView;
                 }
@@ -539,7 +565,7 @@ static UIControlEvents allEventControls = -1;
                    
                     if (hitTestView.clickSignalName.length == 0) {
                         NSString *name = [hitTestView dymaicSignalName];
-                        name = [name stringByReplacingOccurrencesOfString:@"_" withString:@""];
+//                        name = [name stringByReplacingOccurrencesOfString:@"_" withString:@""];
                         hitTestView.clickSignalName = name;
                     }
                 }

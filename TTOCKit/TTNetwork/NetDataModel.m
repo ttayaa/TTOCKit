@@ -8,14 +8,46 @@
 
 #import "NetDataModel.h"
 #import "AFNetworking.h"
-#import "NSDictionary+tt.h"
-#import "SandboxTools.h"
-
-#import "TTDataConfig.h"
 #import "YYModel.h"
+#import "TTDataConfig.h"
+
 
 #define hScreenWidth [UIScreen mainScreen].bounds.size.width
 #define hScreenHeight [UIScreen mainScreen].bounds.size.height
+#define weakify( x )  __weak __typeof__(x) __weak_##x##__ = x;
+#define normalize( x ) __typeof__(x) x = __weak_##x##__;
+
+
+
+@implementation UIScrollView (DataPaging)
+@dynamic ttRefleshPage;
+-(NSNumber *)ttRefleshPage
+{
+    NSNumber *ttRefleshPage = objc_getAssociatedObject(self, @selector(ttRefleshPage));
+    if (!ttRefleshPage) {
+        ttRefleshPage = @(1);
+        objc_setAssociatedObject(self, @selector(ttRefleshPage), ttRefleshPage, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    }
+    return ttRefleshPage;
+}
+-(void)setTtRefleshPage:(NSNumber *)ttRefleshPage
+{
+    objc_setAssociatedObject(self, @selector(ttRefleshPage), ttRefleshPage, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+@dynamic ttReflashModel;
+-(id)ttReflashModel
+{
+    return  objc_getAssociatedObject(self, @selector(ttReflashModel));
+}
+-(void)setTtReflashModel:(id)ttReflashModel
+{
+    objc_setAssociatedObject(self, @selector(ttReflashModel), ttReflashModel, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+@end
+
+
+
 
 
 @implementation NetDataModel
@@ -40,6 +72,10 @@ static NSMutableDictionary * statusKeyBlockDict;
 static NSString * sucessCode;
 
 
+static NSString * ttReflashPageKey;
+
+static BOOL NetWorklogRequestParms;
+static BOOL NetWorklogResponseResult;
 
 //使用默认地址
 +(void)load
@@ -55,6 +91,7 @@ static NSString * sucessCode;
     
     sucessCode = @"1";
     
+    ttReflashPageKey = @"page";
 }
 +(void)chooseAFN:(NSNotification *)noty
 {
@@ -76,7 +113,7 @@ static NSString * sucessCode;
     
     if ([noty.object[1] hasPrefix:@"https"]) {
         
-        if (AFNcerName) {
+        if (AFNcerName.length>0) {
             ShareAfnSessionMgr.securityPolicy     = [self customSecurityPolicy];
         }
     }
@@ -106,7 +143,18 @@ static NSString * sucessCode;
 
 +(void)networkConfigureNetWorkAFNcer:(NSString *)cerName
 {
-    AFNcerName = cerName;
+    if([cerName containsString:@"."])
+    {
+        AFNcerName = cerName;
+        
+        if (AFNcerName.length>0) {
+            ShareAfnSessionMgr.securityPolicy     = [self customSecurityPolicy];
+        }
+    }
+    else
+    {
+        @throw [NSException exceptionWithName:@"Certificate_Error" reason:@"您的证书必须有.xxx(如xxx.cer结尾)" userInfo:nil];
+    }
 }
 
 +(void)networkConfigureParmsFillter:(NetWorkParmsFillter)netWorkParmsFillterblock
@@ -209,7 +257,20 @@ static NSString * sucessCode;
                                                    }];
 }
 
-
+/**
+ 分页时候的上传参数:默认是@"page"
+ */
++(void)networkConfigureDataPagingPageKeyName:(NSString *)pageKeyName
+{
+    ttReflashPageKey = pageKeyName;
+}
+/**
+ 是否打印
+ */
++(void)networkConfigureLog_logParms:(BOOL)islogPrams logResult:(BOOL)islogResult
+{
+    
+}
 
 
 #pragma mark - ---- public ----
@@ -219,12 +280,12 @@ static NSString * sucessCode;
 }
 
 #pragma mark - ---- private ----
-+(NSMutableDictionary *)parmsBlocktoDict:(id)parms
++(NSMutableDictionary *)parmsBlocktoDict:(id)parms Class:(Class)doclass
 {
     
     @autoreleasepool {
         NSDictionary * dict;
-        NetDataModel * parameter = [self.class new];
+        NetDataModel * parameter = [doclass new];
         
         if (parms) {
             
@@ -253,7 +314,7 @@ static NSString * sucessCode;
         if (NetWorkParmsFillterblock) {
             NetWorkParmsFillterblock(dict);
             NSError *error = nil;
-            NSString *jsonString = [dict tt_JSONString];
+            NSString *jsonString = [self JSONStringFromDict:dict];
             NSData *data         = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
             dict = [NSJSONSerialization JSONObjectWithData:data?data:[NSData new] options:NSJSONReadingMutableContainers error:&error];
         }
@@ -261,6 +322,22 @@ static NSString * sucessCode;
     }
 }
 
+
+
++(NSString *)JSONStringFromDict:(NSDictionary *)dict{
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    if (jsonData == nil) {
+#ifdef DEBUG
+        NSLog(@"fail to get JSON from dictionary: %@, error: %@", dict, error);
+#endif
+        return nil;
+    }
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return jsonString;
+}
 
 
 #pragma mark -POST
@@ -298,12 +375,15 @@ static NSString * sucessCode;
         //打印请求的接口信息
 #ifdef DEBUG
         //        NSLog(@"URL=%@%@",ShareAfnSessionMgr.baseURL,URLString);
-        NSLog(@"parameters======%@",newDict);
+        if(NetWorklogRequestParms)
+        {
+            NSLog(@"parameters======%@",newDict);
+        }
 #endif
         
         
         __block BOOL catchFlag = value;
-        __block NSString *saveKey =[NSString stringWithFormat:@"%@%@",[dict tt_JSONString],URLString];
+        __block NSString *saveKey =[NSString stringWithFormat:@"%@%@",[self JSONStringFromDict:dict],URLString];
         
         if (catchFlag) {
             
@@ -322,6 +402,14 @@ static NSString * sucessCode;
         }
         
         [ShareAfnSessionMgr POST:URLString parameters:newDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            //打印请求的结果信息
+#ifdef DEBUG
+            if(NetWorklogResponseResult)
+            {
+                NSLog(@"parameters======%@",responseObject);
+            }
+#endif
             
             responseObject = [self parseResponseObject:responseObject];
             
@@ -408,12 +496,15 @@ static NSString * sucessCode;
         //打印请求的接口信息
 #ifdef DEBUG
         //        NSLog(@"URL=%@%@",ShareAfnSessionMgr.baseURL,URLString);
-        NSLog(@"parameters======%@",newDict);
+        if(NetWorklogRequestParms)
+        {
+            NSLog(@"parameters======%@",newDict);
+        }
 #endif
         
         
         __block BOOL catchFlag = value;
-        __block NSString *saveKey =[NSString stringWithFormat:@"%@%@",[dict tt_JSONString],URLString];
+        __block NSString *saveKey =[NSString stringWithFormat:@"%@%@",[self JSONStringFromDict:dict],URLString];
         
         if (catchFlag) {
             
@@ -432,6 +523,14 @@ static NSString * sucessCode;
         }
         
         [ShareAfnSessionMgr GET:URLString parameters:newDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            //打印请求的结果信息
+#ifdef DEBUG
+            if(NetWorklogResponseResult)
+            {
+                NSLog(@"parameters======%@",responseObject);
+            }
+#endif
             
             responseObject = [self parseResponseObject:responseObject];
             
@@ -486,7 +585,9 @@ static NSString * sucessCode;
 + (void)POST_imgs:(NSString *)URLString parameters:(NetWorkParmsBlock)parmsBlock IsShowHud:(BOOL)isshowhud formData:(void (^)(id<AFMultipartFormData> formData))block progress:(void (^)(NSProgress *uploadProgress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
 {
     //将block转成dict
-    NSMutableDictionary *dict = [self parmsBlocktoDict:parmsBlock];
+//    NSMutableDictionary *dict = [self parmsBlocktoDict:parmsBlock ];
+    
+    NSMutableDictionary *dict = [self parmsBlocktoDict:parmsBlock Class:self.class];
     
     //根据服务器要求添加一些参数
     //        NSMutableDictionary *newDict = [NetRuleManager setupData:dict];
@@ -577,9 +678,15 @@ static NSString * sucessCode;
                 [resultmodelArray addObject:resultmodel];
             }];
             
-        }else{
+        }
+        else if([responseObject[dataKeyName] isKindOfClass:[NSDictionary class]])
+        {
             //            model = [NSObject<NetWorkDataModelProtool> tt_modelWithDictionary:responseObject[dataKeyName]];
             model = [self yy_modelWithDictionary:responseObject[dataKeyName]];
+            
+        }
+        else//说明服务器没有数据的字段返回,但是还是请求成功了(比如获取短信验证码接口,只有status和message字段没有data字段)
+        {
             
         }
         
@@ -738,7 +845,7 @@ static NSString * sucessCode;
 +(BOOL)checkNetworkIPConfig:(NetWorkFailure)failure
 {
     if (ShareAfnSessionMgr.baseURL.absoluteString.length<1) {
- 
+        
         failure(nil,@"请您使用  networkConfigureIP test 方法来配置您的ip",@"你的NetWork配置不对(network_Confingure_Error)");
         
         return NO;
@@ -749,22 +856,101 @@ static NSString * sucessCode;
 +(BOOL)checkNetworkCodeConfig:(id)responseObject failure:(NetWorkFailure)failure
 {
     if (!responseObject[statusKeyName]) {
- 
+        
         failure(nil,@"请您使用  networkConfigureStatusKeyName dataKeyName msgKeyName  方法来配置您的statusKeyName",@"你的NetWork配置不对(network_Confingure_Error)");
         
         return NO;
     }
-    if (!responseObject[dataKeyName]) {
- 
-        failure(nil,@"请您使用  networkConfigureStatusKeyName dataKeyName msgKeyName  方法来配置您的dataKeyName",@"你的NetWork配置不对(network_Confingure_Error)");
-        
-        return NO;
-    }
     if (!responseObject[msgKeyName]) {
- 
+        
         failure(nil,@"请您使用  networkConfigureStatusKeyName: dataKeyName msgKeyName 方法来配置您的msgKeyName",@"你的NetWork配置不对(network_Confingure_Error)");
         return NO;
     }
+//    if (!responseObject[dataKeyName]) {
+//
+//        failure(nil,@"请您使用  networkConfigureStatusKeyName dataKeyName msgKeyName  方法来配置您的dataKeyName",@"你的NetWork配置不对(network_Confingure_Error)");
+//
+//        return NO;
+//    }
+
     return YES;
 }
+
+
+
+
+
+
+#pragma mark - dataPaging 分页
++ (void)POST_HeadLoad:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess))finishblock
+{
+    weakify(self)
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        normalize(self)
+        
+        [self ReflashPOST:URLString ParmsBlock:parmsBlock reflashScrollView:scrollView arrKeyBlock:arrKeyBlock Page:@(1) loadfinish:finishblock];
+        
+    });
+}
+
++ (void)POST_FootLoad:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess))finishblock
+{
+    weakify(self)
+    weakify(scrollView)
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        normalize(self)
+        normalize(scrollView)
+        [self ReflashPOST:URLString ParmsBlock:parmsBlock reflashScrollView:scrollView arrKeyBlock:arrKeyBlock Page:scrollView.ttRefleshPage loadfinish:finishblock];
+    });
+}
+
++ (void)ReflashPOST:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock Page:(NSNumber *)page loadfinish:(void (^)(BOOL isSsucess))finishblock
+{
+    __block NSNumber *tempPage = page;
+    
+    //矫正第一页数值
+    if ([tempPage integerValue] ==0) {
+        tempPage = @1;
+    }
+    
+    scrollView.ttRefleshPage = tempPage;
+    
+    //将block转成dict
+    NSMutableDictionary *dict = [self parmsBlocktoDict:parmsBlock Class:self.class];
+    
+    [dict addEntriesFromDictionary:@{
+  ttReflashPageKey:scrollView.ttRefleshPage,
+                                         }];
+    
+    weakify(scrollView)
+    [self POST_idPrams_Progress:URLString CacheIf:0 IsShowHud:1 parameters:[self.class yy_modelWithDictionary:dict] progress:nil success:^(BOOL isCatch, NetDataModel *model, NSMutableArray<NSObject *> *modelArr, id responseObject) {
+        
+        finishblock(YES);
+        
+        normalize(scrollView)
+        if ([scrollView.ttRefleshPage integerValue]==1) {
+            scrollView.ttReflashModel = model;
+        }
+        
+        if ([scrollView.ttRefleshPage integerValue]>1) {
+            arrKeyBlock(model);
+        }
+        
+        scrollView.ttRefleshPage = @([scrollView.ttRefleshPage integerValue] + 1);
+        
+        if ([scrollView respondsToSelector:@selector(reloadData)]) {
+            [scrollView performSelector:@selector(reloadData)];
+        }
+        
+    } failure:^(NSError *error, NSString *errorStr, NSString *status) {
+        finishblock(NO);
+        //        [scrollView.headRefreshControl endRefreshing];
+        //        [scrollView.footRefreshControl endRefreshing];
+    }];
+    
+
+}
+
+
+
 @end

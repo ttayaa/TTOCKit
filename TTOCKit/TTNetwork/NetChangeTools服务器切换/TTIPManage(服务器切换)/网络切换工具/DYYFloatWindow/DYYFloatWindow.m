@@ -53,18 +53,6 @@
     return  [self initWithFrame:frame mainImageName:name imagesAndTitle:imagesAndTitle bgcolor:bgcolor animationColor:nil];
 }
 
-
-+ (NSBundle *)DYYFloatWindowBundle
-{
-    static NSBundle *TTNetworkBundle = nil;
-    if (TTNetworkBundle == nil) {
-        // 这里不使用mainBundle是为了适配pod 1.x和0.x
-        TTNetworkBundle = [NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"TTNetwork" ofType:@"bundle"]];
-    }
-    return TTNetworkBundle;
-}
-
-
 - (instancetype)initWithFrame:(CGRect)frame mainImageName:(NSString *)mainImageName imagesAndTitle:(NSDictionary*)imagesAndTitle bgcolor:(UIColor *)bgcolor animationColor:animationColor
 {
     if(self = [super initWithFrame:frame])
@@ -73,12 +61,12 @@
         NSAssert(imagesAndTitle != nil, @"imagesAndTitle can't be nil !");
         
         _isShowTab = FALSE;
-
+        
         self.backgroundColor = [UIColor clearColor];
         self.windowLevel = UIWindowLevelAlert + 1;  //如果想在 alert 之上，则改成 + 2
         self.rootViewController = [UIViewController new];
         
-//        [self makeKeyAndVisible];
+        //        [self makeKeyAndVisible];
         self.hidden = NO;
         
         _bgcolor = bgcolor;
@@ -92,10 +80,6 @@
         //添加按钮
         [self setButtons];
         
-        
-        [[UIImage imageWithContentsOfFile:[[DYYFloatWindow DYYFloatWindowBundle] pathForResource:mainImageName ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        
         _mainImageButton =  [UIButton buttonWithType:UIButtonTypeCustom];
         [_mainImageButton setFrame:(CGRect){0, 0,frame.size.width, frame.size.height}];
         [_mainImageButton setImage:[UIImage imageNamed:mainImageName] forState:UIControlStateNormal];
@@ -106,7 +90,7 @@
         }
         
         [self addSubview:_mainImageButton];
-
+        
         [self doBorderWidth:myBorderWidth color:nil cornerRadius:_frameWidth/2];
         
         _pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(locationChange:)];
@@ -135,25 +119,17 @@
         [button setFrame: CGRectMake(self.frameWidth * i , 0, self.frameWidth , self.frameWidth )];
         [button setBackgroundColor:[UIColor clearColor]];
         
-         [[UIImage imageWithContentsOfFile:[[DYYFloatWindow DYYFloatWindowBundle] pathForResource:key ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-
-        
+        UIImage *image = [UIImage imageNamed:key];
         [button setTitle:_imagesAndTitle[key] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:key] forState:UIControlStateNormal];
-        
-        
-        UIImage *image = [[UIImage imageWithContentsOfFile:[[DYYFloatWindow DYYFloatWindowBundle] pathForResource:key ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [button setImage:image forState:UIControlStateNormal];
         
         button.tag = i;
         
         // 则默认image在左，title在右
         // 改成image在上，title在下
-        
-        
         button.titleEdgeInsets = UIEdgeInsetsMake(self.frameWidth/2 , -image.size.width, 0.0, 0.0);
         button.imageEdgeInsets = UIEdgeInsetsMake(2.0, 8.0, 16.0, -
-                                                       button.titleLabel.bounds.size.width + 8);
+                                                  button.titleLabel.bounds.size.width + 8);
         button.titleLabel.font = [UIFont systemFontOfSize: self.frameWidth/5];
         [button addTarget:self action:@selector(itemsClick:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -364,7 +340,7 @@
 }
 
 - (void)doBorderWidth:(CGFloat)width color:(UIColor *)color cornerRadius:(CGFloat)cornerRadius{
-  //  self.layer.masksToBounds = YES;
+    //  self.layer.masksToBounds = YES;
     self.layer.cornerRadius = cornerRadius;
     self.layer.borderWidth = width;
     if (!color) {
@@ -377,27 +353,27 @@
 #pragma mark  ------- animation -------------
 
 - (void)buttonAnimation{
-
+    
     self.layer.masksToBounds = NO;
     
     CGFloat scale = 1.0f;
     
     CGFloat width = self.mainImageButton.bounds.size.width, height = self.mainImageButton.bounds.size.height;
-
+    
     CGFloat biggerEdge = width > height ? width : height, smallerEdge = width > height ? height : width;
     CGFloat radius = smallerEdge / 2 > WZFlashInnerCircleInitialRaius ? WZFlashInnerCircleInitialRaius : smallerEdge / 2;
     
     scale = biggerEdge / radius + 0.5;
     _circleShape = [self createCircleShapeWithPosition:CGPointMake(width/2, height/2)
-                                                 pathRect:CGRectMake(0, 0, radius * 2, radius * 2)
-                                                   radius:radius];
-
-// 圆圈放大效果
-//        scale = 2.5f;
-//        _circleShape = [self createCircleShapeWithPosition:CGPointMake(width/2, height/2)
-//                                                 pathRect:CGRectMake(-CGRectGetMidX(self.mainImageButton.bounds), -CGRectGetMidY(self.mainImageButton.bounds), width, height)
-//                                                   radius:self.mainImageButton.layer.cornerRadius];
-   
+                                              pathRect:CGRectMake(0, 0, radius * 2, radius * 2)
+                                                radius:radius];
+    
+    // 圆圈放大效果
+    //        scale = 2.5f;
+    //        _circleShape = [self createCircleShapeWithPosition:CGPointMake(width/2, height/2)
+    //                                                 pathRect:CGRectMake(-CGRectGetMidX(self.mainImageButton.bounds), -CGRectGetMidY(self.mainImageButton.bounds), width, height)
+    //                                                   radius:self.mainImageButton.layer.cornerRadius];
+    
     
     [self.mainImageButton.layer addSublayer:_circleShape];
     
@@ -407,7 +383,7 @@
 }
 
 - (void)stopAnimation{
-  
+    
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(buttonAnimation) object:nil];
     
     if (_circleShape) {
@@ -421,14 +397,14 @@
     circleShape.path = [self createCirclePathWithRadius:rect radius:radius];
     circleShape.position = position;
     
-
+    
     circleShape.bounds = CGRectMake(0, 0, radius * 2, radius * 2);
     circleShape.fillColor = _animationColor.CGColor;
-
-//  圆圈放大效果
-//  circleShape.fillColor = [UIColor clearColor].CGColor;
-//  circleShape.strokeColor = [UIColor purpleColor].CGColor;
-
+    
+    //  圆圈放大效果
+    //  circleShape.fillColor = [UIColor clearColor].CGColor;
+    //  circleShape.strokeColor = [UIColor purpleColor].CGColor;
+    
     circleShape.opacity = 0;
     circleShape.lineWidth = 1;
     

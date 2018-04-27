@@ -7,11 +7,47 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "TTSourceConfig.h"
 #import "AFNetworking.h"
 //方便打印模型
 #import "NSObject+tt_PrintProperty.h"
+@class NetDataModel;
 
+
+#define NetDataModelOverride(datamodelName)\
+\
+\
+\
+typedef void (^Success_##datamodelName)(BOOL isCatch,datamodelName * model,NSMutableArray <datamodelName *>*modelArr,id responseObject);\
+typedef void (^Failure_##datamodelName)(NSError *error,NSString *errorStr,NSString * status);\
+typedef void (^ParmsBlock_##datamodelName)(datamodelName * ParmsModel);\
+typedef void (^DatePagingRelativeBlock_##datamodelName)(datamodelName *model);\
+\
++ (void)POST_idPrams_Progress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(id)parms progress:(void (^)(NSProgress *progress))progress success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
+\
++ (void)POST_defaultProgress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(ParmsBlock_##datamodelName)parmsBlock progress:(void (^)(NSProgress *progress))progress success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
+\
++ (void)POST_default:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(ParmsBlock_##datamodelName)parmsBlock success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
+\
+\
++ (void)GET_idPrams_Progress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(id)parms progress:(void (^)(NSProgress *progress))progress success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
+\
++ (void)GET_defaultProgress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(ParmsBlock_##datamodelName)parmsBlock progress:(void (^)(NSProgress *progress))progress success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
+\
++ (void)GET_default:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(ParmsBlock_##datamodelName)parmsBlock success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
+\
+\
++ (void)POST_imgs:(NSString *)URLString parameters:(ParmsBlock_##datamodelName)parmsBlock IsShowHud:(BOOL)isshowhud formData:(void (^)(id<AFMultipartFormData> formData))block progress:(void (^)(NSProgress *uploadProgress))progress success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
+\
+\
++ (void)POST_HeadLoad:(NSString *)URLString ParmsBlock:(ParmsBlock_##datamodelName)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(DatePagingRelativeBlock_##datamodelName)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess))finishblock;\
+\
++ (void)POST_FootLoad:(NSString *)URLString ParmsBlock:(ParmsBlock_##datamodelName)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(DatePagingRelativeBlock_##datamodelName)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess))finishblock;\
+
+@interface UIScrollView (DataPaging)
+@property (strong, nonatomic) id ttReflashModel;
+@property (strong, nonatomic) NSNumber *ttRefleshPage;
+
+@end
 
 
 @interface NetDataModel : NSObject
@@ -21,12 +57,17 @@ typedef void (^NetWorkSuccess)(BOOL isCatch,NetDataModel * model,NSMutableArray 
 typedef void (^NetWorkFailure)(NSError *error,NSString *errorStr,NSString * status);
 typedef void (^NetWorkParmsBlock)(NetDataModel* ParmsModel);
 
+typedef void (^NetWorkDatePagingRelativeBlock)(NetDataModel *model);
+
+
 typedef void (^NetWorkExtblock)(void);
 typedef void (^NetWorkAFNconfig)(AFHTTPSessionManager * AFNmgr);
 typedef void (^NetWorkParmsFillter)(NSMutableDictionary * dict);
 typedef void (^NetWorkProgressError)(NSString *text);
 
 typedef void (^NetWorkEachStatusKeyBlock)(void);
+
+
 
 #pragma mark - ---- configure ----
 
@@ -44,7 +85,7 @@ typedef void (^NetWorkEachStatusKeyBlock)(void);
 +(void)networkConfigureParmsFillter:(NetWorkParmsFillter)netWorkParmsFillterblock;
 
 /**
-请求提示控件
+错误的时候,请求提示控件
  */
 +(void)networkConfigureProgress:(NetWorkProgressError)networkConfigureProgressblock;
 
@@ -72,6 +113,17 @@ typedef void (^NetWorkEachStatusKeyBlock)(void);
 +(void)networkConfigureStatusOtherKey:(NSString *)OtherKey block:(NetWorkEachStatusKeyBlock)block;
 
 
+/**
+ 分页时候的上传参数:默认是@"page"
+ */
++(void)networkConfigureDataPagingPageKeyName:(NSString *)pageKeyName;
+
+
+/**
+ 是否打印
+ */
++(void)networkConfigureLog_logParms:(BOOL)islogPrams logResult:(BOOL)islogResult;
+
 
 #pragma mark -POST
 
@@ -96,35 +148,14 @@ typedef void (^NetWorkEachStatusKeyBlock)(void);
 
 
 
+#pragma mark - dataPaging 分页
++ (void)POST_HeadLoad:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess))finishblock;
+
++ (void)POST_FootLoad:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess))finishblock;
 
 #pragma mark - ---- 获取当前请求的URL ----
 +(NSString *)GetBaseURL;
 
+
 @end
 
-
-
-
-#define NetDataModelOverride(datamodelName)\
-\
-\
-\
-typedef void (^Success_##datamodelName)(BOOL isCatch,datamodelName * model,NSMutableArray <datamodelName *>*modelArr,id responseObject);\
-typedef void (^Failure_##datamodelName)(NSError *error,NSString *errorStr,NSString * status);\
-typedef void (^ParmsBlock_##datamodelName)(datamodelName * ParmsModel);\
-\
-+ (void)POST_idPrams_Progress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(id)parms progress:(void (^)(NSProgress *progress))progress success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
-\
-+ (void)POST_defaultProgress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(ParmsBlock_##datamodelName)parmsBlock progress:(void (^)(NSProgress *progress))progress success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
-\
-+ (void)POST_default:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(ParmsBlock_##datamodelName)parmsBlock success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
-\
-\
-+ (void)GET_idPrams_Progress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(id)parms progress:(void (^)(NSProgress *progress))progress success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
-\
-+ (void)GET_defaultProgress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(ParmsBlock_##datamodelName)parmsBlock progress:(void (^)(NSProgress *progress))progress success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
-\
-+ (void)GET_default:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(ParmsBlock_##datamodelName)parmsBlock success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
-\
-\
-+ (void)POST_imgs:(NSString *)URLString parameters:(ParmsBlock_##datamodelName)parmsBlock IsShowHud:(BOOL)isshowhud formData:(void (^)(id<AFMultipartFormData> formData))block progress:(void (^)(NSProgress *uploadProgress))progress success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\

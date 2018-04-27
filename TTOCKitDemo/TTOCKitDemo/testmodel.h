@@ -13,6 +13,8 @@
 
 NetDataModelOverride(testmodel)
 
+@property (strong, nonatomic) NSString *messageType;
+@property (strong, nonatomic) NSString *read;
 
 @property (strong, nonatomic) NSString *login;
 @property (strong, nonatomic) NSString *password;

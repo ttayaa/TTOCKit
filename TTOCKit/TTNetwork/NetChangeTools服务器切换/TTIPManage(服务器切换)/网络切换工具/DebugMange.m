@@ -45,20 +45,12 @@ static DYYFloatWindow *floatWindow;
 
 +(void)show:(ipchangefinish)finish
 {
-    floatWindow = [[DYYFloatWindow alloc]initWithFrame:CGRectMake(0, 300, 50, 50) mainImageName:@"zzz.png" imagesAndTitle:@{@"ddd":@"正式ip",@"eee":@"测试ip",@"fff":@"调试页面"} bgcolor:[UIColor lightGrayColor] animationColor:[UIColor purpleColor]];
+    floatWindow = [[DYYFloatWindow alloc]initWithFrame:CGRectMake(0, 300, 50, 50) mainImageName:@"AppIcon.png" imagesAndTitle:@{@"ddd":@"正式ip",@"eee":@"测试ip",@"fff":@"调试页面"} bgcolor:[UIColor lightGrayColor] animationColor:[UIColor purpleColor]];
     
    
     floatWindow.clickBolcks = ^(NSInteger i){
         
         finish([DebugMange shareDebugMange].IpArr,i);
-
-        
-        
-//        __weak typeof(self) weakSelf = self;
-        //      [weakSelf hiddenWindow];
-        //        UIViewController *aaa = [[UIViewController alloc] init];
-        //        aaa.view.backgroundColor = [UIColor grayColor];
-        //        [weakSelf presentViewController:aaa animated:YES completion:nil];
     };
 }
 +(void)dissmis

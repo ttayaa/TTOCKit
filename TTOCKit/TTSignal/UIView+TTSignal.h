@@ -18,6 +18,9 @@
 
 @property (nonatomic,readonly)NSIndexPath *indexPath;
 
+@property (nonatomic,copy)UITableViewCell *TableViewCell;
+@property (nonatomic,copy)UICollectionViewCell *CollectionViewCell;
+
 @property (nonatomic,assign)UIView *(^setSignalName)(NSString * signalName);
 
 @property (nonatomic,assign)UIView *(^enforceTarget)(NSObject *target);

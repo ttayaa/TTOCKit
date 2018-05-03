@@ -9,6 +9,7 @@
 #import "UINavigationBar+ttAwesome.h"
 #import <objc/runtime.h>
 
+#define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125,2436), [[UIScreen mainScreen] currentMode].size) : NO)
 
 @interface UIViewController (ttAwesome)
 
@@ -102,7 +103,18 @@ static char overlayKey;
     
     if (!objc_getAssociatedObject(self, &overlayKey)) {
         
+        
         CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
+        
+        if (statusBarHeight==0) {
+            if (iPhoneX) {
+                statusBarHeight = 44;
+            }
+            else
+            {
+                statusBarHeight = 20;
+            }
+        }
         
         UIImageView *imgv = [[UIImageView alloc] initWithFrame:CGRectMake(0, -statusBarHeight, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) + statusBarHeight)];
         

@@ -43,7 +43,7 @@ typedef void (^DeallocBlock)(void);
 
 @property (nonatomic,strong)NSString *repeatedSignalName;
 
-@property (nonatomic,weak)UIViewController* mu_ViewController;
+@property (nonatomic,weak)UIViewController* TT_ViewController;
 
 @property (nonatomic,assign)NSUInteger innerSection;
 
@@ -142,30 +142,30 @@ static UIControlEvents allEventControls = -1;
 -(NSUInteger)sections{
     return self.innerSection;
 }
-#pragma -mark mu_viewController
--(void)setMu_ViewController:(UIViewController*)mu_ViewController{
+#pragma -mark TT_viewController
+-(void)setTT_ViewController:(UIViewController*)TT_ViewController{
     TTOrignalObject *ob = [[TTOrignalObject alloc] initWithBlock:^{
-        objc_setAssociatedObject(self, @selector(mu_ViewController), nil, OBJC_ASSOCIATION_ASSIGN);
+        objc_setAssociatedObject(self, @selector(TT_ViewController), nil, OBJC_ASSOCIATION_ASSIGN);
     }];
     // 这里关联的key必须唯一，如果使用_cmd，对一个对象多次关联的时候，前面的对象关联会失效。
-    if (mu_ViewController) {
-        objc_setAssociatedObject(mu_ViewController, (__bridge const void *)(ob.block), ob, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    if (TT_ViewController) {
+        objc_setAssociatedObject(TT_ViewController, (__bridge const void *)(ob.block), ob, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
-    objc_setAssociatedObject(self, @selector(mu_ViewController), mu_ViewController, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @selector(TT_ViewController), TT_ViewController, OBJC_ASSOCIATION_ASSIGN);
 }
 
--(UIViewController*)mu_ViewController{
+-(UIViewController*)TT_ViewController{
     
-    return objc_getAssociatedObject(self, @selector(mu_ViewController));
+    return objc_getAssociatedObject(self, @selector(TT_ViewController));
 }
 
 -(id)viewController{
     
-    if (!self.mu_ViewController) {
+    if (!self.TT_ViewController) {
         
         [self getControllerAndCellindexPath];
     }
-    return self.mu_ViewController;
+    return self.TT_ViewController;
 }
 
 
@@ -376,12 +376,12 @@ static UIControlEvents allEventControls = -1;
         
         
         if ([nextResponder isKindOfClass:[UINavigationController class]]) {
-            self.mu_ViewController = nil;
+            self.TT_ViewController = nil;
             break;
         }
         if ([nextResponder isKindOfClass:[UIViewController class]]) {
             
-            self.mu_ViewController = (UIViewController*)nextResponder;
+            self.TT_ViewController = (UIViewController*)nextResponder;
             name = [self nameWithInstance:self responder:nextResponder];
             if (name.length > 0) {
                 name = [name substringFromIndex:1];
@@ -520,12 +520,12 @@ static UIControlEvents allEventControls = -1;
         
         
         if ([nextResponder isKindOfClass:[UINavigationController class]]) {
-            self.mu_ViewController = nil;
+            self.TT_ViewController = nil;
             break;
         }
         if ([nextResponder isKindOfClass:[UIViewController class]]) {
             
-            self.mu_ViewController = (UIViewController*)nextResponder;
+            self.TT_ViewController = (UIViewController*)nextResponder;
             
             break;
             

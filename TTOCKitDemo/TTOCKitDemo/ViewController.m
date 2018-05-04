@@ -192,10 +192,14 @@ TTSignal(network)
         //0：未读，1：已读，-1或不传：所有
         ParmsModel.read = @"-1";
     } reflashScrollView:self.tableView arrKeyBlock:^(testmodel *model) {
-        
-    } loadfinish:^(BOOL isSsucess) {
-        
+
+    } loadfinish:^(BOOL isSsucess,id responseObject) {
+
     }];
+    
+    
+    
+    
     
 }
 

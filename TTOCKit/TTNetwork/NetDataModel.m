@@ -340,6 +340,19 @@ static BOOL NetWorklogResponseResult;
 }
 
 
++(id)getDictValueFromDotKeyStr:(NSString *)keyStr inDict:(NSDictionary *)dict
+{
+    @autoreleasepool {
+        __block id temp;
+        [[keyStr componentsSeparatedByString:@"."] enumerateObjectsUsingBlock:^(NSString * path, NSUInteger idx, BOOL * _Nonnull stop) {
+            temp = dict[path];
+        }];
+        return temp;
+    }
+}
+
+
+
 #pragma mark -POST
 + (void)POST_idPrams_Progress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(id)parms progress:(void (^)(NSProgress *progress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
 {
@@ -418,7 +431,8 @@ static BOOL NetWorklogResponseResult;
                 return;
             }
             
-            NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
+//            NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
+            NSString *status = [NSString stringWithFormat:@"%@",[self getDictValueFromDotKeyStr:statusKeyName inDict:responseObject]];
             
             if ([status isEqualToString:sucessCode]) {//请求成功
                 if (catchFlag) {
@@ -539,7 +553,9 @@ static BOOL NetWorklogResponseResult;
                 return;
             }
             
-            NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
+//            NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
+             NSString *status = [NSString stringWithFormat:@"%@",[self getDictValueFromDotKeyStr:statusKeyName inDict:responseObject]];
+            
             
             if ([status isEqualToString:sucessCode]) {//请求成功
                 if (catchFlag) {
@@ -663,7 +679,10 @@ static BOOL NetWorklogResponseResult;
 {
     NSDictionary *resultDict = responseObject;
     
-    NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
+//    NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
+//
+    NSString *status = [NSString stringWithFormat:@"%@",[self getDictValueFromDotKeyStr:statusKeyName inDict:responseObject]];
+    
     
     if ([status isEqualToString:sucessCode]) {//请求成功
         
@@ -671,18 +690,18 @@ static BOOL NetWorklogResponseResult;
         
         NSObject *model = nil;
         NSMutableArray <NSObject *>*resultmodelArray = [NSMutableArray array];
-        if ([responseObject[dataKeyName] isKindOfClass:[NSArray class]]) {
-            NSArray <NSObject *> *arr = responseObject[dataKeyName];
+        if ([[self getDictValueFromDotKeyStr:dataKeyName inDict:responseObject] isKindOfClass:[NSArray class]]) {
+            NSArray <NSObject *> *arr = [self getDictValueFromDotKeyStr:dataKeyName inDict:responseObject];
             [arr enumerateObjectsUsingBlock:^(NSObject * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                NSObject * resultmodel = [self yy_modelWithDictionary:responseObject[dataKeyName][idx]];
+                NSObject * resultmodel = [self yy_modelWithDictionary:[self getDictValueFromDotKeyStr:dataKeyName inDict:responseObject][idx]];
                 [resultmodelArray addObject:resultmodel];
             }];
             
         }
-        else if([responseObject[dataKeyName] isKindOfClass:[NSDictionary class]])
+        else if([[self getDictValueFromDotKeyStr:dataKeyName inDict:responseObject] isKindOfClass:[NSDictionary class]])
         {
             //            model = [NSObject<NetWorkDataModelProtool> tt_modelWithDictionary:responseObject[dataKeyName]];
-            model = [self yy_modelWithDictionary:responseObject[dataKeyName]];
+            model = [self yy_modelWithDictionary:[self getDictValueFromDotKeyStr:dataKeyName inDict:responseObject]];
             
         }
         else//说明服务器没有数据的字段返回,但是还是请求成功了(比如获取短信验证码接口,只有status和message字段没有data字段)
@@ -697,17 +716,19 @@ static BOOL NetWorklogResponseResult;
         
     }else {//token
         
-        [self doOtherStatus:[NSString stringWithFormat:@"%@",resultDict[statusKeyName]]];
+//        [self doOtherStatus:[NSString stringWithFormat:@"%@",resultDict[statusKeyName]]];
+        [self doOtherStatus:[NSString stringWithFormat:@"%@",[self getDictValueFromDotKeyStr:statusKeyName inDict:resultDict]]];
         
-        failure(nil,resultDict[msgKeyName],status);
+        
+        failure(nil,[self getDictValueFromDotKeyStr:msgKeyName inDict:resultDict],status);
         
         if (isshowhud) {
             if (NetWorkProgressblock) {
-                NetWorkProgressblock(resultDict[msgKeyName]);
+                NetWorkProgressblock([self getDictValueFromDotKeyStr:msgKeyName inDict:resultDict]);
             }
             else
             {
-                [self ProgressShowTip:@[resultDict[msgKeyName],@"2"]];
+                [self ProgressShowTip:@[[self getDictValueFromDotKeyStr:msgKeyName inDict:resultDict],@"2"]];
             }
         }
         
@@ -855,13 +876,14 @@ static BOOL NetWorklogResponseResult;
 
 +(BOOL)checkNetworkCodeConfig:(id)responseObject failure:(NetWorkFailure)failure
 {
-    if (!responseObject[statusKeyName]) {
-        
+//    if (!responseObject[statusKeyName]) {
+    if (![self getDictValueFromDotKeyStr:statusKeyName inDict:responseObject]) {
+
         failure(nil,@"请您使用  networkConfigureStatusKeyName dataKeyName msgKeyName  方法来配置您的statusKeyName",@"你的NetWork配置不对(network_Confingure_Error)");
         
         return NO;
     }
-    if (!responseObject[msgKeyName]) {
+    if (![self getDictValueFromDotKeyStr:msgKeyName inDict:responseObject]) {
         
         failure(nil,@"请您使用  networkConfigureStatusKeyName: dataKeyName msgKeyName 方法来配置您的msgKeyName",@"你的NetWork配置不对(network_Confingure_Error)");
         return NO;
@@ -882,7 +904,7 @@ static BOOL NetWorklogResponseResult;
 
 
 #pragma mark - dataPaging 分页
-+ (void)POST_HeadLoad:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess))finishblock
++ (void)POST_HeadLoad:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock
 {
     weakify(self)
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -893,7 +915,7 @@ static BOOL NetWorklogResponseResult;
     });
 }
 
-+ (void)POST_FootLoad:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess))finishblock
++ (void)POST_FootLoad:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock
 {
     weakify(self)
     weakify(scrollView)
@@ -904,7 +926,7 @@ static BOOL NetWorklogResponseResult;
     });
 }
 
-+ (void)ReflashPOST:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock Page:(NSNumber *)page loadfinish:(void (^)(BOOL isSsucess))finishblock
++ (void)ReflashPOST:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock Page:(NSNumber *)page loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock
 {
     __block NSNumber *tempPage = page;
     
@@ -925,7 +947,7 @@ static BOOL NetWorklogResponseResult;
     weakify(scrollView)
     [self POST_idPrams_Progress:URLString CacheIf:0 IsShowHud:1 parameters:[self.class yy_modelWithDictionary:dict] progress:nil success:^(BOOL isCatch, NetDataModel *model, NSMutableArray<NSObject *> *modelArr, id responseObject) {
         
-        finishblock(YES);
+        finishblock(YES,responseObject);
         
         normalize(scrollView)
         if ([scrollView.ttRefleshPage integerValue]==1) {
@@ -943,7 +965,7 @@ static BOOL NetWorklogResponseResult;
         }
         
     } failure:^(NSError *error, NSString *errorStr, NSString *status) {
-        finishblock(NO);
+        finishblock(NO,@[error?error:@"",errorStr?errorStr:@"",status?status:@""]);
         //        [scrollView.headRefreshControl endRefreshing];
         //        [scrollView.footRefreshControl endRefreshing];
     }];

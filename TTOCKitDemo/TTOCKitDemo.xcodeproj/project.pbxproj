@@ -452,11 +452,11 @@
 			isa = PBXGroup;
 			children = (
 				18BC1B9D2093082200D703F1 /* TTRouterCategory */,
-				18BC1BA02093082200D703F1 /* UINavigationController+TTRouter.m */,
 				18BC1BA12093082200D703F1 /* PresentViewController(自定义modal动画) */,
-				18BC1BBA2093082300D703F1 /* UINavigationController+TTRouter.h */,
-				18BC1BBB2093082300D703F1 /* TTRouter.h */,
 				18BC1BBC2093082300D703F1 /* PushViewController(自定义push动画) */,
+				18BC1BBA2093082300D703F1 /* UINavigationController+TTRouter.h */,
+				18BC1BA02093082200D703F1 /* UINavigationController+TTRouter.m */,
+				18BC1BBB2093082300D703F1 /* TTRouter.h */,
 			);
 			path = TTRouter;
 			sourceTree = "<group>";
@@ -570,11 +570,11 @@
 			isa = PBXGroup;
 			children = (
 				18BC1BCA2093082300D703F1 /* TTQRScanController.h */,
+				18BC1BCF2093082300D703F1 /* TTQRScanController.m */,
+				18BC1BCD2093082300D703F1 /* TTScanQRCodeResultDEMO.h */,
 				18BC1BCB2093082300D703F1 /* TTScanQRCodeResultDEMO.m */,
 				18BC1BCC2093082300D703F1 /* TTQRScan.storyboard */,
-				18BC1BCD2093082300D703F1 /* TTScanQRCodeResultDEMO.h */,
 				18BC1BCE2093082300D703F1 /* TTQRScanController.bundle */,
-				18BC1BCF2093082300D703F1 /* TTQRScanController.m */,
 			);
 			path = TTQRScanController;
 			sourceTree = "<group>";
@@ -606,9 +606,9 @@
 			isa = PBXGroup;
 			children = (
 				18BC1BDC2093082300D703F1 /* UIView+cell.h */,
+				18BC1BDF2093082300D703F1 /* UIView+cell.m */,
 				18BC1BDD2093082300D703F1 /* UIView+TTframe.h */,
 				18BC1BDE2093082300D703F1 /* UIView+TTframe.m */,
-				18BC1BDF2093082300D703F1 /* UIView+cell.m */,
 			);
 			path = TTCommonTools;
 			sourceTree = "<group>";
@@ -616,8 +616,8 @@
 		18BC1BE02093082300D703F1 /* TTPlaceholderPlace */ = {
 			isa = PBXGroup;
 			children = (
-				18BC1BE12093082300D703F1 /* NSObject+TTPlaceholderPlace.m */,
 				18BC1BE22093082300D703F1 /* NSObject+TTPlaceholderPlace.h */,
+				18BC1BE12093082300D703F1 /* NSObject+TTPlaceholderPlace.m */,
 			);
 			path = TTPlaceholderPlace;
 			sourceTree = "<group>";
@@ -625,12 +625,12 @@
 		18BC1BE32093082300D703F1 /* TTNumberTF */ = {
 			isa = PBXGroup;
 			children = (
-				18BC1BE42093082300D703F1 /* TTBankNumberTF.m */,
 				18BC1BE52093082300D703F1 /* UITextField+TTNumberTF.h */,
-				18BC1BE62093082300D703F1 /* TTPhoneNumberTF.m */,
-				18BC1BE72093082300D703F1 /* TTBankNumberTF.h */,
 				18BC1BE82093082300D703F1 /* UITextField+TTNumberTF.m */,
 				18BC1BE92093082300D703F1 /* TTPhoneNumberTF.h */,
+				18BC1BE62093082300D703F1 /* TTPhoneNumberTF.m */,
+				18BC1BE72093082300D703F1 /* TTBankNumberTF.h */,
+				18BC1BE42093082300D703F1 /* TTBankNumberTF.m */,
 			);
 			path = TTNumberTF;
 			sourceTree = "<group>";
@@ -700,10 +700,10 @@
 		18BC1BFF2093082300D703F1 /* TTLimitTextField */ = {
 			isa = PBXGroup;
 			children = (
-				18BC1C002093082300D703F1 /* TTTextfield.h */,
 				18BC1C012093082300D703F1 /* NSString+TTTextField.h */,
-				18BC1C022093082300D703F1 /* TTTextfield.m */,
 				18BC1C032093082300D703F1 /* NSString+TTTextField.m */,
+				18BC1C002093082300D703F1 /* TTTextfield.h */,
+				18BC1C022093082300D703F1 /* TTTextfield.m */,
 			);
 			path = TTLimitTextField;
 			sourceTree = "<group>";
@@ -711,8 +711,8 @@
 		18BC1C042093082300D703F1 /* TTAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				18BC1C052093082300D703F1 /* TTAlertView.m */,
 				18BC1C062093082300D703F1 /* TTAlertView.h */,
+				18BC1C052093082300D703F1 /* TTAlertView.m */,
 			);
 			path = TTAlertView;
 			sourceTree = "<group>";
@@ -738,8 +738,8 @@
 		18BC1C0D2093082300D703F1 /* TTButtonInnerRect */ = {
 			isa = PBXGroup;
 			children = (
-				18BC1C0E2093082300D703F1 /* UIButton+TTLayout.m */,
 				18BC1C0F2093082300D703F1 /* UIButton+TTLayout.h */,
+				18BC1C0E2093082300D703F1 /* UIButton+TTLayout.m */,
 			);
 			path = TTButtonInnerRect;
 			sourceTree = "<group>";
@@ -761,10 +761,10 @@
 			isa = PBXGroup;
 			children = (
 				18BC1C122093082300D703F1 /* FBKVOController */,
-				18BC1C182093082300D703F1 /* UIViewController+AlphaBar.m */,
-				18BC1C192093082300D703F1 /* UINavigationBar+ttAwesome.m */,
 				18BC1C1A2093082300D703F1 /* UIViewController+AlphaBar.h */,
+				18BC1C182093082300D703F1 /* UIViewController+AlphaBar.m */,
 				18BC1C1B2093082300D703F1 /* UINavigationBar+ttAwesome.h */,
+				18BC1C192093082300D703F1 /* UINavigationBar+ttAwesome.m */,
 			);
 			path = "AlphaBar(半透明导航栏)";
 			sourceTree = "<group>";
@@ -836,11 +836,11 @@
 		18BC1C312093082300D703F1 /* easyJump(控制器跳转) */ = {
 			isa = PBXGroup;
 			children = (
-				18BC1C322093082300D703F1 /* UIViewController+easyJump.m */,
 				18BC1C332093082300D703F1 /* ControllerCategoryOverride.h */,
+				18BC1C362093082300D703F1 /* UIViewController+auto_implementation.h */,
 				18BC1C342093082300D703F1 /* UIViewController+auto_implementation.m */,
 				18BC1C352093082300D703F1 /* UIViewController+easyJump.h */,
-				18BC1C362093082300D703F1 /* UIViewController+auto_implementation.h */,
+				18BC1C322093082300D703F1 /* UIViewController+easyJump.m */,
 			);
 			path = "easyJump(控制器跳转)";
 			sourceTree = "<group>";
@@ -856,21 +856,21 @@
 		18BC1C392093082400D703F1 /* TTMVVM */ = {
 			isa = PBXGroup;
 			children = (
-				18BC1C3A2093082400D703F1 /* TTMutableProxy.m */,
-				18BC1C3B2093082400D703F1 /* UIView+TTVM.m */,
-				18BC1C3C2093082400D703F1 /* TTGroupViewBaseMake.m */,
 				18BC1C3D2093082400D703F1 /* UITableView+TTVM.h */,
+				18BC1C422093082400D703F1 /* UITableView+TTVM.m */,
 				18BC1C3E2093082400D703F1 /* UITableView+TTCellAnimation.h */,
+				18BC1C462093082400D703F1 /* UITableView+TTCellAnimation.m */,
 				18BC1C3F2093082400D703F1 /* UICollectionView+TTVM.h */,
+				18BC1C482093082400D703F1 /* UICollectionView+TTVM.m */,
+				18BC1C472093082400D703F1 /* TTTableSectionMake.h */,
 				18BC1C402093082400D703F1 /* TTTableSectionMake.m */,
 				18BC1C412093082400D703F1 /* TTMutableProxy.h */,
-				18BC1C422093082400D703F1 /* UITableView+TTVM.m */,
+				18BC1C3A2093082400D703F1 /* TTMutableProxy.m */,
 				18BC1C432093082400D703F1 /* TTGroupViewBaseMake.h */,
+				18BC1C3C2093082400D703F1 /* TTGroupViewBaseMake.m */,
 				18BC1C442093082400D703F1 /* TTVM.h */,
 				18BC1C452093082400D703F1 /* UIView+TTVM.h */,
-				18BC1C462093082400D703F1 /* UITableView+TTCellAnimation.m */,
-				18BC1C472093082400D703F1 /* TTTableSectionMake.h */,
-				18BC1C482093082400D703F1 /* UICollectionView+TTVM.m */,
+				18BC1C3B2093082400D703F1 /* UIView+TTVM.m */,
 			);
 			path = TTMVVM;
 			sourceTree = "<group>";

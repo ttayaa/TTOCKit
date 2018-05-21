@@ -51,7 +51,7 @@
 
 
 
-- (void)setTTVM:(CGFloat)width;
+- (void)setTTVMwidth:(CGFloat)width;
 {
     CGRect frame = [self frame];
     frame.size.width = width;

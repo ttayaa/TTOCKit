@@ -95,9 +95,9 @@
             }
         }
 
+        [self view];
         [self.view addSubview:web];
         [self.view insertSubview:web belowSubview:self.progressView];
-        
         
         web.UIDelegate = self;
         web.navigationDelegate = self;

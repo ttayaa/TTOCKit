@@ -41,8 +41,6 @@ typedef void (^DeallocBlock)(void);
 
 @property (nonatomic,weak)NSObject *targetObject;
 
-@property (nonatomic,strong)NSString *repeatedSignalName;
-
 @property (nonatomic,weak)UIViewController* TT_ViewController;
 
 @property (nonatomic,assign)NSUInteger innerSection;
@@ -184,16 +182,6 @@ static UIControlEvents allEventControls = -1;
     objc_setAssociatedObject(self, @selector(innerIndexPath), innerIndexPath, OBJC_ASSOCIATION_ASSIGN);
 }
 
-#pragma -mark repeated name
--(void)setRepeatedSignalName:(NSString *)repeatedSignalName{
-    
-    objc_setAssociatedObject(self, @selector(repeatedSignalName), repeatedSignalName, OBJC_ASSOCIATION_COPY);
-}
-
--(NSString *)repeatedSignalName{
-    
-    return objc_getAssociatedObject(self, @selector(repeatedSignalName));
-}
 
 -(NSIndexPath *)innerIndexPath{
     
@@ -311,6 +299,14 @@ static UIControlEvents allEventControls = -1;
                 [super touchesBegan:touches withEvent:event];
             }else{
                 self.clickSignalName = name;
+                
+                SEL selctor = NSSelectorFromString([NSString stringWithFormat:@"%@%@:",havedSignal,name]);
+                //如果在view中没有实现
+                if (![self.targetObject respondsToSelector:selctor] && ![self.viewController respondsToSelector:selctor]) {
+                    [super touchesBegan:touches withEvent:event];
+                    return;
+                }
+                
             }
         }
         
@@ -318,6 +314,14 @@ static UIControlEvents allEventControls = -1;
         
         if (self.clickSignalName.length <= 0) {
             [super touchesBegan:touches withEvent:event];
+        }
+        else {
+            SEL selctor = NSSelectorFromString(self.clickSignalName);
+            //如果在view中没有实现
+            if (![self.targetObject respondsToSelector:selctor] && ![self.viewController respondsToSelector:selctor]) {
+                [super touchesBegan:touches withEvent:event];
+                return;
+            }
         }
     }
 }
@@ -368,7 +372,7 @@ static UIControlEvents allEventControls = -1;
     
     //     NSLog(@"%@",NSStringFromClass([nextResponder class]));
     NSString *name = @"";
-    if ([self isKindOfClass:[UITableViewCell class]] || [self isKindOfClass:[UICollectionViewCell class]]||[self isKindOfClass:NSClassFromString(@"UITableViewWrapperView")]||[NSStringFromClass([self class]) isEqualToString:@"UITableViewCellContentView"]||[NSStringFromClass([self class]) isEqualToString:@"UICollectionViewCellContentView"]) {
+    if ([self isKindOfClass:[UITableViewCell class]] || [self isKindOfClass:[UICollectionViewCell class]]||[self isKindOfClass:NSClassFromString(@"UITableViewWrapperView")]) {
         return name;
     }
     UIResponder *nextResponder = self.nextResponder;
@@ -409,7 +413,7 @@ static UIControlEvents allEventControls = -1;
         //来到这里说明
         //获取当前控件属性名字失败,那么判断它是不是cell的第一层控件,如果是是说明再往下事件传递就通过cell了
         //这里判断用户有没有在当前控制器或者在本身中写信号宏
-        if([nextResponder isKindOfClass:[UITableViewCell class]])
+        if([nextResponder isKindOfClass:[UITableViewCell class]]||[nextResponder isKindOfClass:[UICollectionViewCell class]])
         {
             SEL cellSEL = NSSelectorFromString([NSString stringWithFormat:@"%@%@:",havedSignal,NSStringFromClass(nextResponder.class)]);
             if([self.viewController respondsToSelector:cellSEL]||[((UITableViewCell *)nextResponder) respondsToSelector:cellSEL])
@@ -464,17 +468,13 @@ static UIControlEvents allEventControls = -1;
 -(void)sendSignal{
     
     void(*action)(id,SEL,id) = (void(*)(id,SEL,id))objc_msgSend;
-    if (self.repeatedSignalName.length<=0) {
-        self.clickSignalName = [havedSignal stringByAppendingString:self.clickSignalName];
-        self.clickSignalName = [NSString stringWithFormat:@"%@:",self.clickSignalName];
-        self.repeatedSignalName = self.clickSignalName;
-    }
-    
+
+    NSString * setStr = [NSString stringWithFormat:@"%@:",[havedSignal stringByAppendingString:self.clickSignalName]];
     
     //这里是用来设置indexPath
     [self getControllerAndCellindexPath];
     //
-    SEL selctor = NSSelectorFromString(self.repeatedSignalName);
+    SEL selctor = NSSelectorFromString(setStr);
     //如果在view中已经实现那么就调用
     if ([self.targetObject respondsToSelector:selctor]) {
         action(self.targetObject,selctor,self);

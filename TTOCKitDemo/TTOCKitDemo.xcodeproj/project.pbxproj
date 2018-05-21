@@ -582,13 +582,13 @@
 		18BC1BD02093082300D703F1 /* TTPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				18BC1BD42093082300D703F1 /* TTBrowserImageView.h */,
 				18BC1BD12093082300D703F1 /* TTBrowserImageView.m */,
 				18BC1BD22093082300D703F1 /* TTWaitingView.h */,
-				18BC1BD32093082300D703F1 /* TTPhotoBrowser.h */,
-				18BC1BD42093082300D703F1 /* TTBrowserImageView.h */,
 				18BC1BD52093082300D703F1 /* TTWaitingView.m */,
-				18BC1BD62093082300D703F1 /* TTPhotoBrowserConfig.h */,
+				18BC1BD32093082300D703F1 /* TTPhotoBrowser.h */,
 				18BC1BD72093082300D703F1 /* TTPhotoBrowser.m */,
+				18BC1BD62093082300D703F1 /* TTPhotoBrowserConfig.h */,
 			);
 			path = TTPhotoBrowser;
 			sourceTree = "<group>";

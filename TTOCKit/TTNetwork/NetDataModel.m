@@ -423,7 +423,10 @@ static BOOL NetWorklogResponseResult;
                 NSLog(@"parameters======%@",responseObject);
             }
 #endif
-            
+            if (!responseObject) {
+                failure(nil,@"服务器返回数据为空!",@"404");
+                return ;
+            }
             responseObject = [self parseResponseObject:responseObject];
             
             //检测用户是否设置状态码
@@ -431,7 +434,7 @@ static BOOL NetWorklogResponseResult;
                 return;
             }
             
-//            NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
+            //            NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
             NSString *status = [NSString stringWithFormat:@"%@",[self getDictValueFromDotKeyStr:statusKeyName inDict:responseObject]];
             
             if ([status isEqualToString:sucessCode]) {//请求成功
@@ -545,7 +548,10 @@ static BOOL NetWorklogResponseResult;
                 NSLog(@"parameters======%@",responseObject);
             }
 #endif
-            
+            if (!responseObject) {
+                failure(nil,@"服务器返回数据为空!",@"404");
+                return ;
+            }
             responseObject = [self parseResponseObject:responseObject];
             
             //检测用户是否设置状态码
@@ -553,8 +559,8 @@ static BOOL NetWorklogResponseResult;
                 return;
             }
             
-//            NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
-             NSString *status = [NSString stringWithFormat:@"%@",[self getDictValueFromDotKeyStr:statusKeyName inDict:responseObject]];
+            //            NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
+            NSString *status = [NSString stringWithFormat:@"%@",[self getDictValueFromDotKeyStr:statusKeyName inDict:responseObject]];
             
             
             if ([status isEqualToString:sucessCode]) {//请求成功
@@ -601,7 +607,7 @@ static BOOL NetWorklogResponseResult;
 + (void)POST_imgs:(NSString *)URLString parameters:(NetWorkParmsBlock)parmsBlock IsShowHud:(BOOL)isshowhud formData:(void (^)(id<AFMultipartFormData> formData))block progress:(void (^)(NSProgress *uploadProgress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
 {
     //将block转成dict
-//    NSMutableDictionary *dict = [self parmsBlocktoDict:parmsBlock ];
+    //    NSMutableDictionary *dict = [self parmsBlocktoDict:parmsBlock ];
     
     NSMutableDictionary *dict = [self parmsBlocktoDict:parmsBlock Class:self.class];
     
@@ -648,6 +654,10 @@ static BOOL NetWorklogResponseResult;
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
+        if (!responseObject) {
+            failure(nil,@"服务器返回数据为空!",@"404");
+            return ;
+        }
         responseObject = [self parseResponseObject:responseObject];
         
         //检测用户是否设置状态码
@@ -679,8 +689,8 @@ static BOOL NetWorklogResponseResult;
 {
     NSDictionary *resultDict = responseObject;
     
-//    NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
-//
+    //    NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
+    //
     NSString *status = [NSString stringWithFormat:@"%@",[self getDictValueFromDotKeyStr:statusKeyName inDict:responseObject]];
     
     
@@ -716,7 +726,7 @@ static BOOL NetWorklogResponseResult;
         
     }else {//token
         
-//        [self doOtherStatus:[NSString stringWithFormat:@"%@",resultDict[statusKeyName]]];
+        //        [self doOtherStatus:[NSString stringWithFormat:@"%@",resultDict[statusKeyName]]];
         [self doOtherStatus:[NSString stringWithFormat:@"%@",[self getDictValueFromDotKeyStr:statusKeyName inDict:resultDict]]];
         
         
@@ -876,9 +886,9 @@ static BOOL NetWorklogResponseResult;
 
 +(BOOL)checkNetworkCodeConfig:(id)responseObject failure:(NetWorkFailure)failure
 {
-//    if (!responseObject[statusKeyName]) {
+    //    if (!responseObject[statusKeyName]) {
     if (![self getDictValueFromDotKeyStr:statusKeyName inDict:responseObject]) {
-
+        
         failure(nil,@"请您使用  networkConfigureStatusKeyName dataKeyName msgKeyName  方法来配置您的statusKeyName",@"你的NetWork配置不对(network_Confingure_Error)");
         
         return NO;
@@ -888,13 +898,13 @@ static BOOL NetWorklogResponseResult;
         failure(nil,@"请您使用  networkConfigureStatusKeyName: dataKeyName msgKeyName 方法来配置您的msgKeyName",@"你的NetWork配置不对(network_Confingure_Error)");
         return NO;
     }
-//    if (!responseObject[dataKeyName]) {
-//
-//        failure(nil,@"请您使用  networkConfigureStatusKeyName dataKeyName msgKeyName  方法来配置您的dataKeyName",@"你的NetWork配置不对(network_Confingure_Error)");
-//
-//        return NO;
-//    }
-
+    //    if (!responseObject[dataKeyName]) {
+    //
+    //        failure(nil,@"请您使用  networkConfigureStatusKeyName dataKeyName msgKeyName  方法来配置您的dataKeyName",@"你的NetWork配置不对(network_Confingure_Error)");
+    //
+    //        return NO;
+    //    }
+    
     return YES;
 }
 
@@ -941,8 +951,8 @@ static BOOL NetWorklogResponseResult;
     NSMutableDictionary *dict = [self parmsBlocktoDict:parmsBlock Class:self.class];
     
     [dict addEntriesFromDictionary:@{
-  ttReflashPageKey:scrollView.ttRefleshPage,
-                                         }];
+                                     ttReflashPageKey:scrollView.ttRefleshPage,
+                                     }];
     
     weakify(scrollView)
     [self POST_idPrams_Progress:URLString CacheIf:0 IsShowHud:1 parameters:[self.class yy_modelWithDictionary:dict] progress:nil success:^(BOOL isCatch, NetDataModel *model, NSMutableArray<NSObject *> *modelArr, id responseObject) {
@@ -970,7 +980,7 @@ static BOOL NetWorklogResponseResult;
         //        [scrollView.footRefreshControl endRefreshing];
     }];
     
-
+    
 }
 
 

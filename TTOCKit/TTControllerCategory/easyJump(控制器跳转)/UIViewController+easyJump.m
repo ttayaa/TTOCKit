@@ -127,6 +127,7 @@ TTDynamicBlockProperty(OffenBlock, TTOutsideviewDidDisappearWilldoblock_offen)
 
 ControllerCategoryOverride(easyJump);
 
+
 viewDidLoad(easyJump)
 {
     //如果block有值说明外部 已经调用了WhenViewDidAppear方法
@@ -144,7 +145,7 @@ viewDidLoad(easyJump)
 -(void)WhenViewDidLoad:(OnceBlock)OutsideWilldoblock
 {
     self.TTOutsideviewDidLoadWilldoblock_once = OutsideWilldoblock;
-
+    
 }
 -(void)WhenViewDidLoad_offen:(OffenBlock)OutsideWilldoblock
 {
@@ -169,7 +170,7 @@ viewWillLayoutSubviews(easyJump)
 -(void)WhenViewWillLayoutSubviews:(OnceBlock)OutsideWilldoblock
 {
     self.TTOutsideviewWillLayoutSubviewsWilldoblock_once = OutsideWilldoblock;
-
+    
 }
 -(void)WhenViewWillLayoutSubviews_offen:(OffenBlock)OutsideWilldoblock
 {
@@ -268,7 +269,7 @@ viewWillDisappear(easyJump)
 -(void)WhenViewWillDisappear:(OnceBlock)OutsideWilldoblock
 {
     self.TTOutsideviewWillDisappearWilldoblock_once = OutsideWilldoblock;
-
+    
 }
 
 -(void)WhenViewWillDisappear_offen:(OffenBlock)OutsideWilldoblock
@@ -288,20 +289,20 @@ viewDidDisappear(easyJump)
     }
     //如有常用的block 就调用
     if (self.TTOutsideviewDidDisappearWilldoblock_offen) {
-         self.TTOutsideviewDidDisappearWilldoblock_offen(self.TTeasyjumpArgs);
+        self.TTOutsideviewDidDisappearWilldoblock_offen(self.TTeasyjumpArgs);
     }
     
 }
 -(void)WhenViewDidDisappear:(OnceBlock)OutsideWilldoblock
 {
     self.TTOutsideviewDidDisappearWilldoblock_once = OutsideWilldoblock;
-
+    
 }
 
 -(void)WhenViewDidDisappear_offen:(OffenBlock)OutsideWilldoblock
 {
     self.TTOutsideviewDidDisappearWilldoblock_offen = OutsideWilldoblock;
-
+    
 }
 
 

@@ -224,7 +224,15 @@ TTSignal(ColorBar)
 }
 TTSignal(swich)
 {
-    
+   ViewController *vc = [ViewController new];
+//    vc.TTisCanMutablePush = YES;
+    [self.navigationController TTPushViewController:vc animated:YES SetupParms:^(UIViewController *vc, NSMutableDictionary *dict) {
+        
+    } callback:^(id parameter) {
+        
+    } jumpError:^{
+        
+    }];
 }
 TTSignal(textfield)
 {

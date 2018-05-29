@@ -18,5 +18,5 @@
 #import "UIViewController+NVBarClick.h"
 #import "UIViewController+AlphaBar.h"
 #import "UIViewController+easyJump.h"
-
+#import "UIViewController+TTAlowPush.h"
 #endif /* TTControllerCategoryHeader_h */

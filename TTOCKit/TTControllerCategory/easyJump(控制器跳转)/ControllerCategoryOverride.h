@@ -26,43 +26,75 @@ _Pragma("clang diagnostic ignored \"-Wundeclared-selector\"") \
 {  \
 Method viewDidLoad = class_getInstanceMethod(self, @selector(viewDidLoad)); \
 Method ExtviewDidLoad = class_getInstanceMethod(self,@selector(viewDidLoad_##name)); \
+if (  class_addMethod(self, @selector(viewDidLoad), method_getImplementation(ExtviewDidLoad), method_getTypeEncoding(ExtviewDidLoad))    ) { \
+class_replaceMethod(self, @selector(viewDidLoad_##name), method_getImplementation(viewDidLoad),  method_getTypeEncoding(viewDidLoad)); \
+}else{ \
 method_exchangeImplementations(viewDidLoad, ExtviewDidLoad); \
+} \
 \
 Method viewWillAppear = class_getInstanceMethod(self, @selector(viewWillAppear:)); \
 Method ExtviewWillAppear = class_getInstanceMethod(self,@selector(viewWillAppear_##name:)); \
+if (  class_addMethod(self, @selector(viewWillAppear:), method_getImplementation(ExtviewWillAppear), method_getTypeEncoding(ExtviewWillAppear))    ) { \
+class_replaceMethod(self, @selector(viewWillAppear_##name:),method_getImplementation(viewWillAppear),  method_getTypeEncoding(viewWillAppear)); \
+}else{ \
 method_exchangeImplementations(viewWillAppear, ExtviewWillAppear); \
+} \
 \
 Method viewDidDisappear = class_getInstanceMethod(self, @selector(viewDidDisappear:)); \
 Method ExtviewDidDisappear = class_getInstanceMethod(self,@selector(viewDidDisappear_##name:)); \
+if (  class_addMethod(self, @selector(viewDidDisappear:), method_getImplementation(ExtviewDidDisappear), method_getTypeEncoding(ExtviewDidDisappear))    ) { \
+class_replaceMethod(self, @selector(viewDidDisappear_##name:), method_getImplementation(viewDidDisappear), method_getTypeEncoding(viewDidDisappear)); \
+}else{ \
 method_exchangeImplementations(viewDidDisappear, ExtviewDidDisappear); \
+} \
 \
 Method viewWillDisappear = class_getInstanceMethod(self, @selector(viewWillDisappear:)); \
 Method ExtviewWillDisappear = class_getInstanceMethod(self,@selector(viewWillDisappear_##name:)); \
+if (  class_addMethod(self, @selector(viewWillDisappear:), method_getImplementation(ExtviewWillDisappear), method_getTypeEncoding(ExtviewWillDisappear))    ) { \
+class_replaceMethod(self, @selector(viewWillDisappear_##name:), method_getImplementation(viewWillDisappear),  method_getTypeEncoding(viewWillDisappear)); \
+}else{ \
 method_exchangeImplementations(viewWillDisappear, ExtviewWillDisappear); \
+} \
 \
 Method viewDidLayoutSubviews = class_getInstanceMethod(self, @selector(viewDidLayoutSubviews)); \
 Method ExtviewDidLayoutSubviews = class_getInstanceMethod(self,@selector(viewDidLayoutSubviews_##name)); \
+if (  class_addMethod(self, @selector(viewDidLayoutSubviews), method_getImplementation(ExtviewDidLayoutSubviews), method_getTypeEncoding(ExtviewDidLayoutSubviews))    ) { \
+class_replaceMethod(self, @selector(viewDidLayoutSubviews_##name), method_getImplementation(viewDidLayoutSubviews),  method_getTypeEncoding(viewDidLayoutSubviews)); \
+}else{ \
 method_exchangeImplementations(viewDidLayoutSubviews, ExtviewDidLayoutSubviews); \
+} \
 \
 Method viewWillLayoutSubviews = class_getInstanceMethod(self, @selector(viewWillLayoutSubviews)); \
 Method ExtviewWillLayoutSubviews = class_getInstanceMethod(self,@selector(viewWillLayoutSubviews_##name)); \
+if (  class_addMethod(self, @selector(viewWillLayoutSubviews), method_getImplementation(ExtviewWillLayoutSubviews), method_getTypeEncoding(ExtviewWillLayoutSubviews))    ) { \
+class_replaceMethod(self, @selector(viewWillLayoutSubviews_##name), method_getImplementation(viewWillLayoutSubviews),  method_getTypeEncoding(viewWillLayoutSubviews)); \
+}else{ \
 method_exchangeImplementations(viewWillLayoutSubviews, ExtviewWillLayoutSubviews); \
+} \
 \
 Method viewDidAppear = class_getInstanceMethod(self, @selector(viewDidAppear:)); \
 Method ExtviewDidAppear = class_getInstanceMethod(self,@selector(viewDidAppear_##name:)); \
+if (  class_addMethod(self, @selector(viewDidAppear:), method_getImplementation(ExtviewDidAppear), method_getTypeEncoding(ExtviewDidAppear))    ) { \
+class_replaceMethod(self,@selector(viewDidAppear_##name:), method_getImplementation(viewDidAppear), method_getTypeEncoding(viewDidAppear)); \
+}else{ \
 method_exchangeImplementations(viewDidAppear, ExtviewDidAppear); \
+} \
 \
 \
 if ([self respondsToSelector:@selector(LOADEXT)]) { \
-    [self performSelector:@selector(LOADEXT)]; \
+[self performSelector:@selector(LOADEXT)]; \
 }\
 \
 } \
 _Pragma("clang diagnostic pop") \
 
 
-/**    2
 
+
+
+
+/**    2
+ 
  在分类中实现 viewDidLoad(categoryName){...} viewWillAppear(categoryName){...} .....
  */
 

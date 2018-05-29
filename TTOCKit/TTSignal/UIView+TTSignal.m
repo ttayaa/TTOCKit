@@ -418,7 +418,18 @@ static UIControlEvents allEventControls = -1;
             SEL cellSEL = NSSelectorFromString([NSString stringWithFormat:@"%@%@:",havedSignal,NSStringFromClass(nextResponder.class)]);
             if([self.viewController respondsToSelector:cellSEL]||[((UITableViewCell *)nextResponder) respondsToSelector:cellSEL])
             {
+                //设置一个cell名的信号
                 ((UITableViewCell *)nextResponder).clickSignalName = NSStringFromClass(nextResponder.class);
+                
+                UITableViewCell *cell = (UITableViewCell *)nextResponder;
+                if (@available(iOS 11.0, *)) {
+                    UITableView *tableView = (UITableView *)cell.superview;
+                    cell.innerIndexPath = [tableView indexPathForCell:cell];
+                }else{
+                    UITableView *tableView = (UITableView *)cell.superview.superview;
+                    cell.innerIndexPath = [tableView indexPathForCell:cell];
+                }
+                
             }
         }
         
@@ -468,12 +479,13 @@ static UIControlEvents allEventControls = -1;
 -(void)sendSignal{
     
     void(*action)(id,SEL,id) = (void(*)(id,SEL,id))objc_msgSend;
-
+    
     NSString * setStr = [NSString stringWithFormat:@"%@:",[havedSignal stringByAppendingString:self.clickSignalName]];
     
     //这里是用来设置indexPath
     [self getControllerAndCellindexPath];
-    //
+    
+    
     SEL selctor = NSSelectorFromString(setStr);
     //如果在view中已经实现那么就调用
     if ([self.targetObject respondsToSelector:selctor]) {
@@ -506,7 +518,7 @@ static UIControlEvents allEventControls = -1;
         
         
     }
-
+    
     
     //Don't not straight to this method that it will be kill when you run in a really iOS(64) Device
     //    objc_msgSend(self.viewController,selctor,self);
@@ -557,15 +569,15 @@ static UIControlEvents allEventControls = -1;
                 
                 if ([subview isKindOfClass:[UISwitch class]]&&subview.clickSignalName.length == 0) {//处理UISwitch
                     NSString *name = [subview dymaicSignalName];
-//                    name = [name stringByReplacingOccurrencesOfString:@"_" withString:@""];
+                    //                    name = [name stringByReplacingOccurrencesOfString:@"_" withString:@""];
                     subview.clickSignalName = name;
                     return hitTestView;
                 }
-               else if ([hitTestView isKindOfClass:[UIControl class]]) {//处理其它UIControl类
-                   
+                else if ([hitTestView isKindOfClass:[UIControl class]]) {//处理其它UIControl类
+                    
                     if (hitTestView.clickSignalName.length == 0) {
                         NSString *name = [hitTestView dymaicSignalName];
-//                        name = [name stringByReplacingOccurrencesOfString:@"_" withString:@""];
+                        //                        name = [name stringByReplacingOccurrencesOfString:@"_" withString:@""];
                         hitTestView.clickSignalName = name;
                     }
                 }
@@ -599,3 +611,4 @@ static UIControlEvents allEventControls = -1;
 }
 
 @end
+

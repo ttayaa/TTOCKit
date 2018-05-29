@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		182D023820BD52820012EB01 /* UIViewController+TTAlowPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D023720BD52810012EB01 /* UIViewController+TTAlowPush.m */; };
 		1898F4D5208F1B9700647FC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1898F4D3208F1B9700647FC9 /* Main.storyboard */; };
 		1898F4D7208F1B9800647FC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1898F4D6208F1B9800647FC9 /* Assets.xcassets */; };
 		1898F4DA208F1B9800647FC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1898F4D8208F1B9800647FC9 /* LaunchScreen.storyboard */; };
@@ -99,6 +100,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		182D023620BD52810012EB01 /* UIViewController+TTAlowPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TTAlowPush.h"; sourceTree = "<group>"; };
+		182D023720BD52810012EB01 /* UIViewController+TTAlowPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TTAlowPush.m"; sourceTree = "<group>"; };
 		1898F4CA208F1B9700647FC9 /* TTOCKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TTOCKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1898F4D4208F1B9700647FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1898F4D6208F1B9800647FC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -295,6 +298,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		182D023520BD52810012EB01 /* TTAllowPush(多次push问题) */ = {
+			isa = PBXGroup;
+			children = (
+				182D023620BD52810012EB01 /* UIViewController+TTAlowPush.h */,
+				182D023720BD52810012EB01 /* UIViewController+TTAlowPush.m */,
+			);
+			path = "TTAllowPush(多次push问题)";
+			sourceTree = "<group>";
+		};
 		1898F4C1208F1B9700647FC9 = {
 			isa = PBXGroup;
 			children = (
@@ -747,6 +759,7 @@
 		18BC1C102093082300D703F1 /* TTControllerCategory */ = {
 			isa = PBXGroup;
 			children = (
+				182D023520BD52810012EB01 /* TTAllowPush(多次push问题) */,
 				18BC1C112093082300D703F1 /* AlphaBar(半透明导航栏) */,
 				18BC1C1C2093082300D703F1 /* DZNEmptyDataSet(空页面扩展) */,
 				18BC1C242093082300D703F1 /* NBarClick(导航栏点击) */,
@@ -1091,6 +1104,7 @@
 				18BC1C4C2093082400D703F1 /* DebugMange.m in Sources */,
 				18BC1C5A2093082400D703F1 /* UIViewController+CustomPopVc.m in Sources */,
 				18BC1C532093082400D703F1 /* ModalAnimator_downMenuAnimation_black.m in Sources */,
+				182D023820BD52820012EB01 /* UIViewController+TTAlowPush.m in Sources */,
 				18BC1C822093082400D703F1 /* UIViewController+DZNEmptyDataSet.m in Sources */,
 				18BC1C542093082400D703F1 /* ModalAnimator_downToUpAnimation.m in Sources */,
 				18BC1C4E2093082400D703F1 /* NetDataModel.m in Sources */,

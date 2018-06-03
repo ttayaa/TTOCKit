@@ -12,9 +12,9 @@
 #import "FBShimmeringView.h"
 
 //外部可以直接使用宏
-#define TTLeftClick   - (void)tt_leftBarItemAction:(UIBarButtonItem *)BarButtonItem
+#define TTLeftClick   - (void)tt_leftBarItemAction:(UIButton *)btn
 
-#define TTRightClick   - (void)tt_rightBarItemAction:(UIBarButtonItem *)BarButtonItem
+#define TTRightClick   - (void)tt_rightBarItemAction:(UIButton *)btn
 
 
 @interface UIViewController (NVBarClick)

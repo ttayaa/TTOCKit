@@ -195,7 +195,7 @@
 
 //默认返回
 //重写则覆盖
-- (void)tt_leftBarItemAction:(UIBarButtonItem *)BarButtonItem
+- (void)tt_leftBarItemAction:(UIButton *)btn
 {
     if(self.navigationController.viewControllers.count>1)
     {
@@ -223,7 +223,7 @@
     
 }
 //需重写
-- (void)tt_rightBarItemAction:(UIBarButtonItem *)BarButtonItem
+- (void)tt_rightBarItemAction:(UIButton *)btn
 {
     
 }

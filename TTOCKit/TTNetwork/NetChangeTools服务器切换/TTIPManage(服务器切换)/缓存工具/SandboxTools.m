@@ -131,6 +131,10 @@ static  NSMutableArray<NSMutableDictionary *> *KeyNameArr;
 {
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:key];
     
+    if ([data isKindOfClass:[NSDictionary class]]) {
+        return data;
+    }
+    
     return (NSDictionary *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     
 }

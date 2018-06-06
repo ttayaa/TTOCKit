@@ -961,11 +961,23 @@ static BOOL NetWorklogResponseResult;
         
         normalize(scrollView)
         if ([scrollView.ttRefleshPage integerValue]==1) {
-            scrollView.ttReflashModel = model;
+            if (model) {//如果返回的是模型
+                scrollView.ttReflashModel = model;
+            }
+            if (modelArr.count>0) {//如果返回的是模型数组
+                scrollView.ttReflashModel = modelArr;
+            }
         }
         
         if ([scrollView.ttRefleshPage integerValue]>1) {
-            arrKeyBlock(model);
+            if (model) {
+                arrKeyBlock(model,responseObject);
+            }
+            if(modelArr.count>0)
+            {
+                arrKeyBlock(modelArr,responseObject);
+            }
+            
         }
         
         scrollView.ttRefleshPage = @([scrollView.ttRefleshPage integerValue] + 1);

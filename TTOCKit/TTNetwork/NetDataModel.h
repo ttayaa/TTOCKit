@@ -20,7 +20,7 @@
 typedef void (^Success_##datamodelName)(BOOL isCatch,datamodelName * model,NSMutableArray <datamodelName *>*modelArr,id responseObject);\
 typedef void (^Failure_##datamodelName)(NSError *error,NSString *errorStr,NSString * status);\
 typedef void (^ParmsBlock_##datamodelName)(datamodelName * ParmsModel);\
-typedef void (^DatePagingRelativeBlock_##datamodelName)(datamodelName *model);\
+typedef void (^DatePagingRelativeBlock_##datamodelName)(id model,id responseObject);\
 \
 + (void)POST_idPrams_Progress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(id)parms progress:(void (^)(NSProgress *progress))progress success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
 \
@@ -57,7 +57,7 @@ typedef void (^NetWorkSuccess)(BOOL isCatch,NetDataModel * model,NSMutableArray 
 typedef void (^NetWorkFailure)(NSError *error,NSString *errorStr,NSString * status);
 typedef void (^NetWorkParmsBlock)(NetDataModel* ParmsModel);
 
-typedef void (^NetWorkDatePagingRelativeBlock)(NetDataModel *model);
+typedef void (^NetWorkDatePagingRelativeBlock)(id model,id responseObject);
 
 
 typedef void (^NetWorkExtblock)(void);

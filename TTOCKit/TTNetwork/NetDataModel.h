@@ -75,7 +75,7 @@ typedef void (^NetWorkEachStatusKeyBlock)(void);
 /**
  统一的afn处理
  */
-+(void)networkConfigureNetWorkAFNconfig:(NetWorkAFNconfig)NetWorkAFNconfigblock;
++(void)networkConfigureNetWorkAFNconfig:(NetWorkAFNconfig)netWorkAFNconfigblock;
 //配置证书 https
 +(void)networkConfigureNetWorkAFNcer:(NSString *)cerName;
 

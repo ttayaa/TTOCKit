@@ -17,8 +17,10 @@ NSString *const TTAlertViewDidDismissNotification = @"TTAlertViewDidDismissNotif
 #define LWHColor(r, g, b) [UIColor colorWithRed:(r/255.0) green:(g/255.0) blue:(b/255.0) alpha:1.0]
 #define LWHScreenWidth [UIScreen mainScreen].bounds.size.width
 #define LWHScreenHeight [UIScreen mainScreen].bounds.size.height
-#define LWHAlertViewWidth 280
-#define LWHAlertViewHeight 150
+//#define LWHAlertViewWidth 280
+//#define LWHAlertViewHeight 150
+#define LWHAlertViewWidth 268*[UIScreen mainScreen].bounds.size.width/375
+#define LWHAlertViewHeight 180*[UIScreen mainScreen].bounds.size.height/667
 #define LWHAlertViewMaxHeight 440
 #define LWHMargin 0
 #define LWHContentMargin 15
@@ -144,16 +146,16 @@ NSString *const TTAlertViewDidDismissNotification = @"TTAlertViewDidDismissNotif
         CGContextDrawImage(effectInContext, imageRect, originalImage.CGImage);
         
         vImage_Buffer effectInBuffer;
-        effectInBuffer.data	 = CGBitmapContextGetData(effectInContext);
-        effectInBuffer.width	= CGBitmapContextGetWidth(effectInContext);
+        effectInBuffer.data     = CGBitmapContextGetData(effectInContext);
+        effectInBuffer.width    = CGBitmapContextGetWidth(effectInContext);
         effectInBuffer.height   = CGBitmapContextGetHeight(effectInContext);
         effectInBuffer.rowBytes = CGBitmapContextGetBytesPerRow(effectInContext);
         
         UIGraphicsBeginImageContextWithOptions(originalImage.size, NO, [[UIScreen mainScreen] scale]);
         CGContextRef effectOutContext = UIGraphicsGetCurrentContext();
         vImage_Buffer effectOutBuffer;
-        effectOutBuffer.data	 = CGBitmapContextGetData(effectOutContext);
-        effectOutBuffer.width	= CGBitmapContextGetWidth(effectOutContext);
+        effectOutBuffer.data     = CGBitmapContextGetData(effectOutContext);
+        effectOutBuffer.width    = CGBitmapContextGetWidth(effectOutContext);
         effectOutBuffer.height   = CGBitmapContextGetHeight(effectOutContext);
         effectOutBuffer.rowBytes = CGBitmapContextGetBytesPerRow(effectOutContext);
         
@@ -174,7 +176,7 @@ NSString *const TTAlertViewDidDismissNotification = @"TTAlertViewDidDismissNotif
                 0.0722 + 0.9278 * s,  0.0722 - 0.0722 * s,  0.0722 - 0.0722 * s,  0,
                 0.7152 - 0.7152 * s,  0.7152 + 0.2848 * s,  0.7152 - 0.7152 * s,  0,
                 0.2126 - 0.2126 * s,  0.2126 - 0.2126 * s,  0.2126 + 0.7873 * s,  0,
-                0,					0,					0,  1,
+                0,                    0,                    0,  1,
             };
             const int32_t divisor = 256;
             NSUInteger matrixSize = sizeof(floatingPointSaturationMatrix)/sizeof(floatingPointSaturationMatrix[0]);
@@ -528,21 +530,40 @@ buttonType ButtonTitle:(NSString *)buttonTitle Click:(clickHandle)click ButtonTy
     self.layer.cornerRadius=8;
     
     self.frame = CGRectMake(0, 0, LWHAlertViewWidth, LWHAlertViewHeight);
+    //    self.backgroundColor = [UIColor whiteColor];
+    
+    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
+    effectView.layer.cornerRadius = 10.0f;
+    effectView.layer.masksToBounds = YES;
+    effectView.frame = self.frame;
+    [self addSubview:effectView];
+    self.backgroundColor = [UIColor clearColor];
+    UIVisualEffectView *subEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIVibrancyEffect effectForBlurEffect:(UIBlurEffect *)effectView.effect]];
+    subEffectView.frame = effectView.bounds;
+    [effectView.contentView addSubview:subEffectView];
+    
+    
+    //    UIToolbar *toolbar  = [[UIToolbar alloc] initWithFrame:self.frame];
+    //    toolbar.barStyle = UIBarStyleBlack;
+    //    toolbar.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3f];
+    //    self.backgroundColor = [UIColor clearColor];
+    //    self.alpha = 0.1f;
+    //    [self addSubview:toolbar];
+    
     NSInteger count = self.buttons.count;
     
     if (count > 2) {
         self.frame = CGRectMake(0, 0, LWHAlertViewWidth, LWHAlertViewTitleLabelHeight + LWHAlertViewContentHeight + LWHMargin + (LWHMargin + LWHButtonHeight) * count);
     }
     self.center = CGPointMake(LWHScreenWidth / 2, LWHScreenHeight / 2);
-    self.backgroundColor = [UIColor whiteColor];
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(LWHMargin, 0, LWHAlertViewWidth - LWHMargin * 2, LWHAlertViewTitleLabelHeight)];
-    titleLabel.backgroundColor = [UIColor clearColor];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(LWHMargin, 10, LWHAlertViewWidth - LWHMargin * 2, LWHAlertViewTitleLabelHeight-10)];
+    //    titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.text = self.title;
-    titleLabel.textColor = LWHAlertViewTitleColor;
+    //    titleLabel.textColor = LWHAlertViewTitleColor;
     titleLabel.font = LWHAlertViewTitleFont;
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:titleLabel];
+    [subEffectView.contentView addSubview:titleLabel];
     
     CGFloat contentLabelYValue=LWHAlertViewTitleLabelHeight;
     if (self.title.length==0||self.title==nil) {
@@ -550,13 +571,13 @@ buttonType ButtonTitle:(NSString *)buttonTitle Click:(clickHandle)click ButtonTy
     }
     
     UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(LWHContentMargin, contentLabelYValue, LWHAlertViewWidth - LWHContentMargin * 2, LWHAlertViewContentHeight)];
-    contentLabel.backgroundColor = [UIColor clearColor];
+    //    contentLabel.backgroundColor = [UIColor clearColor];
     contentLabel.text = self.message;
-    contentLabel.textColor = LWHAlertViewContentColor;
+    //    contentLabel.textColor = LWHAlertViewContentColor;
     contentLabel.font = LWHAlertViewContentFont;
     contentLabel.numberOfLines = 0;
     contentLabel.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:contentLabel];
+    [subEffectView.contentView addSubview:contentLabel];
     
     CGFloat contentHeight = [contentLabel sizeThatFits:CGSizeMake(LWHAlertViewWidth-LWHContentMargin*2, CGFLOAT_MAX)].height;
     
@@ -572,7 +593,7 @@ buttonType ButtonTitle:(NSString *)buttonTitle Click:(clickHandle)click ButtonTy
         if (LWHiOS7OrLater) {
             contentView.selectable = NO;
         }
-        [self addSubview:contentView];
+        [subEffectView.contentView addSubview:contentView];
         
         CGFloat realContentHeight = 0;
         if (LWHiOS7OrLater) {
@@ -611,9 +632,10 @@ buttonType ButtonTitle:(NSString *)buttonTitle Click:(clickHandle)click ButtonTy
     if (count == 1) {
         
         //增加线条
-        UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(LWHMargin, self.frame.size.height - LWHButtonHeight - LWHMargin, LWHAlertViewWidth - LWHMargin * 2, 0.3)];
-        lineView.backgroundColor=[UIColor grayColor];
-        [self addSubview:lineView];
+        UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(LWHMargin, self.frame.size.height - LWHButtonHeight - LWHMargin, LWHAlertViewWidth - LWHMargin * 2, 0.4)];
+        lineView.backgroundColor=LWHColor(238,238,238);
+        
+        [subEffectView.contentView addSubview:lineView];
         
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(LWHMargin, self.frame.size.height - LWHButtonHeight - LWHMargin, LWHAlertViewWidth - LWHMargin * 2, LWHButtonHeight)];
         NSDictionary *btnDict = [self.buttons firstObject];
@@ -626,13 +648,13 @@ buttonType ButtonTitle:(NSString *)buttonTitle Click:(clickHandle)click ButtonTy
         CGFloat btnWidth = LWHAlertViewWidth / 2 - LWHMargin * 1.5;
         
         //增加两条线
-        UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(LWHMargin, self.frame.size.height - LWHButtonHeight - LWHMargin, LWHAlertViewWidth - LWHMargin * 2, 0.3)];
-        lineView.backgroundColor=[UIColor grayColor];
-        [self addSubview:lineView];
+        UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(LWHMargin, self.frame.size.height - LWHButtonHeight - LWHMargin, LWHAlertViewWidth - LWHMargin * 2, 0.4)];
+        lineView.backgroundColor=LWHColor(238,238,238);
+        [subEffectView.contentView addSubview:lineView];
         
-        UIView *seperateLine=[[UIView alloc]initWithFrame:CGRectMake(LWHMargin + (LWHMargin + btnWidth), self.frame.size.height - LWHButtonHeight - LWHMargin,0.3, LWHButtonHeight)];
-        seperateLine.backgroundColor=[UIColor grayColor];
-        [self addSubview:seperateLine];
+        UIView *seperateLine=[[UIView alloc]initWithFrame:CGRectMake(LWHMargin + (LWHMargin + btnWidth), self.frame.size.height - LWHButtonHeight - LWHMargin,0.4, LWHButtonHeight)];
+        seperateLine.backgroundColor=LWHColor(238,238,238);
+        [subEffectView.contentView addSubview:seperateLine];
         
         for (int i = 0; i < 2; i++) {
             
@@ -667,10 +689,9 @@ buttonType ButtonTitle:(NSString *)buttonTitle Click:(clickHandle)click ButtonTy
     //可以不断的扩展Button样式
     switch (buttonType) {
         case TTAlertViewButtonTypeDefault:
-//            normalImage = [self imageFromColorWithColor:[UIColor blueColor]];
-//            highImage = [self imageFromColorWithColor:[UIColor blueColor]];
-            normalImage = [self imageFromColorWithColor:[UIColor redColor]];
-            highImage = [self imageFromColorWithColor:[UIColor redColor]];
+            normalImage = [self imageFromColorWithColor:[UIColor blueColor]];
+            highImage = [self imageFromColorWithColor:[UIColor blueColor]];
+            
             textColor = LWHColor(255, 255, 255);
             [btn setBackgroundImage:[self resizeImage:normalImage] forState:UIControlStateNormal];
             [btn setBackgroundImage:[self resizeImage:highImage] forState:UIControlStateHighlighted];
@@ -693,8 +714,8 @@ buttonType ButtonTitle:(NSString *)buttonTitle Click:(clickHandle)click ButtonTy
             textColor = LWHColor(255, 255, 255);
             break;
         case TTAlertViewButtonTypeNone:
+            textColor = LWHColor(119, 73, 53);
             
-            textColor = [UIColor blueColor];
             [btn setTitleColor:textColor forState:UIControlStateNormal];
             break;
         case TTAlertViewButtonTypeHeight:

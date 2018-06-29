@@ -136,9 +136,9 @@ static BOOL NetWorklogResponseResult;
 //}
 
 
-+(void)networkConfigureNetWorkAFNconfig:(NetWorkAFNconfig)NetWorkAFNconfigblock
++(void)networkConfigureNetWorkAFNconfig:(NetWorkAFNconfig)netWorkAFNconfigblock
 {
-    NetWorkAFNconfigblock = NetWorkAFNconfigblock;
+    NetWorkAFNconfigblock = netWorkAFNconfigblock;
 }
 
 +(void)networkConfigureNetWorkAFNcer:(NSString *)cerName

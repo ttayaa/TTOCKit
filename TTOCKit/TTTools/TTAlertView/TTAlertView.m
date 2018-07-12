@@ -15,6 +15,8 @@ NSString *const TTAlertViewWillDismissNotification = @"TTAlertViewWillDismissNot
 NSString *const TTAlertViewDidDismissNotification = @"TTAlertViewDidDismissNotification";
 
 #define LWHColor(r, g, b) [UIColor colorWithRed:(r/255.0) green:(g/255.0) blue:(b/255.0) alpha:1.0]
+#define LWHColorA(r, g, b,a) [UIColor colorWithRed:(r/255.0) green:(g/255.0) blue:(b/255.0) alpha:a]
+
 #define LWHScreenWidth [UIScreen mainScreen].bounds.size.width
 #define LWHScreenHeight [UIScreen mainScreen].bounds.size.height
 //#define LWHAlertViewWidth 280
@@ -631,11 +633,7 @@ buttonType ButtonTitle:(NSString *)buttonTitle Click:(clickHandle)click ButtonTy
     
     if (count == 1) {
         
-        //增加线条
-        UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(LWHMargin, self.frame.size.height - LWHButtonHeight - LWHMargin, LWHAlertViewWidth - LWHMargin * 2, 0.4)];
-        lineView.backgroundColor=LWHColor(238,238,238);
         
-        [subEffectView.contentView addSubview:lineView];
         
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(LWHMargin, self.frame.size.height - LWHButtonHeight - LWHMargin, LWHAlertViewWidth - LWHMargin * 2, LWHButtonHeight)];
         NSDictionary *btnDict = [self.buttons firstObject];
@@ -644,17 +642,15 @@ buttonType ButtonTitle:(NSString *)buttonTitle Click:(clickHandle)click ButtonTy
         [self addSubview:btn];
         btn.tag = 0;
         [btn addTarget:self action:@selector(alertBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        //增加线条
+        UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(LWHMargin, self.frame.size.height - LWHButtonHeight - LWHMargin, LWHAlertViewWidth - LWHMargin * 2, 1)];
+        lineView.backgroundColor=LWHColorA(180,180,180,1);
+        
+        [self addSubview:lineView];
     } else if (count == 2) {
         CGFloat btnWidth = LWHAlertViewWidth / 2 - LWHMargin * 1.5;
         
-        //增加两条线
-        UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(LWHMargin, self.frame.size.height - LWHButtonHeight - LWHMargin, LWHAlertViewWidth - LWHMargin * 2, 0.4)];
-        lineView.backgroundColor=LWHColor(238,238,238);
-        [subEffectView.contentView addSubview:lineView];
-        
-        UIView *seperateLine=[[UIView alloc]initWithFrame:CGRectMake(LWHMargin + (LWHMargin + btnWidth), self.frame.size.height - LWHButtonHeight - LWHMargin,0.4, LWHButtonHeight)];
-        seperateLine.backgroundColor=LWHColor(238,238,238);
-        [subEffectView.contentView addSubview:seperateLine];
         
         for (int i = 0; i < 2; i++) {
             
@@ -666,6 +662,18 @@ buttonType ButtonTitle:(NSString *)buttonTitle Click:(clickHandle)click ButtonTy
             btn.tag = i;
             [btn addTarget:self action:@selector(alertBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         }
+        
+        
+        //增加两条线
+        UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(LWHMargin, self.frame.size.height - LWHButtonHeight - LWHMargin, LWHAlertViewWidth - LWHMargin * 2, 1)];
+        lineView.backgroundColor=LWHColorA(180,180,180,1);
+        [self addSubview:lineView];
+        
+        UIView *seperateLine=[[UIView alloc]initWithFrame:CGRectMake(LWHMargin + (LWHMargin + btnWidth), self.frame.size.height - LWHButtonHeight - LWHMargin,1, LWHButtonHeight)];
+        seperateLine.backgroundColor=LWHColorA(180,180,180,1);
+        [self addSubview:seperateLine];
+        
+        
     } else if (count > 2) {
         if (contentHeight < LWHAlertViewContentHeight) {
             contentHeight = LWHAlertViewContentHeight;
@@ -714,7 +722,7 @@ buttonType ButtonTitle:(NSString *)buttonTitle Click:(clickHandle)click ButtonTy
             textColor = LWHColor(255, 255, 255);
             break;
         case TTAlertViewButtonTypeNone:
-            textColor = LWHColor(119, 73, 53);
+            textColor = LWHColor(75, 137, 60);
             
             [btn setTitleColor:textColor forState:UIControlStateNormal];
             break;
@@ -747,3 +755,4 @@ buttonType ButtonTitle:(NSString *)buttonTitle Click:(clickHandle)click ButtonTy
 }
 
 @end
+

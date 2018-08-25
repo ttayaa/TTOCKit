@@ -175,17 +175,17 @@ TTSignal(alphaBar)
 
 TTSignal(network)
 {
-
     
-    [testmodel POST_HeadLoad:@"/message/list" ParmsBlock:^(testmodel *ParmsModel) {
+    [testmodel POST_HeadLoad:@"/entrustments/list" ParmsBlock:^(testmodel *ParmsModel) {
+        
         //消息类型。0-所有消息，-2:个人信息;4:系统消息;-1:系统公告
         ParmsModel.messageType = @"-1";
         //0：未读，1：已读，-1或不传：所有
-        ParmsModel.read = @"-1";
-    } reflashScrollView:self.tableView arrKeyBlock:^(testmodel *model) {
-
+    } reflashScrollView:self.tableView arrKeyBlock:^(testmodel *model,id responseObject) {
+        
+        
     } loadfinish:^(BOOL isSsucess,id responseObject) {
-
+   
     }];
     
     

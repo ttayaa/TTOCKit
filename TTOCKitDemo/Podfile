@@ -10,6 +10,6 @@ target 'TTOCKitDemo' do
 pod 'YYModel'
 pod 'AFNetworking'
 pod 'SDWebImage'
-
+pod 'DZNEmptyDataSet'
 #      pod 'TTOCKit'
 end

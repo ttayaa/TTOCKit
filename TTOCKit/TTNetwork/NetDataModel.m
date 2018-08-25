@@ -950,6 +950,10 @@ static BOOL NetWorklogResponseResult;
     //将block转成dict
     NSMutableDictionary *dict = [self parmsBlocktoDict:parmsBlock Class:self.class];
     
+    if (!scrollView) {
+        return;
+    }
+    
     [dict addEntriesFromDictionary:@{
                                      ttReflashPageKey:scrollView.ttRefleshPage,
                                      }];

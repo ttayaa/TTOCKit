@@ -7,8 +7,8 @@
 //
 
 #import "tetController.h"
-#import "TTSignal.h"
 #import "TTRouter.h"
+#import "TTSignal.h"
 @interface tetController ()
 @property (weak, nonatomic) IBOutlet UIButton *dissmis;
 

@@ -30,6 +30,7 @@ Pod::Spec.new do |s|
     
     s.subspec 'TTControllerCategory' do |ss|
         ss.source_files = 'TTOCKit/TTControllerCategory/**/*.{h,m,mm}'
+        ss.dependency 'DZNEmptyDataSet'
     end
     
     s.subspec 'TTMVVM' do |ss|

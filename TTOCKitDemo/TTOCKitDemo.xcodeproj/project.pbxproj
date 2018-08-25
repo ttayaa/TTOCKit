@@ -80,9 +80,6 @@
 		18BC1C802093082400D703F1 /* UIViewController+AlphaBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BC1C182093082300D703F1 /* UIViewController+AlphaBar.m */; };
 		18BC1C812093082400D703F1 /* UINavigationBar+ttAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BC1C192093082300D703F1 /* UINavigationBar+ttAwesome.m */; };
 		18BC1C822093082400D703F1 /* UIViewController+DZNEmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BC1C1E2093082300D703F1 /* UIViewController+DZNEmptyDataSet.m */; };
-		18BC1C832093082400D703F1 /* placeholder_dropbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BC1C202093082300D703F1 /* placeholder_dropbox@2x.png */; };
-		18BC1C842093082400D703F1 /* placeholder_dropbox@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18BC1C212093082300D703F1 /* placeholder_dropbox@3x.png */; };
-		18BC1C852093082400D703F1 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BC1C222093082300D703F1 /* UIScrollView+EmptyDataSet.m */; };
 		18BC1C862093082400D703F1 /* UIViewController+NVBarClick.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BC1C252093082300D703F1 /* UIViewController+NVBarClick.m */; };
 		18BC1C872093082400D703F1 /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BC1C2A2093082300D703F1 /* FBShimmeringLayer.m */; };
 		18BC1C882093082400D703F1 /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BC1C2B2093082300D703F1 /* FBShimmeringView.m */; };
@@ -246,10 +243,6 @@
 		18BC1C1B2093082300D703F1 /* UINavigationBar+ttAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ttAwesome.h"; sourceTree = "<group>"; };
 		18BC1C1D2093082300D703F1 /* UIViewController+DZNEmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DZNEmptyDataSet.h"; sourceTree = "<group>"; };
 		18BC1C1E2093082300D703F1 /* UIViewController+DZNEmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DZNEmptyDataSet.m"; sourceTree = "<group>"; };
-		18BC1C202093082300D703F1 /* placeholder_dropbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder_dropbox@2x.png"; sourceTree = "<group>"; };
-		18BC1C212093082300D703F1 /* placeholder_dropbox@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder_dropbox@3x.png"; sourceTree = "<group>"; };
-		18BC1C222093082300D703F1 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
-		18BC1C232093082300D703F1 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		18BC1C252093082300D703F1 /* UIViewController+NVBarClick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NVBarClick.m"; sourceTree = "<group>"; };
 		18BC1C272093082300D703F1 /* FBShimmering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmering.h; sourceTree = "<group>"; };
 		18BC1C282093082300D703F1 /* FBShimmeringLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringLayer.h; sourceTree = "<group>"; };
@@ -799,20 +792,8 @@
 			children = (
 				18BC1C1D2093082300D703F1 /* UIViewController+DZNEmptyDataSet.h */,
 				18BC1C1E2093082300D703F1 /* UIViewController+DZNEmptyDataSet.m */,
-				18BC1C1F2093082300D703F1 /* DZNEmptyDataSet */,
 			);
 			path = "DZNEmptyDataSet(空页面扩展)";
-			sourceTree = "<group>";
-		};
-		18BC1C1F2093082300D703F1 /* DZNEmptyDataSet */ = {
-			isa = PBXGroup;
-			children = (
-				18BC1C202093082300D703F1 /* placeholder_dropbox@2x.png */,
-				18BC1C212093082300D703F1 /* placeholder_dropbox@3x.png */,
-				18BC1C222093082300D703F1 /* UIScrollView+EmptyDataSet.m */,
-				18BC1C232093082300D703F1 /* UIScrollView+EmptyDataSet.h */,
-			);
-			path = DZNEmptyDataSet;
 			sourceTree = "<group>";
 		};
 		18BC1C242093082300D703F1 /* NBarClick(导航栏点击) */ = {
@@ -968,12 +949,10 @@
 				18BC1C4B2093082400D703F1 /* TTNetwork.xcassets in Resources */,
 				1898F4DA208F1B9800647FC9 /* LaunchScreen.storyboard in Resources */,
 				1898F4D7208F1B9800647FC9 /* Assets.xcassets in Resources */,
-				18BC1C842093082400D703F1 /* placeholder_dropbox@3x.png in Resources */,
 				18BC1C732093082400D703F1 /* KVNProgressView.xib in Resources */,
 				1898F620208F1D8200647FC9 /* TTOCKit.podspec in Resources */,
 				1898F502208F1CC300647FC9 /* tetController.xib in Resources */,
 				1898F4D5208F1B9700647FC9 /* Main.storyboard in Resources */,
-				18BC1C832093082400D703F1 /* placeholder_dropbox@2x.png in Resources */,
 				18BC1C632093082400D703F1 /* TTQRScan.storyboard in Resources */,
 				1898F500208F1CC300647FC9 /* TableViewCel2.xib in Resources */,
 				1898F505208F1CC300647FC9 /* TableViewCell1.xib in Resources */,
@@ -992,12 +971,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TTOCKitDemo/Pods-TTOCKitDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
 			);
@@ -1085,7 +1066,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18BC1C852093082400D703F1 /* UIScrollView+EmptyDataSet.m in Sources */,
 				1898F4DD208F1B9800647FC9 /* main.m in Sources */,
 				18BC1C492093082400D703F1 /* SandboxTools.m in Sources */,
 				18BC1C7F2093082400D703F1 /* FBKVOController.m in Sources */,
@@ -1304,10 +1284,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W4K85W89V2;
 				INFOPLIST_FILE = TTOCKitDemo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ttayaa.TTOCKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1322,10 +1299,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W4K85W89V2;
 				INFOPLIST_FILE = TTOCKitDemo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ttayaa.TTOCKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

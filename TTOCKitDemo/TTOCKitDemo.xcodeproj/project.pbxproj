@@ -780,9 +780,9 @@
 			children = (
 				18BC1C132093082300D703F1 /* KVOController.h */,
 				18BC1C142093082300D703F1 /* FBKVOController.h */,
-				18BC1C152093082300D703F1 /* NSObject+FBKVOController.m */,
 				18BC1C162093082300D703F1 /* FBKVOController.m */,
 				18BC1C172093082300D703F1 /* NSObject+FBKVOController.h */,
+				18BC1C152093082300D703F1 /* NSObject+FBKVOController.m */,
 			);
 			path = FBKVOController;
 			sourceTree = "<group>";
@@ -1284,7 +1284,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W4K85W89V2;
 				INFOPLIST_FILE = TTOCKitDemo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ttayaa.TTOCKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1299,7 +1302,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W4K85W89V2;
 				INFOPLIST_FILE = TTOCKitDemo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ttayaa.TTOCKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

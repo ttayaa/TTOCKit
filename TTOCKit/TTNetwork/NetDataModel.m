@@ -353,17 +353,16 @@ static BOOL NetWorklogResponseResult;
 
 
 
-#pragma mark -POST
-+ (void)POST_idPrams_Progress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(id)parms progress:(void (^)(NSProgress *progress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
+
++ (void)LoadDataWithRequestType:(NetWorkRequestType)requestType URLStr:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(id)parms formData:(void (^)(id<AFMultipartFormData> formData))formDatablock progress:(void (^)(NSProgress *progress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
 {
     @autoreleasepool {
-        
         
         NSDictionary * dict;
         if ([parms isKindOfClass:[NetDataModel class]]) {
             NSError *error = nil;
             NSString *jsonString = [parms yy_modelToJSONString];
-            NSData *data         = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+            NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
             dict = [NSJSONSerialization JSONObjectWithData:data?data:[NSData new] options:NSJSONReadingMutableContainers error:&error];
         }
         else if([parms isKindOfClass:[NSDictionary class]])
@@ -414,275 +413,122 @@ static BOOL NetWorklogResponseResult;
             return;
         }
         
-        [ShareAfnSessionMgr POST:URLString parameters:newDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        if (requestType == NetWorkRequestTypeGET) {
             
-            //打印请求的结果信息
-#ifdef DEBUG
-            if(NetWorklogResponseResult)
-            {
-                NSLog(@"parameters======%@",responseObject);
-            }
-#endif
-            if (!responseObject) {
-                failure(nil,@"服务器返回数据为空!",@"404");
-                return ;
-            }
-            responseObject = [self parseResponseObject:responseObject];
-            
-            //检测用户是否设置状态码
-            if (![self checkNetworkCodeConfig:responseObject failure:failure]) {
-                return;
-            }
-            
-            //            NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
-            NSString *status = [NSString stringWithFormat:@"%@",[self getDictValueFromDotKeyStr:statusKeyName inDict:responseObject]];
-            
-            if ([status isEqualToString:sucessCode]) {//请求成功
-                if (catchFlag) {
-                    //存入缓存
-                    [[NSUserDefaults standardUserDefaults] setObject:[NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil] forKey:saveKey];
-                }
-            }
-            
-            [self commonDoResponseObject:responseObject success:success failure:failure isCatch:NO isShowHud:isshowhud];
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            failure(error,@"请检查您的网络!",@"404");
-            
-            if (isshowhud) {
+            [ShareAfnSessionMgr GET:URLString parameters:newDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 
-                if (NetWorkProgressblock) {
-                    NetWorkProgressblock(@"请检查您的网络!");
-                }
-                else
-                {
-                    [self ProgressShowTip:@[@"请检查您的网络!",@"3"]];
-                }
-            }
+                [self doSuccess:responseObject Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
+                
+                
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                [self doFailure:failure IsShowHud:isshowhud Error:error];
+                
+            }];
+        }
+        
+        
+       else if (requestType == NetWorkRequestTypePOST) {
             
-        }];
+            [ShareAfnSessionMgr POST:URLString parameters:newDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                
+                [self doSuccess:responseObject Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
+                
+                
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                [self doFailure:failure IsShowHud:isshowhud Error:error];
+                
+            }];
+        }
         
-        
+        else if (requestType == NetWorkRequestTypePUT) {
+            
+            [ShareAfnSessionMgr PUT:URLString parameters:newDict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                [self doSuccess:responseObject Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                [self doFailure:failure IsShowHud:isshowhud Error:error];
+            }];
+        }
+        else if (requestType == NetWorkRequestTypePATCH) {
+            
+            [ShareAfnSessionMgr PATCH:URLString parameters:newDict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                [self doSuccess:responseObject Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                [self doFailure:failure IsShowHud:isshowhud Error:error];
+            }];
+        }
+        else if(requestType == NetWorkRequestTypeDELETE) {
+            
+            [ShareAfnSessionMgr DELETE:URLString parameters:newDict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                [self doSuccess:responseObject Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                [self doFailure:failure IsShowHud:isshowhud Error:error];
+            }];
+        }
+        else if(requestType == NetWorkRequestTypeUPLOAD) {
+            
+            
+            [ShareAfnSessionMgr POST:URLString parameters:newDict constructingBodyWithBlock:formDatablock progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                [self doSuccess:responseObject Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                 [self doFailure:failure IsShowHud:isshowhud Error:error];
+            }];
+
+        }
+      
+    }
+    
+}
+
+
+
++(void)doFailure:(NetWorkFailure)failure IsShowHud:(BOOL)isshowhud Error:(NSError *)error{
+    failure(error,@"请检查您的网络!",@"404");
+    if (isshowhud) {
+        if (NetWorkProgressblock) {
+            NetWorkProgressblock(@"请检查您的网络!");
+        }
+        else
+        {
+            [self ProgressShowTip:@[@"请检查您的网络!",@"3"]];
+        }
     }
 }
 
-+ (void)POST_defaultProgress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(NetWorkParmsBlock)parmsBlock progress:(void (^)(NSProgress *progress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
++(void)doSuccess:(id)responseObject Success:(NetWorkSuccess)success Failure:(NetWorkFailure)failure CatchFlag:(BOOL)catchFlag SaveKey:(NSString *)saveKey IsShowHud:(BOOL)isshowhud
 {
-    [self POST_idPrams_Progress:URLString CacheIf:value IsShowHud:isshowhud  parameters:parmsBlock progress:progress success:success failure:failure];
-}
-
-
-+ (void)POST_default:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(NetWorkParmsBlock)parmsBlock success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
-{
-    [self POST_idPrams_Progress:URLString CacheIf:value IsShowHud:isshowhud  parameters:parmsBlock progress:nil success:success failure:failure];
-}
-
-
-#pragma mark -GET
-+ (void)GET_idPrams_Progress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(id)parms progress:(void (^)(NSProgress *progress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
-{
-    @autoreleasepool {
-        
-        
-        NSDictionary * dict;
-        if ([parms isKindOfClass:[NetDataModel class]]) {
-            NSError *error = nil;
-            NSString *jsonString = [parms yy_modelToJSONString];
-            NSData *data         = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-            dict = [NSJSONSerialization JSONObjectWithData:data?data:[NSData new] options:NSJSONReadingMutableContainers error:&error];
-        }
-        else if([parms isKindOfClass:[NSDictionary class]])
-        {
-            dict = parms;
-        }
-        else{
-            NetDataModel * parameter = [self.class new];
-            NetWorkParmsBlock block = parms;
-            block(parameter);
-            NSError *error = nil;
-            NSString *jsonString = [parameter yy_modelToJSONString];
-            NSData *data         = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-            dict = [NSJSONSerialization JSONObjectWithData:data?data:[NSData new] options:NSJSONReadingMutableContainers error:&error];
-        }
-        
-        
-        //根据服务器要求添加一些参数
-        NSMutableDictionary *newDict = [self dictToDictInBlock:NetWorkParmsFillterblock parmsDict:[NSMutableDictionary dictionaryWithDictionary:dict]];
-        
-        
-        //打印请求的接口信息
+    
+    //打印请求的结果信息
 #ifdef DEBUG
-        //        NSLog(@"URL=%@%@",ShareAfnSessionMgr.baseURL,URLString);
-        if(NetWorklogRequestParms)
-        {
-            NSLog(@"parameters======%@",newDict);
-        }
+    if(NetWorklogResponseResult)
+    {NSLog(@"parameters======%@",responseObject);}
 #endif
+    if (!responseObject) {
+        failure(nil,@"服务器返回数据为空!",@"404");
+        return ;
         
-        
-        __block BOOL catchFlag = value;
-        __block NSString *saveKey =[NSString stringWithFormat:@"%@%@",[self JSONStringFromDict:dict],URLString];
-        
+    }
+    
+    responseObject = [self parseResponseObject:responseObject];
+    
+    //检测用户是否设置状态码
+    if (![self checkNetworkCodeConfig:responseObject failure:failure]) {
+        return;
+    }
+    
+    //            NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
+    NSString *status = [NSString stringWithFormat:@"%@",[self getDictValueFromDotKeyStr:statusKeyName inDict:responseObject]];
+    
+    if ([status isEqualToString:sucessCode]) {//请求成功
         if (catchFlag) {
-            
-            //读取缓存中是否有key
-            id data = [SandboxTools unarchiveSystemObjectKey:saveKey];
-            if (data) {
-                data = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-                
-                [self commonDoResponseObject:data success:success failure:failure isCatch:YES isShowHud:isshowhud];
-            }
+            //存入缓存
+            [[NSUserDefaults standardUserDefaults] setObject:[NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil] forKey:saveKey];
         }
-        
-        //检测用户是否设置ip
-        if (![self checkNetworkIPConfig:failure]) {
-            return;
-        }
-        
-        [ShareAfnSessionMgr GET:URLString parameters:newDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
-            //打印请求的结果信息
-#ifdef DEBUG
-            if(NetWorklogResponseResult)
-            {
-                NSLog(@"parameters======%@",responseObject);
-            }
-#endif
-            if (!responseObject) {
-                failure(nil,@"服务器返回数据为空!",@"404");
-                return ;
-            }
-            responseObject = [self parseResponseObject:responseObject];
-            
-            //检测用户是否设置状态码
-            if (![self checkNetworkCodeConfig:responseObject failure:failure]) {
-                return;
-            }
-            
-            //            NSString *status = [NSString stringWithFormat:@"%@",responseObject[statusKeyName]];
-            NSString *status = [NSString stringWithFormat:@"%@",[self getDictValueFromDotKeyStr:statusKeyName inDict:responseObject]];
-            
-            
-            if ([status isEqualToString:sucessCode]) {//请求成功
-                if (catchFlag) {
-                    //存入缓存
-                    [[NSUserDefaults standardUserDefaults] setObject:[NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil] forKey:saveKey];
-                }
-            }
-            
-            [self commonDoResponseObject:responseObject success:success failure:failure isCatch:NO isShowHud:isshowhud];
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            failure(error,@"请检查您的网络!",@"404");
-            
-            if (isshowhud) {
-                
-                if (NetWorkProgressblock) {
-                    NetWorkProgressblock(@"请检查您的网络!");
-                }
-                else
-                {
-                    [self ProgressShowTip:@[@"请检查您的网络!",@"3"]];
-                }
-            }
-            
-        }];
-        
-        
     }
-}
-
-+ (void)GET_defaultProgress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(NetWorkParmsBlock)parmsBlock progress:(void (^)(NSProgress *progress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
-{
-    [self GET_idPrams_Progress:URLString CacheIf:value IsShowHud:isshowhud  parameters:parmsBlock progress:progress success:success failure:failure];
+    
+    [self commonDoResponseObject:responseObject success:success failure:failure isCatch:NO isShowHud:isshowhud];
     
 }
-
-+ (void)GET_default:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(NetWorkParmsBlock)parmsBlock success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
-{
-    [self GET_idPrams_Progress:URLString CacheIf:value IsShowHud:isshowhud  parameters:parmsBlock progress:nil success:success failure:failure];
-}
-
-#pragma mark -POST images
-+ (void)POST_imgs:(NSString *)URLString parameters:(NetWorkParmsBlock)parmsBlock IsShowHud:(BOOL)isshowhud formData:(void (^)(id<AFMultipartFormData> formData))block progress:(void (^)(NSProgress *uploadProgress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
-{
-    //将block转成dict
-    //    NSMutableDictionary *dict = [self parmsBlocktoDict:parmsBlock ];
-    
-    NSMutableDictionary *dict = [self parmsBlocktoDict:parmsBlock Class:self.class];
-    
-    //根据服务器要求添加一些参数
-    //        NSMutableDictionary *newDict = [NetRuleManager setupData:dict];
-    NSMutableDictionary *newDict = [self dictToDictInBlock:NetWorkParmsFillterblock parmsDict:dict];
-    
-    
-    
-    
-    //    NSMutableDictionary *imgDic = [NSMutableDictionary dictionary ];
-    //    if (images.count>0) {
-    //        [images enumerateObjectsUsingBlock:^(UIImage * _Nonnull image, NSUInteger idx, BOOL * _Nonnull stop) {
-    //            //缩放图片
-    //            UIImage *imgScale = image;
-    //            //            = [self scaleFromImage: toSize:CGSizeMake(800.0f, 600.0f)];
-    //            CGFloat quality = 0.1;
-    //            NSData *imgData = UIImageJPEGRepresentation(imgScale, quality);
-    //            [imgDic setObject:imgData forKey:[NSString stringWithFormat:@"tt%ld",idx+1]];
-    //
-    //        }];
-    //    }
-    //
-    
-    [ShareAfnSessionMgr POST:URLString parameters:newDict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        
-        block(formData);
-        
-        //        for (NSString *key in imgDic.allKeys) {
-        //            NSData *data = [imgDic objectForKey:key];
-        //
-        //            [formData appendPartWithFileData:data name:@"file" fileName:@"img_shenfenzheng.jpg" mimeType:@"image/jpeg"];
-        //        }
-        
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        progress(uploadProgress);
-        //        NSString *result = [NSString stringWithFormat:@"图片上传进度：%0.0f%%",100.0*uploadProgress.completedUnitCount/uploadProgress.totalUnitCount];
-        //
-        //        dispatch_async(dispatch_get_main_queue(), ^{
-        //            if (imageArr.count>0) {
-        //                //                CommonProgressSucess(result)
-        //            }
-        //        });
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        if (!responseObject) {
-            failure(nil,@"服务器返回数据为空!",@"404");
-            return ;
-        }
-        responseObject = [self parseResponseObject:responseObject];
-        
-        //检测用户是否设置状态码
-        if (![self checkNetworkCodeConfig:responseObject failure:failure]) {
-            return;
-        }
-        
-        
-        [self commonDoResponseObject:responseObject success:success failure:failure isCatch:NO isShowHud:isshowhud];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        failure(error,@"请检查您的网络!",@"404");
-        
-        if (isshowhud) {
-            if (NetWorkProgressblock) {
-                NetWorkProgressblock(@"请检查您的网络!");
-            }
-            else
-            {
-                [self ProgressShowTip:@[@"请检查您的网络!",@"3"]];
-            }
-        }
-    }];
-}
-
 
 
 +(void)commonDoResponseObject:(id )responseObject success:(NetWorkSuccess)success failure:(NetWorkFailure)failure isCatch:(BOOL)value isShowHud:(BOOL)isshowhud
@@ -747,6 +593,50 @@ static BOOL NetWorklogResponseResult;
 }
 
 
+#pragma mark -POST
++ (void)POST_idPrams_Progress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(id)parms progress:(void (^)(NSProgress *progress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
+{
+    
+    [self LoadDataWithRequestType:NetWorkRequestTypePOST URLStr:URLString CacheIf:value IsShowHud:isshowhud parameters:parms formData:nil progress:progress success:success failure:failure];
+}
+
++ (void)POST_defaultProgress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(NetWorkParmsBlock)parmsBlock progress:(void (^)(NSProgress *progress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
+{
+    [self POST_idPrams_Progress:URLString CacheIf:value IsShowHud:isshowhud  parameters:parmsBlock progress:progress success:success failure:failure];
+}
+
+
++ (void)POST_default:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(NetWorkParmsBlock)parmsBlock success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
+{
+    [self POST_idPrams_Progress:URLString CacheIf:value IsShowHud:isshowhud  parameters:parmsBlock progress:nil success:success failure:failure];
+}
+
+
+#pragma mark -GET
++ (void)GET_idPrams_Progress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(id)parms progress:(void (^)(NSProgress *progress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
+{
+   [self LoadDataWithRequestType:NetWorkRequestTypeGET URLStr:URLString CacheIf:value IsShowHud:isshowhud parameters:parms formData:nil progress:progress success:success failure:failure];
+}
+
++ (void)GET_defaultProgress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(NetWorkParmsBlock)parmsBlock progress:(void (^)(NSProgress *progress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
+{
+    [self GET_idPrams_Progress:URLString CacheIf:value IsShowHud:isshowhud  parameters:parmsBlock progress:progress success:success failure:failure];
+    
+}
+
++ (void)GET_default:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(NetWorkParmsBlock)parmsBlock success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
+{
+    [self GET_idPrams_Progress:URLString CacheIf:value IsShowHud:isshowhud  parameters:parmsBlock progress:nil success:success failure:failure];
+}
+
+#pragma mark -POST images
++ (void)POST_imgs:(NSString *)URLString parameters:(NetWorkParmsBlock)parmsBlock IsShowHud:(BOOL)isshowhud formData:(void (^)(id<AFMultipartFormData> formData))block progress:(void (^)(NSProgress *uploadProgress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
+{
+    
+    [self LoadDataWithRequestType:NetWorkRequestTypeUPLOAD URLStr:URLString CacheIf:0 IsShowHud:isshowhud parameters:parmsBlock formData:block progress:progress success:success failure:failure];
+}
+
+
 
 
 #pragma -mark othercode
@@ -759,13 +649,6 @@ static BOOL NetWorklogResponseResult;
     }
     
 }
-//+(void)login{
-//
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"KNOTIFICATION_LOSSLOGIN" object:nil];
-//
-//}
-
-
 
 //添加证书,Https必需需要
 + (AFSecurityPolicy *)customSecurityPolicy {
@@ -920,7 +803,7 @@ static BOOL NetWorklogResponseResult;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         normalize(self)
         
-        [self ReflashPOST:URLString ParmsBlock:parmsBlock reflashScrollView:scrollView arrKeyBlock:arrKeyBlock Page:@(1) loadfinish:finishblock];
+        [self ReflashRequestType:NetWorkRequestTypePOST URL:URLString ParmsBlock:parmsBlock reflashScrollView:scrollView arrKeyBlock:arrKeyBlock Page:@(1) loadfinish:finishblock];
         
     });
 }
@@ -932,11 +815,37 @@ static BOOL NetWorklogResponseResult;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         normalize(self)
         normalize(scrollView)
-        [self ReflashPOST:URLString ParmsBlock:parmsBlock reflashScrollView:scrollView arrKeyBlock:arrKeyBlock Page:scrollView.ttRefleshPage loadfinish:finishblock];
+        [self ReflashRequestType:NetWorkRequestTypePOST URL:URLString ParmsBlock:parmsBlock reflashScrollView:scrollView arrKeyBlock:arrKeyBlock Page:scrollView.ttRefleshPage loadfinish:finishblock];
     });
 }
 
-+ (void)ReflashPOST:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock Page:(NSNumber *)page loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock
+
+
++ (void)GET_HeadLoad:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock
+{
+    weakify(self)
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        normalize(self)
+        
+        [self ReflashRequestType:NetWorkRequestTypeGET URL:URLString ParmsBlock:parmsBlock reflashScrollView:scrollView arrKeyBlock:arrKeyBlock Page:@(1) loadfinish:finishblock];
+        
+    });
+}
+
++ (void)GET_FootLoad:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock
+{
+    weakify(self)
+    weakify(scrollView)
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        normalize(self)
+        normalize(scrollView)
+        [self ReflashRequestType:NetWorkRequestTypeGET URL:URLString ParmsBlock:parmsBlock reflashScrollView:scrollView arrKeyBlock:arrKeyBlock Page:scrollView.ttRefleshPage loadfinish:finishblock];
+    });
+}
+
+
+
++ (void)ReflashRequestType:(NetWorkRequestType)requestType URL:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock Page:(NSNumber *)page loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock
 {
     __block NSNumber *tempPage = page;
     
@@ -958,47 +867,63 @@ static BOOL NetWorklogResponseResult;
                                      ttReflashPageKey:scrollView.ttRefleshPage,
                                      }];
     
-    weakify(scrollView)
-    [self POST_idPrams_Progress:URLString CacheIf:0 IsShowHud:1 parameters:[self.class yy_modelWithDictionary:dict] progress:nil success:^(BOOL isCatch, NetDataModel *model, NSMutableArray<NSObject *> *modelArr, id responseObject) {
-        
-        finishblock(YES,responseObject);
-        
-        normalize(scrollView)
-        if ([scrollView.ttRefleshPage integerValue]==1) {
-            if (model) {//如果返回的是模型
-                scrollView.ttReflashModel = model;
-            }
-            if (modelArr.count>0) {//如果返回的是模型数组
-                scrollView.ttReflashModel = modelArr;
-            }
-        }
-        
-        if ([scrollView.ttRefleshPage integerValue]>1) {
-            if (model) {
-                arrKeyBlock(model,responseObject);
-            }
-            if(modelArr.count>0)
-            {
-                arrKeyBlock(modelArr,responseObject);
-            }
-            
-        }
-        
-        scrollView.ttRefleshPage = @([scrollView.ttRefleshPage integerValue] + 1);
-        
-        if ([scrollView respondsToSelector:@selector(reloadData)]) {
-            [scrollView performSelector:@selector(reloadData)];
-        }
-        
-    } failure:^(NSError *error, NSString *errorStr, NSString *status) {
-        finishblock(NO,@[error?error:@"",errorStr?errorStr:@"",status?status:@""]);
-        //        [scrollView.headRefreshControl endRefreshing];
-        //        [scrollView.footRefreshControl endRefreshing];
-    }];
+    
+    if (requestType == NetWorkRequestTypePOST) {
+        weakify(scrollView)
+        [self POST_idPrams_Progress:URLString CacheIf:0 IsShowHud:1 parameters:[self.class yy_modelWithDictionary:dict] progress:nil success:^(BOOL isCatch, NetDataModel *model, NSMutableArray<NSObject *> *modelArr, id responseObject) {
+            normalize(scrollView)
+            [self doReflashSuccess:responseObject model:model modelArr:modelArr loadfinish:finishblock reflashScrollView:scrollView arrKeyBlock:arrKeyBlock];
+        } failure:^(NSError *error, NSString *errorStr, NSString *status) {
+            finishblock(NO,@[error?error:@"",errorStr?errorStr:@"",status?status:@""]);
+        }];
+    }
+   else if (requestType == NetWorkRequestTypeGET) {
+        weakify(scrollView)
+        [self GET_idPrams_Progress:URLString CacheIf:0 IsShowHud:1 parameters:[self.class yy_modelWithDictionary:dict] progress:nil success:^(BOOL isCatch, NetDataModel *model, NSMutableArray<NSObject *> *modelArr, id responseObject) {
+            normalize(scrollView)
+            [self doReflashSuccess:responseObject model:model modelArr:modelArr loadfinish:finishblock reflashScrollView:scrollView arrKeyBlock:arrKeyBlock];
+        } failure:^(NSError *error, NSString *errorStr, NSString *status) {
+            finishblock(NO,@[error?error:@"",errorStr?errorStr:@"",status?status:@""]);
+        }];
+    }
+   
     
     
 }
 
+
+
++(void)doReflashSuccess:(id)responseObject model:(NetDataModel *)model modelArr:(NSMutableArray<NSObject *> *)modelArr loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock
+{
+    finishblock(YES,responseObject);
+    
+//    normalize(scrollView)
+    if ([scrollView.ttRefleshPage integerValue]==1) {
+        if (model) {//如果返回的是模型
+            scrollView.ttReflashModel = model;
+        }
+        if (modelArr.count>0) {//如果返回的是模型数组
+            scrollView.ttReflashModel = modelArr;
+        }
+    }
+    
+    if ([scrollView.ttRefleshPage integerValue]>1) {
+        if (model) {
+            arrKeyBlock(model,responseObject);
+        }
+        if(modelArr.count>0)
+        {
+            arrKeyBlock(modelArr,responseObject);
+        }
+        
+    }
+    
+    scrollView.ttRefleshPage = @([scrollView.ttRefleshPage integerValue] + 1);
+    
+    if ([scrollView respondsToSelector:@selector(reloadData)]) {
+        [scrollView performSelector:@selector(reloadData)];
+    }
+}
 
 
 @end

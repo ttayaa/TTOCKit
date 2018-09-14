@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
     s.name         = "TTOCKit"
-    s.version      = "1.1.0"
+    s.version      = "1.1.1"
     s.summary      = " mvc."
     s.description  = <<-DESC
                 easy to mvc.

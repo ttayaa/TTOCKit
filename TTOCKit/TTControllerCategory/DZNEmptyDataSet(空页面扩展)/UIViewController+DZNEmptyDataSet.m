@@ -36,10 +36,33 @@
     return [objc_getAssociatedObject(self, @selector(TTisShowEmpty)) boolValue] ;
 }
 
-//-(void)setTTisShowEmpty:(BOOL)TTisShowEmpty
-//{
-//    objc_setAssociatedObject(self, @selector(TTisShowEmpty), @(TTisShowEmpty), OBJC_ASSOCIATION_RETAIN);
-//}
+
+@dynamic TTVerticalOffset;
+-(CGFloat)TTVerticalOffset
+{
+    return [objc_getAssociatedObject(self, @selector(TTVerticalOffset)) boolValue] ;
+}
+-(void)setTTVerticalOffset:(CGFloat)TTVerticalOffset
+{
+    objc_setAssociatedObject(self, @selector(TTVerticalOffset), @(TTVerticalOffset), OBJC_ASSOCIATION_RETAIN);
+}
+@dynamic TTSpaceHeight;
+-(CGFloat)TTSpaceHeight
+{
+    return [objc_getAssociatedObject(self, @selector(TTSpaceHeight)) floatValue] ;
+}
+-(void)setTTSpaceHeight:(CGFloat)TTSpaceHeight
+{
+    objc_setAssociatedObject(self, @selector(TTSpaceHeight), @(TTSpaceHeight), OBJC_ASSOCIATION_RETAIN);
+}
+
+
+
+
+
+
+
+
 
 @dynamic TTtitleForEmpty;
 -(NSString *)TTtitleForEmpty
@@ -59,6 +82,32 @@
     objc_setAssociatedObject(self, @selector(TTtitleForEmpty), TTtitleForEmpty, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
+@dynamic TTtitleForEmptyAttributes;
+-(NSDictionary *)TTtitleForEmptyAttributes
+{
+    
+    NSDictionary *TTtitleForEmptyAttributes = objc_getAssociatedObject(self, @selector(TTtitleForEmptyAttributes));
+    if (!TTtitleForEmptyAttributes) {
+        TTtitleForEmptyAttributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+                                      NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+   
+        objc_setAssociatedObject(self, @selector(TTtitleForEmptyAttributes), TTtitleForEmptyAttributes, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return TTtitleForEmptyAttributes;
+}
+
+
+- (void)setTTtitleForEmptyAttributes:(NSDictionary *)TTtitleForEmptyAttributes
+{
+    objc_setAssociatedObject(self, @selector(TTtitleForEmptyAttributes), TTtitleForEmptyAttributes, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+
+
+
+
+
+
 
 @dynamic TTdescriptionForEmpty;
 
@@ -77,6 +126,37 @@
 {
     objc_setAssociatedObject(self, @selector(TTdescriptionForEmpty), TTdescriptionForEmpty, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
+
+@dynamic TTdescriptionForEmptyAttributes;
+-(NSDictionary *)TTdescriptionForEmptyAttributes
+{
+    
+    NSDictionary *TTdescriptionForEmptyAttributes = objc_getAssociatedObject(self, @selector(TTdescriptionForEmptyAttributes));
+    if (!TTdescriptionForEmptyAttributes) {
+        
+        NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+        paragraph.lineBreakMode            = NSLineBreakByWordWrapping;
+        paragraph.alignment                = NSTextAlignmentCenter;
+        TTdescriptionForEmptyAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],                                            NSForegroundColorAttributeName: [UIColor lightGrayColor],NSParagraphStyleAttributeName: paragraph};
+        
+        objc_setAssociatedObject(self, @selector(TTdescriptionForEmptyAttributes), TTdescriptionForEmptyAttributes, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return TTdescriptionForEmptyAttributes;
+}
+
+
+- (void)setTTdescriptionForEmptyAttributes:(NSDictionary *)TTdescriptionForEmptyAttributes
+{
+    objc_setAssociatedObject(self, @selector(TTdescriptionForEmptyAttributes), TTdescriptionForEmptyAttributes, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+
+
+
+
+
+
+
 
 @dynamic TTimageNameForEmpty;
 
@@ -136,9 +216,9 @@
             collect.emptyDataSetDelegate=self;
             collect.emptyDataSetSource=self;
         }
-
+        
     }
- 
+    
 }
 
 #pragma mark - DZNEmptyDataSetSource Methods
@@ -149,10 +229,7 @@
 {
     NSString *text           = self.TTtitleForEmpty;
     
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
-                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
-    
-    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:self.TTtitleForEmptyAttributes];
 }
 
 /**
@@ -162,15 +239,7 @@
 {
     NSString *text                     = self.TTdescriptionForEmpty;
     
-    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
-    paragraph.lineBreakMode            = NSLineBreakByWordWrapping;
-    paragraph.alignment                = NSTextAlignmentCenter;
-    
-    NSDictionary *attributes           = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
-                                           NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                           NSParagraphStyleAttributeName: paragraph};
-    
-    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+    return [[NSAttributedString alloc] initWithString:text attributes:self.TTdescriptionForEmptyAttributes];
 }
 
 
@@ -193,13 +262,13 @@
 {
     //    return -20.0f;
     
-    return 64.0f;
+    return self.TTVerticalOffset;
 }
 
 //设置垂直间距
 - (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return 0.0f;
+    return self.TTSpaceHeight;
 }
 #pragma mark - DZNEmptyDataSetDelegate Methods
 
@@ -208,12 +277,7 @@
  */
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
 {
-//    if (self.dy_firstShowEmpty) {
-//        self.dy_firstShowEmpty = NO;
-//        
-//        return NO;
-//    }
-//    
+    
     return YES;
 }
 

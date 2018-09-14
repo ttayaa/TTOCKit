@@ -51,6 +51,6 @@
 
 
 
-@property (nonatomic,weak)WKWebView *web;
+@property (nonatomic,strong)WKWebView *web;
 
 @end

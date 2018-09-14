@@ -722,7 +722,7 @@ buttonType ButtonTitle:(NSString *)buttonTitle Click:(clickHandle)click ButtonTy
             textColor = LWHColor(255, 255, 255);
             break;
         case TTAlertViewButtonTypeNone:
-            textColor = LWHColor(75, 137, 60);
+            textColor = LWHColor(2, 160, 233);
             
             [btn setTitleColor:textColor forState:UIControlStateNormal];
             break;

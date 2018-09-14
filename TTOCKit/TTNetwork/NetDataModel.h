@@ -42,6 +42,15 @@ typedef void (^DatePagingRelativeBlock_##datamodelName)(id model,id responseObje
 + (void)POST_HeadLoad:(NSString *)URLString ParmsBlock:(ParmsBlock_##datamodelName)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(DatePagingRelativeBlock_##datamodelName)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock;\
 \
 + (void)POST_FootLoad:(NSString *)URLString ParmsBlock:(ParmsBlock_##datamodelName)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(DatePagingRelativeBlock_##datamodelName)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock;\
+\
++ (void)GET_HeadLoad:(NSString *)URLString ParmsBlock:(ParmsBlock_##datamodelName)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(DatePagingRelativeBlock_##datamodelName)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock;\
+\
++ (void)GET_FootLoad:(NSString *)URLString ParmsBlock:(ParmsBlock_##datamodelName)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(DatePagingRelativeBlock_##datamodelName)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock;\
+
+
+
+
+
 
 @interface UIScrollView (DataPaging)
 @property (strong, nonatomic) id ttReflashModel;
@@ -68,7 +77,18 @@ typedef void (^NetWorkProgressError)(NSString *text);
 typedef void (^NetWorkEachStatusKeyBlock)(void);
 
 
+typedef NS_ENUM(NSInteger, NetWorkRequestType) {
+    
+    NetWorkRequestTypeGET=1,
+    NetWorkRequestTypePOST=2,
+    NetWorkRequestTypePUT=3,
+    NetWorkRequestTypePATCH=4,
+    NetWorkRequestTypeDELETE=5,
+    NetWorkRequestTypeUPLOAD=6
 
+
+
+};
 #pragma mark - ---- configure ----
 
 
@@ -155,6 +175,11 @@ typedef void (^NetWorkEachStatusKeyBlock)(void);
 + (void)POST_HeadLoad:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock;
 
 + (void)POST_FootLoad:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock;
+
++ (void)GET_HeadLoad:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock;
+
++ (void)GET_FootLoad:(NSString *)URLString ParmsBlock:(NetWorkParmsBlock)parmsBlock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock;
+
 
 #pragma mark - ---- 获取当前请求的URL ----
 +(NSString *)GetBaseURL;

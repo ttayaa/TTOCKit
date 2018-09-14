@@ -142,10 +142,32 @@
     
 }
 
-
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+//    CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
+//   __block CGFloat BarHeight = 44 + statusBarHeight;
+//   __block BOOL ishaveAnimatNavBar;
+//    [self.view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        if (obj.frame.size.height == BarHeight&&obj.frame.size.width == [UIScreen mainScreen].bounds.size.width) {
+//            ishaveAnimatNavBar=YES;
+//        }
+//        
+//    }];
+//    
+//
+//    
+//    if (!ishaveAnimatNavBar) {
+//        self.navigationController.navigationBar.subviews[1].frame = CGRectMake(0, self.navigationController.navigationBar.subviews[1].frame.origin.y-self.view.frame.origin.y, self.navigationController.navigationBar.subviews[1].frame.size.width, self.navigationController.navigationBar.subviews[1].frame.size.height);
+//            [self.view addSubview:self.navigationController.navigationBar.subviews[1]];
+//    }
+    
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setNav4Left];
+    self.navigationController.navigationBar.alpha = 1;
     
 }
 

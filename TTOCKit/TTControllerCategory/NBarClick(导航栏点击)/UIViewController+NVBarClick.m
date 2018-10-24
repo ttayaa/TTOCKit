@@ -238,7 +238,7 @@
     lb.backgroundColor = [UIColor clearColor];
     
     lb.text = string;
-    
+    lb.adjustsFontSizeToFitWidth = YES;
     if (color) {
         lb.textColor =color;
     }

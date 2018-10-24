@@ -40,7 +40,7 @@
 @dynamic TTVerticalOffset;
 -(CGFloat)TTVerticalOffset
 {
-    return [objc_getAssociatedObject(self, @selector(TTVerticalOffset)) boolValue] ;
+    return [objc_getAssociatedObject(self, @selector(TTVerticalOffset)) floatValue] ;
 }
 -(void)setTTVerticalOffset:(CGFloat)TTVerticalOffset
 {
@@ -260,9 +260,21 @@
 //设置垂直方向的偏移值
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
-    //    return -20.0f;
     
-    return self.TTVerticalOffset;
+    
+    UIScrollView *view = (UIScrollView *)self.view;
+    
+    if (![view isKindOfClass:[UIScrollView class]]) {
+        return self.TTVerticalOffset;
+    }
+    
+    if (@available(iOS 11.0, *)) {
+        return fabs(view.contentOffset.y) +self.TTVerticalOffset;
+    } else {
+        return -fabs(view.contentOffset.y)+self.TTVerticalOffset;
+    }
+    
+//    return self.TTVerticalOffset;
 }
 
 //设置垂直间距

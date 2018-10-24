@@ -197,7 +197,7 @@
     }
     else
     {
-        [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
+        [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]]];
     }
     
 }

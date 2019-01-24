@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		182D023820BD52820012EB01 /* UIViewController+TTAlowPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D023720BD52810012EB01 /* UIViewController+TTAlowPush.m */; };
+		1890A2C021F9A6C7009C6803 /* UIApplication+TTSignal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890A2BF21F9A6C6009C6803 /* UIApplication+TTSignal.m */; };
 		1898F4D5208F1B9700647FC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1898F4D3208F1B9700647FC9 /* Main.storyboard */; };
 		1898F4D7208F1B9800647FC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1898F4D6208F1B9800647FC9 /* Assets.xcassets */; };
 		1898F4DA208F1B9800647FC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1898F4D8208F1B9800647FC9 /* LaunchScreen.storyboard */; };
@@ -99,6 +100,8 @@
 /* Begin PBXFileReference section */
 		182D023620BD52810012EB01 /* UIViewController+TTAlowPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TTAlowPush.h"; sourceTree = "<group>"; };
 		182D023720BD52810012EB01 /* UIViewController+TTAlowPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TTAlowPush.m"; sourceTree = "<group>"; };
+		1890A2BE21F9A6C4009C6803 /* UIApplication+TTSignal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+TTSignal.h"; sourceTree = "<group>"; };
+		1890A2BF21F9A6C6009C6803 /* UIApplication+TTSignal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+TTSignal.m"; sourceTree = "<group>"; };
 		1898F4CA208F1B9700647FC9 /* TTOCKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TTOCKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1898F4D4208F1B9700647FC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1898F4D6208F1B9800647FC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -447,6 +450,8 @@
 			children = (
 				18BC1B982093082200D703F1 /* TTSignal.h */,
 				18BC1B9A2093082200D703F1 /* TTMacros.h */,
+				1890A2BE21F9A6C4009C6803 /* UIApplication+TTSignal.h */,
+				1890A2BF21F9A6C6009C6803 /* UIApplication+TTSignal.m */,
 				18BC1B992093082200D703F1 /* UIView+TTSignal.h */,
 				18BC1B9B2093082200D703F1 /* UIView+TTSignal.m */,
 			);
@@ -1092,6 +1097,7 @@
 				18BC1C892093082400D703F1 /* UIViewController+ViewIsScrollview.m in Sources */,
 				18BC1C722093082400D703F1 /* KVNProgressConfiguration.m in Sources */,
 				18BC1C5F2093082400D703F1 /* NavigationBarPop_push_Manager.m in Sources */,
+				1890A2C021F9A6C7009C6803 /* UIApplication+TTSignal.m in Sources */,
 				18BC1C592093082400D703F1 /* ModalAnimator_midSpringPopAnimation_black.m in Sources */,
 				18BC1C742093082400D703F1 /* UIImage+KVNImageEffects.m in Sources */,
 				18BC1C4A2093082400D703F1 /* DYYFloatWindow.m in Sources */,

@@ -23,9 +23,16 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ProgressDismiss:) name:KNOTIFICATION_Dismiss object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ProgressNetWorkFail:) name:KNOTIFICATION_NetWorkFail object:nil];
     
-    [TTProgressView setupBaseKVNProgressUI];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [TTProgressView setupBaseKVNProgressUI];
+
+    });
+    
     
 }
+
+
+
 
 +(void)ProgressShowWait:(NSNotification *)noty
 {

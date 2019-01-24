@@ -8,8 +8,9 @@
 
 #import "TTWebController.h"
 //#import "SignalWebView.h"
-
-#define isiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125,2436), [[UIScreen mainScreen] currentMode].size) : NO)
+#define hScreenWidth [UIScreen mainScreen].bounds.size.width
+#define hScreenHeight [UIScreen mainScreen].bounds.size.height
+#define isTTiPhoneX ( (hScreenHeight/hScreenWidth) < 2.1654 && (hScreenHeight/hScreenWidth) > 2.1642 )
 
 
 @interface TTWebController ()<WKUIDelegate,WKNavigationDelegate>
@@ -53,7 +54,7 @@
             self.edgesForExtendedLayout=UIRectEdgeNone;
             web.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - NbarHeight - 49);
             
-            if (isiPhoneX) {
+            if (isTTiPhoneX) {
                 web.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - NbarHeight - 83);
             }
             
@@ -71,7 +72,7 @@
             
             web.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - NbarHeight - 49);
             
-            if (isiPhoneX) {
+            if (isTTiPhoneX) {
                 self.edgesForExtendedLayout=UIRectEdgeAll;
                 
                 web.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - NbarHeight - 83);
@@ -146,22 +147,22 @@
 {
     [super viewWillDisappear:animated];
     
-    //    CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
-    //   __block CGFloat BarHeight = 44 + statusBarHeight;
-    //   __block BOOL ishaveAnimatNavBar;
-    //    [self.view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-    //        if (obj.frame.size.height == BarHeight&&obj.frame.size.width == [UIScreen mainScreen].bounds.size.width) {
-    //            ishaveAnimatNavBar=YES;
-    //        }
-    //
-    //    }];
-    //
-    //
-    //
-    //    if (!ishaveAnimatNavBar) {
-    //        self.navigationController.navigationBar.subviews[1].frame = CGRectMake(0, self.navigationController.navigationBar.subviews[1].frame.origin.y-self.view.frame.origin.y, self.navigationController.navigationBar.subviews[1].frame.size.width, self.navigationController.navigationBar.subviews[1].frame.size.height);
-    //            [self.view addSubview:self.navigationController.navigationBar.subviews[1]];
-    //    }
+//    CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
+//   __block CGFloat BarHeight = 44 + statusBarHeight;
+//   __block BOOL ishaveAnimatNavBar;
+//    [self.view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        if (obj.frame.size.height == BarHeight&&obj.frame.size.width == [UIScreen mainScreen].bounds.size.width) {
+//            ishaveAnimatNavBar=YES;
+//        }
+//        
+//    }];
+//    
+//
+//    
+//    if (!ishaveAnimatNavBar) {
+//        self.navigationController.navigationBar.subviews[1].frame = CGRectMake(0, self.navigationController.navigationBar.subviews[1].frame.origin.y-self.view.frame.origin.y, self.navigationController.navigationBar.subviews[1].frame.size.width, self.navigationController.navigationBar.subviews[1].frame.size.height);
+//            [self.view addSubview:self.navigationController.navigationBar.subviews[1]];
+//    }
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -197,8 +198,6 @@
     }
     else
     {
-        //        [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]]];//转义在外部即可
-        
         [self.web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
     }
     
@@ -433,6 +432,5 @@
 //}
 
 @end
-
 
 

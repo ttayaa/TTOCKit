@@ -171,43 +171,50 @@ static BOOL NetWorklogResponseResult;
     //testapi.zcb365.cn
     [DebugMange addIpModel_toIPArr:[IPModel ipDescWith:testIp name:@"测试服务器" flagName:@"CS"]];
     
-    [DebugMange show:^(NSMutableArray<IPModel *> *IpArr, NSInteger index) {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        //正式服点击
-        if (index==0) {
-            [IpArr enumerateObjectsUsingBlock:^(IPModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([obj.flagName isEqualToString:@"ZS"]) {
-                    //发通知
-                    [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_CHOOSEIP object:@[obj.flagName,obj.urlstr]];
-                    
-                    NSLog(@"当前为:%@",obj.name);
-                    [self ProgressShowTip:@[[NSString stringWithFormat:@"当前为:%@",obj.name],@(3)]];
-                }
-            }];
-        }
-        //测试服点击
-        if (index==1) {
-            [IpArr enumerateObjectsUsingBlock:^(IPModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                
-                if ([obj.flagName isEqualToString:@"CS"]) {
-                    //发通知
-                    [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_CHOOSEIP object:@[obj.flagName,obj.urlstr]];
-                    
-                    NSLog(@"当前为:%@",obj.name);
-                    [self ProgressShowTip:@[[NSString stringWithFormat:@"当前为:%@",obj.name],@(3)]];
-                }
-            }];
-        }
-        
-        
-        if (index==2) {
+        [DebugMange show:^(NSMutableArray<IPModel *> *IpArr, NSInteger index) {
             
-            block();
-        }
+            //正式服点击
+            if (index==0) {
+                [IpArr enumerateObjectsUsingBlock:^(IPModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([obj.flagName isEqualToString:@"ZS"]) {
+                        //发通知
+                        [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_CHOOSEIP object:@[obj.flagName,obj.urlstr]];
+                        
+                        NSLog(@"当前为:%@",obj.name);
+                        [self ProgressShowTip:@[[NSString stringWithFormat:@"当前为:%@",obj.name],@(3)]];
+                    }
+                }];
+            }
+            //测试服点击
+            if (index==1) {
+                [IpArr enumerateObjectsUsingBlock:^(IPModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    
+                    if ([obj.flagName isEqualToString:@"CS"]) {
+                        //发通知
+                        [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_CHOOSEIP object:@[obj.flagName,obj.urlstr]];
+                        
+                        NSLog(@"当前为:%@",obj.name);
+                        [self ProgressShowTip:@[[NSString stringWithFormat:@"当前为:%@",obj.name],@(3)]];
+                    }
+                }];
+            }
+            
+            
+            if (index==2) {
+                
+                block();
+            }
+            
+            
+            
+        }];
         
         
         
-    }];
+    });
+    
     
     
     
@@ -216,18 +223,20 @@ static BOOL NetWorklogResponseResult;
     [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_CHOOSEIP object:@[@"ZS",ip]];
     NSLog(@"当前为:正式服务器");
     
-    
+
 #ifdef DEBUG
-    
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self ProgressShowTip:@[@"当前为:正式服务器",@(3)]];
     });
-    
-    
+
+
 #else
-    
-    [DebugMange dissmis];
-    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [DebugMange dissmis];
+    });
+
+
 #endif
     
 }
@@ -895,7 +904,6 @@ static BOOL NetWorklogResponseResult;
 
 +(void)doReflashSuccess:(id)responseObject model:(NetDataModel *)model modelArr:(NSMutableArray<NSObject *> *)modelArr loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock
 {
-    finishblock(YES,responseObject);
     
 //    normalize(scrollView)
     if ([scrollView.ttRefleshPage integerValue]==1) {
@@ -906,6 +914,9 @@ static BOOL NetWorklogResponseResult;
             scrollView.ttReflashModel = modelArr;
         }
     }
+    
+    finishblock(YES,responseObject);
+
     
     if ([scrollView.ttRefleshPage integerValue]>1) {
         if (model) {

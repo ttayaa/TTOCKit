@@ -156,8 +156,8 @@ CG_INLINE CGRect CGRectMake414(CGFloat x, CGFloat y, CGFloat width, CGFloat heig
 #define isPad                   (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
 // 是否iPhoneX
-#define isiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125,2436), [[UIScreen mainScreen] currentMode].size) : NO)
-
+//#define isiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125,2436), [[UIScreen mainScreen] currentMode].size) : NO)
+#define isTTiPhoneX ( (hScreenHeight/hScreenWidth) < 2.1654 && (hScreenHeight/hScreenWidth) > 2.1642 )
 //通知中心
 #define hNotificationCenter     [NSNotificationCenter defaultCenter]
 

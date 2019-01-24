@@ -48,7 +48,7 @@
 
 - (void)dealloc
 {
-//    [[UIApplication sharedApplication].keyWindow removeObserver:self forKeyPath:@"frame"];
+    [[UIApplication sharedApplication].keyWindow removeObserver:self forKeyPath:@"frame"];
 }
 
 - (void)setupToolbars
@@ -315,6 +315,7 @@
     [window addObserver:self forKeyPath:@"frame" options:0 context:nil];
     [window addSubview:self];
 }
+
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(UIView *)object change:(NSDictionary *)change context:(void *)context
 {

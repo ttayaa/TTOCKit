@@ -40,6 +40,16 @@
 @end
 
 @implementation DYYFloatWindow
+
+-(void)makeKeyWindow
+{
+    [super makeKeyWindow];
+    
+    if ([UIApplication sharedApplication].keyWindow==self) {
+        [[UIApplication sharedApplication].windows.firstObject makeKeyWindow];
+    }
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -78,6 +88,7 @@
         _contentView.alpha  = 0;
         [self addSubview:_contentView];
         //添加按钮
+
         [self setButtons];
         
         _mainImageButton =  [UIButton buttonWithType:UIButtonTypeCustom];

@@ -238,11 +238,15 @@ static NSString const * havedSignal = @"TTSignal_";
                 UITableView *tableView = (UITableView *)cell.superview;
                 self.indexPath = [tableView indexPathForCell:cell];
                 self.tableView = tableView;
+                cell.indexPath = self.indexPath;
+                cell.tableView = tableView;
+
             }else{
                 UITableView *tableView = (UITableView *)cell.superview.superview;
                 self.indexPath = [tableView indexPathForCell:cell];
                 self.tableView = tableView;
-                
+                cell.indexPath = self.indexPath;
+                cell.tableView = tableView;
             }
             
         }
@@ -261,10 +265,14 @@ static NSString const * havedSignal = @"TTSignal_";
                 UICollectionView *collectionView = (UICollectionView *)cell.superview;
                 self.indexPath = [collectionView indexPathForCell:cell];
                 self.collectionView = collectionView;
+                cell.indexPath = self.indexPath;
+                cell.collectionView = collectionView;
             }else{
                 UICollectionView *collectionView = (UICollectionView *)cell.superview.superview;
                 self.indexPath = [collectionView indexPathForCell:cell];
                 self.collectionView = collectionView;
+                cell.indexPath = self.indexPath;
+                cell.collectionView = collectionView;
             }
             
         }

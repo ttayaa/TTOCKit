@@ -315,7 +315,7 @@ BOOL LightOn;
         // id 类型不能点语法,所以要先去取出数组中对象
         AVMetadataMachineReadableCodeObject *object = [metadataObjects lastObject];
         
-        if (object == nil) return;
+        if (object == nil||object.stringValue== nil) return;
     
     
 //        // 只要扫描到结果就会调用
@@ -441,17 +441,16 @@ BOOL LightOn;
     } completion:nil];
     
 }
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
-{
+- (IBAction)bottomBtnClick:(UIButton *)btn {
     // 根据当前选中的按钮重新设置二维码容器高度
-
-    if ([item.title isEqualToString:@"二维码"]) {
+    
+    if ([btn.titleLabel.text isEqualToString:@"二维码"]) {
         self.containerHeightConstraint.constant = 250;
-
+        
     }
-    if ([item.title isEqualToString:@"条形码"]) {
+    if ([btn.titleLabel.text isEqualToString:@"条形码"]) {
         self.containerHeightConstraint.constant   =  125;
-
+        
     }
     
     // 刷新UI
@@ -462,6 +461,7 @@ BOOL LightOn;
     
     [self startAnimation];
 }
+
 
 
 + (NSBundle *)TTQRScanControllerBundle

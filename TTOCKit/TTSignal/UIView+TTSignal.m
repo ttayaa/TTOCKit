@@ -9,95 +9,79 @@
 #import "UIView+TTSignal.h"
 #import <objc/message.h>
 
+
+
+@interface TTSignalWeakProperty : NSObject
+
+@property (weak, nonatomic) NSString *clickSignalName;
+
+@property (weak, nonatomic) UIResponder *targetResponder;
+@property (weak, nonatomic) UIViewController *viewController;
+@property (weak, nonatomic) UITableViewCell *TableViewCell;
+@property (weak, nonatomic) UICollectionViewCell *CollectionViewCell;
+@property (weak, nonatomic) UITableView *tableView;
+@property (weak, nonatomic) UICollectionView *collectionView;
+@property (weak, nonatomic) NSIndexPath *indexPath;
+
+
+@property (nonatomic,copy)UIView *(^setSignalName)(NSString * signalName);
+
+@property (nonatomic,copy)UIView *(^enforceTarget)(NSObject *target);
+
+
+@property (nonatomic,weak)NSObject *targetObject;
+@end
+@implementation TTSignalWeakProperty
+
+@end
+
+
+
+
+
 static NSString const * havedSignal = @"TTSignal_";
 
 @interface UIView ()
 
-@property (nonatomic,weak)NSObject *targetObject;
+//@property (nonatomic,weak)NSObject *targetObject;
+
 @end
 @implementation UIView (TTSignal)
-
-
+//
+//
 -(void)setClickSignalName:(NSString *)clickSignalName{
     
-    
-    objc_setAssociatedObject(self, @selector(clickSignalName), clickSignalName, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    self.WeakProperty.clickSignalName = clickSignalName;
     self.userInteractionEnabled = YES;
 }
 
 -(NSString *)clickSignalName{
-    
-    return objc_getAssociatedObject(self, @selector(clickSignalName));
-}
-
-
-
-
--(void)setIndexPath:(NSIndexPath *)indexPath{
-    
-    objc_setAssociatedObject(self, @selector(indexPath), indexPath, OBJC_ASSOCIATION_ASSIGN);
+    return self.WeakProperty.clickSignalName;
 }
 
 
 -(NSIndexPath *)indexPath{
-    
-    return objc_getAssociatedObject(self, @selector(indexPath));
+    return self.WeakProperty.indexPath;
 }
 
-
--(void)setTableViewCell:(UITableViewCell *)TableViewCell{
-    objc_setAssociatedObject(self, @selector(TableViewCell), TableViewCell, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
 -(UITableViewCell *)TableViewCell{
-    return objc_getAssociatedObject(self, @selector(TableViewCell));
+    return self.WeakProperty.TableViewCell;
 }
--(void)setCollectionViewCell:(UICollectionViewCell *)CollectionViewCell{
-    objc_setAssociatedObject(self, @selector(CollectionViewCell), CollectionViewCell, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
+
 -(UICollectionViewCell *)CollectionViewCell{
-    return objc_getAssociatedObject(self, @selector(CollectionViewCell));
+    return self.WeakProperty.CollectionViewCell;
 }
 
--(void)setTableView:(UITableView *)tableView{
-    objc_setAssociatedObject(self, @selector(tableView), tableView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+-(UITableView *)tableView{
+    return self.WeakProperty.tableView;
 }
--(UITableViewCell *)tableView{
-    return objc_getAssociatedObject(self, @selector(tableView));
+
+-(UICollectionView *)collectionView{
+    return self.WeakProperty.collectionView;
 }
--(void)setCollectionView:(UICollectionView *)collectionView{
-    objc_setAssociatedObject(self, @selector(collectionView), collectionView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
--(UICollectionViewCell *)collectionView{
-    return objc_getAssociatedObject(self, @selector(collectionView));
-}
--(void)setViewController:(UIViewController *)viewController{
-    objc_setAssociatedObject(self, @selector(viewController), viewController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
+
 -(UIViewController *)viewController{
-    return objc_getAssociatedObject(self, @selector(viewController));
-}
-
-
-#pragma -mark the task in execution with targetObject
--(void)setTargetObject:(NSObject *)targetObject{
-    
-    objc_setAssociatedObject(self, @selector(targetObject), targetObject, OBJC_ASSOCIATION_ASSIGN);
-}
-
--(NSObject *)targetObject{
-    
-    return objc_getAssociatedObject(self, @selector(targetObject));
-}
-
-
--(void)setTargetResponder:(UIResponder *)targetResponder{
-    
-    objc_setAssociatedObject(self, @selector(targetResponder), targetResponder, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
--(UIResponder *)targetResponder{
-    
-    return objc_getAssociatedObject(self, @selector(targetResponder));
+    return self.WeakProperty.viewController;
 }
 
 
@@ -107,16 +91,13 @@ static NSString const * havedSignal = @"TTSignal_";
     
     __weak typeof(self)weakSelf = self;
     return ^(NSString *signalName){
-        
         weakSelf.clickSignalName = signalName;
-        
         return weakSelf;
     };
 }
 
 -(void)setSetSignalName:(UIView *(^)(NSString *))setSignalName{
-    
-    objc_setAssociatedObject(self, @selector(setSetSignalName:), setSignalName, OBJC_ASSOCIATION_ASSIGN);
+    self.WeakProperty.setSignalName = setSignalName;
 }
 
 #pragma mark enforce -target
@@ -125,15 +106,27 @@ static NSString const * havedSignal = @"TTSignal_";
     __weak typeof(self)weakSelf = self;
     return ^(NSObject * target){
         __weak typeof(target)weakTarget = target;
-        weakSelf.targetObject = weakTarget;
+        weakSelf.WeakProperty.targetObject = weakTarget;
         return weakSelf;
     };
 }
 
 -(void)setEnforceTarget:(UIView *(^)(NSObject *))enforceTarget{
-    
-    objc_setAssociatedObject(self, @selector(enforceTarget), enforceTarget, OBJC_ASSOCIATION_ASSIGN);
+    self.WeakProperty.enforceTarget = enforceTarget;
 }
+
+
+-(TTSignalWeakProperty *)WeakProperty{
+    
+    TTSignalWeakProperty *WeakProperty = objc_getAssociatedObject(self, @selector(WeakProperty));
+    if (!WeakProperty) {
+        WeakProperty = [TTSignalWeakProperty new];
+        objc_setAssociatedObject(self, @selector(WeakProperty), WeakProperty, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return WeakProperty;
+    
+}
+
 
 #pragma mark- touch events handler
 -(void)TTtouchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -148,7 +141,7 @@ static NSString const * havedSignal = @"TTSignal_";
     }else{
         
     }
-
+    
 }
 
 //-(BOOL)isImplementation:(SEL)selector
@@ -207,46 +200,42 @@ static NSString const * havedSignal = @"TTSignal_";
 -(NSString *)dymaicSignalName{
     
     NSString *oldName = self.clickSignalName;
-
+    
     //分析他的层级关系
     UIResponder *nextResponder = self.nextResponder;
     
     //view到离他最近的控制器之间
-//    //如果存在cellname 说明之间有cell
-//    NSString * cellname = @"";
+    //    //如果存在cellname 说明之间有cell
+    //    NSString * cellname = @"";
     //如果存在signalName 如果到控制器之前有一个父控件有这个属性
     NSString * signalName = @"";
     
     while (nextResponder != nil) {
         
         if ([nextResponder isKindOfClass:[UIWindow class]]) {
-           return @"";
+            return @"";
         }
         
         //如果检测到是cell 并且cellname没有设置(因为这里可能出现tableview嵌套的情况)  ,记录cellname
         if ([nextResponder isKindOfClass:[UITableViewCell class]]) {
-
-//
+            
+            //
             //记录当前控件的cell和indexpath
             UITableViewCell *cell = (UITableViewCell *)nextResponder;
-            self.TableViewCell = cell;
+            self.WeakProperty.TableViewCell = cell;
             //帮cell记录名字
             cell.clickSignalName = NSStringFromClass(nextResponder.class);
-            cell.TableViewCell = cell;
+            cell.WeakProperty.TableViewCell = cell;
             
             if (@available(iOS 11.0, *)) {
                 UITableView *tableView = (UITableView *)cell.superview;
-                self.indexPath = [tableView indexPathForCell:cell];
-                self.tableView = tableView;
-                cell.indexPath = self.indexPath;
-                cell.tableView = tableView;
-
+                self.WeakProperty.indexPath = [tableView indexPathForCell:cell];
+                self.WeakProperty.tableView = tableView;
             }else{
                 UITableView *tableView = (UITableView *)cell.superview.superview;
-                self.indexPath = [tableView indexPathForCell:cell];
-                self.tableView = tableView;
-                cell.indexPath = self.indexPath;
-                cell.tableView = tableView;
+                self.WeakProperty.indexPath = [tableView indexPathForCell:cell];
+                self.WeakProperty.tableView = tableView;
+                
             }
             
         }
@@ -257,36 +246,32 @@ static NSString const * havedSignal = @"TTSignal_";
             
             //记录当前控件的cell和indexpath
             UICollectionViewCell *cell = (UICollectionViewCell *)nextResponder;
-            self.CollectionViewCell = cell;
+            self.WeakProperty.CollectionViewCell = cell;
             //帮cell记录名字
             cell.clickSignalName = NSStringFromClass(nextResponder.class);
-            cell.CollectionViewCell = cell;
+            cell.WeakProperty.CollectionViewCell = cell;
             if (@available(iOS 11.0, *)) {
                 UICollectionView *collectionView = (UICollectionView *)cell.superview;
-                self.indexPath = [collectionView indexPathForCell:cell];
-                self.collectionView = collectionView;
-                cell.indexPath = self.indexPath;
-                cell.collectionView = collectionView;
+                self.WeakProperty.indexPath = [collectionView indexPathForCell:cell];
+                self.WeakProperty.collectionView = collectionView;
             }else{
                 UICollectionView *collectionView = (UICollectionView *)cell.superview.superview;
-                self.indexPath = [collectionView indexPathForCell:cell];
-                self.collectionView = collectionView;
-                cell.indexPath = self.indexPath;
-                cell.collectionView = collectionView;
+                self.WeakProperty.indexPath = [collectionView indexPathForCell:cell];
+                self.WeakProperty.collectionView = collectionView;
             }
             
         }
         
         
         //尝试获取名字
-       NSString *tempname = [self nameWithInstance:self target:nextResponder];
+        NSString *tempname = [self nameWithInstance:self target:nextResponder];
         
         if (tempname.length > 0) {
             //设置名字成功
             signalName = [tempname substringFromIndex:1];
             
             //记录当前有属性的View
-            self.targetResponder = nextResponder;
+            self.WeakProperty.targetResponder = nextResponder;
         }
         
         
@@ -295,10 +280,14 @@ static NSString const * havedSignal = @"TTSignal_";
         //如果检测到控制器或者UIWindow,那么判断
         if ([nextResponder isKindOfClass:[UIViewController class]]) {
             
-            self.viewController = (UIViewController *)nextResponder;
-            self.TableViewCell.viewController = (UIViewController *)nextResponder;
-            self.CollectionViewCell.viewController = (UIViewController *)nextResponder;
-
+            
+            self.WeakProperty.viewController = (UIViewController *)nextResponder;
+            
+            self.WeakProperty.TableViewCell.WeakProperty.viewController = (UIViewController *)nextResponder;
+            
+            self.WeakProperty.CollectionViewCell.WeakProperty.viewController = (UIViewController *)nextResponder;
+            
+            
             //结束循环
             break;
         }
@@ -319,11 +308,11 @@ static NSString const * havedSignal = @"TTSignal_";
         return oldName;
     }
     else{
- 
-        if (self.TableViewCell||self.CollectionViewCell) {
-            NSString * setStr = [NSString stringWithFormat:@"%@:",[havedSignal stringByAppendingString:self.TableViewCell?self.TableViewCell.clickSignalName:self.CollectionViewCell.clickSignalName]];
+        
+        if (self.WeakProperty.TableViewCell||self.WeakProperty.CollectionViewCell) {
+            NSString * setStr = [NSString stringWithFormat:@"%@:",[havedSignal stringByAppendingString:self.WeakProperty.TableViewCell?self.WeakProperty.TableViewCell.clickSignalName:self.WeakProperty.CollectionViewCell.clickSignalName]];
             SEL selctor = NSSelectorFromString(setStr);
-            if ([self.targetObject respondsToSelector:selctor]||[self.viewController respondsToSelector:selctor]) {
+            if ([self.WeakProperty.targetObject respondsToSelector:selctor]||[self.WeakProperty.viewController respondsToSelector:selctor]) {
                 return nil;
             }
             else
@@ -338,7 +327,7 @@ static NSString const * havedSignal = @"TTSignal_";
     }
     //什么名字都没有
     return @"";
-  
+    
 }
 
 //send action to target(viewController)
@@ -352,19 +341,19 @@ static NSString const * havedSignal = @"TTSignal_";
     SEL selctor = NSSelectorFromString(setStr);
     
     //1,优先判断有没有targetObject
-    if ([self.targetObject respondsToSelector:selctor]) {
-        action(self.targetObject,selctor,self);
+    if ([self.WeakProperty.targetObject respondsToSelector:selctor]) {
+        action(self.WeakProperty.targetObject,selctor,self);
         return;
     }
     
     //优先在属性持有者中调用(属性持有者有可能是控制器)
-    if ([self.targetResponder respondsToSelector:selctor]) {
-        action(self.targetResponder,selctor,self);
+    if ([self.WeakProperty.targetResponder respondsToSelector:selctor]) {
+        action(self.WeakProperty.targetResponder,selctor,self);
         return;
     }
-
-    if ([self.viewController respondsToSelector:selctor]) {
-        action(self.viewController,selctor,self);
+    
+    if ([self.WeakProperty.viewController respondsToSelector:selctor]) {
+        action(self.WeakProperty.viewController,selctor,self);
         return;
     }
     

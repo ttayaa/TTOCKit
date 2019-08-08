@@ -229,13 +229,17 @@ static NSString const * havedSignal = @"TTSignal_";
             
             if (@available(iOS 11.0, *)) {
                 UITableView *tableView = (UITableView *)cell.superview;
-                self.WeakProperty.indexPath = [tableView indexPathForCell:cell];
-                self.WeakProperty.tableView = tableView;
+                if ([tableView isKindOfClass:[UITableView class]]) {
+                    self.WeakProperty.indexPath = [tableView indexPathForCell:cell];
+                    self.WeakProperty.tableView = tableView;
+                }
+                
             }else{
                 UITableView *tableView = (UITableView *)cell.superview.superview;
-                self.WeakProperty.indexPath = [tableView indexPathForCell:cell];
-                self.WeakProperty.tableView = tableView;
-                
+                if ([tableView isKindOfClass:[UITableView class]]) {
+                    self.WeakProperty.indexPath = [tableView indexPathForCell:cell];
+                    self.WeakProperty.tableView = tableView;
+                }
             }
             
         }
@@ -252,12 +256,17 @@ static NSString const * havedSignal = @"TTSignal_";
             cell.WeakProperty.CollectionViewCell = cell;
             if (@available(iOS 11.0, *)) {
                 UICollectionView *collectionView = (UICollectionView *)cell.superview;
-                self.WeakProperty.indexPath = [collectionView indexPathForCell:cell];
-                self.WeakProperty.collectionView = collectionView;
+                if ([collectionView isKindOfClass:[UICollectionView class]]) {
+                    self.WeakProperty.indexPath = [collectionView indexPathForCell:cell];
+                    self.WeakProperty.collectionView = collectionView;
+                }
+                
             }else{
                 UICollectionView *collectionView = (UICollectionView *)cell.superview.superview;
-                self.WeakProperty.indexPath = [collectionView indexPathForCell:cell];
-                self.WeakProperty.collectionView = collectionView;
+                if ([collectionView isKindOfClass:[UICollectionView class]]) {
+                    self.WeakProperty.indexPath = [collectionView indexPathForCell:cell];
+                    self.WeakProperty.collectionView = collectionView;
+                }
             }
             
         }

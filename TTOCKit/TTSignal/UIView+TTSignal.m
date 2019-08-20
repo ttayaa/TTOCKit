@@ -16,7 +16,7 @@
 @property (weak, nonatomic) NSString *clickSignalName;
 
 @property (weak, nonatomic) UIResponder *targetResponder;
-@property (weak, nonatomic) UIViewController *viewController;
+@property (weak, nonatomic) UIViewController *TTSignal_viewController;
 @property (weak, nonatomic) UITableViewCell *TableViewCell;
 @property (weak, nonatomic) UICollectionViewCell *CollectionViewCell;
 @property (weak, nonatomic) UITableView *tableView;
@@ -80,8 +80,9 @@ static NSString const * havedSignal = @"TTSignal_";
     return self.WeakProperty.collectionView;
 }
 
--(UIViewController *)viewController{
-    return self.WeakProperty.viewController;
+-(UIViewController *)TTSignal_viewController{
+    return self.WeakProperty.TTSignal_viewController;
+    
 }
 
 
@@ -229,18 +230,18 @@ static NSString const * havedSignal = @"TTSignal_";
             
             if (@available(iOS 11.0, *)) {
                 UITableView *tableView = (UITableView *)cell.superview;
-                if ([tableView isKindOfClass:[UITableView class]]) {
-                    self.WeakProperty.indexPath = [tableView indexPathForCell:cell];
-                    self.WeakProperty.tableView = tableView;
-                }
-                
+                self.WeakProperty.indexPath = [tableView indexPathForCell:cell];
+                self.WeakProperty.tableView = tableView;
+
             }else{
                 UITableView *tableView = (UITableView *)cell.superview.superview;
-                if ([tableView isKindOfClass:[UITableView class]]) {
-                    self.WeakProperty.indexPath = [tableView indexPathForCell:cell];
-                    self.WeakProperty.tableView = tableView;
-                }
+                self.WeakProperty.indexPath = [tableView indexPathForCell:cell];
+                self.WeakProperty.tableView = tableView;
+
             }
+            self.WeakProperty.TableViewCell.WeakProperty.indexPath = self.WeakProperty.indexPath;
+            self.WeakProperty.TableViewCell.WeakProperty.tableView = self.WeakProperty.tableView;
+
             
         }
         
@@ -256,19 +257,16 @@ static NSString const * havedSignal = @"TTSignal_";
             cell.WeakProperty.CollectionViewCell = cell;
             if (@available(iOS 11.0, *)) {
                 UICollectionView *collectionView = (UICollectionView *)cell.superview;
-                if ([collectionView isKindOfClass:[UICollectionView class]]) {
-                    self.WeakProperty.indexPath = [collectionView indexPathForCell:cell];
-                    self.WeakProperty.collectionView = collectionView;
-                }
-                
+                self.WeakProperty.indexPath = [collectionView indexPathForCell:cell];
+                self.WeakProperty.collectionView = collectionView;
             }else{
                 UICollectionView *collectionView = (UICollectionView *)cell.superview.superview;
-                if ([collectionView isKindOfClass:[UICollectionView class]]) {
-                    self.WeakProperty.indexPath = [collectionView indexPathForCell:cell];
-                    self.WeakProperty.collectionView = collectionView;
-                }
+                self.WeakProperty.indexPath = [collectionView indexPathForCell:cell];
+                self.WeakProperty.collectionView = collectionView;
             }
-            
+            self.WeakProperty.CollectionViewCell.WeakProperty.indexPath = self.WeakProperty.indexPath;
+            self.WeakProperty.CollectionViewCell.WeakProperty.collectionView = self.WeakProperty.collectionView;
+
         }
         
         
@@ -290,11 +288,11 @@ static NSString const * havedSignal = @"TTSignal_";
         if ([nextResponder isKindOfClass:[UIViewController class]]) {
             
             
-            self.WeakProperty.viewController = (UIViewController *)nextResponder;
+            self.WeakProperty.TTSignal_viewController = (UIViewController *)nextResponder;
             
-            self.WeakProperty.TableViewCell.WeakProperty.viewController = (UIViewController *)nextResponder;
+            self.WeakProperty.TableViewCell.WeakProperty.TTSignal_viewController = (UIViewController *)nextResponder;
             
-            self.WeakProperty.CollectionViewCell.WeakProperty.viewController = (UIViewController *)nextResponder;
+            self.WeakProperty.CollectionViewCell.WeakProperty.TTSignal_viewController = (UIViewController *)nextResponder;
             
             
             //结束循环
@@ -321,7 +319,7 @@ static NSString const * havedSignal = @"TTSignal_";
         if (self.WeakProperty.TableViewCell||self.WeakProperty.CollectionViewCell) {
             NSString * setStr = [NSString stringWithFormat:@"%@:",[havedSignal stringByAppendingString:self.WeakProperty.TableViewCell?self.WeakProperty.TableViewCell.clickSignalName:self.WeakProperty.CollectionViewCell.clickSignalName]];
             SEL selctor = NSSelectorFromString(setStr);
-            if ([self.WeakProperty.targetObject respondsToSelector:selctor]||[self.WeakProperty.viewController respondsToSelector:selctor]) {
+            if ([self.WeakProperty.targetObject respondsToSelector:selctor]||[self.WeakProperty.TTSignal_viewController respondsToSelector:selctor]) {
                 return nil;
             }
             else
@@ -361,11 +359,12 @@ static NSString const * havedSignal = @"TTSignal_";
         return;
     }
     
-    if ([self.WeakProperty.viewController respondsToSelector:selctor]) {
-        action(self.WeakProperty.viewController,selctor,self);
+    if ([self.WeakProperty.TTSignal_viewController respondsToSelector:selctor]) {
+        action(self.WeakProperty.TTSignal_viewController,selctor,self);
         return;
     }
     
 }
 
 @end
+

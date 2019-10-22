@@ -20,7 +20,7 @@
 typedef void (^Success_##datamodelName)(BOOL isCatch,datamodelName * model,NSMutableArray <datamodelName *>*modelArr,id responseObject);\
 typedef void (^Failure_##datamodelName)(NSError *error,NSString *errorStr,NSString * status);\
 typedef void (^ParmsBlock_##datamodelName)(datamodelName * ParmsModel);\
-typedef void (^DatePagingRelativeBlock_##datamodelName)(id model,id responseObject);\
+typedef void (^DatePagingRelativeBlock_##datamodelName)(datamodelName * model,id responseObject);\
 \
 + (void)POST_idPrams_Progress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(id)parms progress:(void (^)(NSProgress *progress))progress success:(Success_##datamodelName)success failure:(Failure_##datamodelName)failure;\
 \
@@ -85,9 +85,9 @@ typedef NS_ENUM(NSInteger, NetWorkRequestType) {
     NetWorkRequestTypePATCH=4,
     NetWorkRequestTypeDELETE=5,
     NetWorkRequestTypeUPLOAD=6
-
-
-
+    
+    
+    
 };
 #pragma mark - ---- configure ----
 
@@ -105,12 +105,12 @@ typedef NS_ENUM(NSInteger, NetWorkRequestType) {
 +(void)networkConfigureParmsFillter:(NetWorkParmsFillter)netWorkParmsFillterblock;
 
 /**
-错误的时候,请求提示控件
+ 错误的时候,请求提示控件
  */
 +(void)networkConfigureProgress:(NetWorkProgressError)networkConfigureProgressblock;
 
 /**
-正式服和测试服 的 ip
+ 正式服和测试服 的 ip
  */
 +(void)networkConfigureIP:(NSString *)ip test:(NSString *)testIp ext:(NetWorkExtblock)block;
 
@@ -126,7 +126,7 @@ typedef NS_ENUM(NSInteger, NetWorkRequestType) {
 +(void)networkConfigureStatusKeyName:(NSString *)statusKey dataKeyName:(NSString *)dataKey msgKeyName:(NSString *)msgKey;
 
 /**
-配置请求成功是哪个
+ 配置请求成功是哪个
  */
 +(void)networkConfigureStatusSuceessKey:(NSString *)sucessKey;
 
@@ -184,6 +184,10 @@ typedef NS_ENUM(NSInteger, NetWorkRequestType) {
 #pragma mark - ---- 获取当前请求的URL ----
 +(NSString *)GetBaseURL;
 
++(AFHTTPSessionManager *)GetAFNManager;
++(id)parseResponseObject:(id)responseObject;
+
 
 @end
+
 

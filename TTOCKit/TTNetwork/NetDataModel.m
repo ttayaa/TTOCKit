@@ -1,3 +1,4 @@
+
 //
 //  Network.m
 //  testproject
@@ -126,7 +127,6 @@ static BOOL NetWorklogResponseResult;
 
 
 
-
 #pragma mark - ---- configure ----
 
 //+(void)networkConfigureParmsModelName:(NSString *)ParmsModelName DataModelName:(NSString *)DataModelName
@@ -223,20 +223,20 @@ static BOOL NetWorklogResponseResult;
     [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_CHOOSEIP object:@[@"ZS",ip]];
     NSLog(@"当前为:正式服务器");
     
-
+    
 #ifdef DEBUG
-
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self ProgressShowTip:@[@"当前为:正式服务器",@(3)]];
     });
-
-
+    
+    
 #else
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [DebugMange dissmis];
     });
-
-
+    
+    
 #endif
     
 }
@@ -283,6 +283,11 @@ static BOOL NetWorklogResponseResult;
 
 
 #pragma mark - ---- public ----
++(AFHTTPSessionManager *)GetAFNManager
+{
+    return ShareAfnSessionMgr;
+}
+
 +(NSString *)GetBaseURL
 {
     return [ShareAfnSessionMgr.baseURL absoluteString];
@@ -437,7 +442,7 @@ static BOOL NetWorklogResponseResult;
         }
         
         
-       else if (requestType == NetWorkRequestTypePOST) {
+        else if (requestType == NetWorkRequestTypePOST) {
             
             [ShareAfnSessionMgr POST:URLString parameters:newDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 
@@ -480,11 +485,11 @@ static BOOL NetWorklogResponseResult;
             [ShareAfnSessionMgr POST:URLString parameters:newDict constructingBodyWithBlock:formDatablock progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 [self doSuccess:responseObject Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                 [self doFailure:failure IsShowHud:isshowhud Error:error];
+                [self doFailure:failure IsShowHud:isshowhud Error:error];
             }];
-
+            
         }
-      
+        
     }
     
 }
@@ -624,7 +629,7 @@ static BOOL NetWorklogResponseResult;
 #pragma mark -GET
 + (void)GET_idPrams_Progress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(id)parms progress:(void (^)(NSProgress *progress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
 {
-   [self LoadDataWithRequestType:NetWorkRequestTypeGET URLStr:URLString CacheIf:value IsShowHud:isshowhud parameters:parms formData:nil progress:progress success:success failure:failure];
+    [self LoadDataWithRequestType:NetWorkRequestTypeGET URLStr:URLString CacheIf:value IsShowHud:isshowhud parameters:parms formData:nil progress:progress success:success failure:failure];
 }
 
 + (void)GET_defaultProgress:(NSString *)URLString CacheIf:(BOOL)value IsShowHud:(BOOL)isshowhud parameters:(NetWorkParmsBlock)parmsBlock progress:(void (^)(NSProgress *progress))progress success:(NetWorkSuccess)success failure:(NetWorkFailure)failure
@@ -886,7 +891,7 @@ static BOOL NetWorklogResponseResult;
             finishblock(NO,@[error?error:@"",errorStr?errorStr:@"",status?status:@""]);
         }];
     }
-   else if (requestType == NetWorkRequestTypeGET) {
+    else if (requestType == NetWorkRequestTypeGET) {
         weakify(scrollView)
         [self GET_idPrams_Progress:URLString CacheIf:0 IsShowHud:1 parameters:[self.class yy_modelWithDictionary:dict] progress:nil success:^(BOOL isCatch, NetDataModel *model, NSMutableArray<NSObject *> *modelArr, id responseObject) {
             normalize(scrollView)
@@ -895,7 +900,7 @@ static BOOL NetWorklogResponseResult;
             finishblock(NO,@[error?error:@"",errorStr?errorStr:@"",status?status:@""]);
         }];
     }
-   
+    
     
     
 }
@@ -905,7 +910,7 @@ static BOOL NetWorklogResponseResult;
 +(void)doReflashSuccess:(id)responseObject model:(NetDataModel *)model modelArr:(NSMutableArray<NSObject *> *)modelArr loadfinish:(void (^)(BOOL isSsucess,id responseObject))finishblock reflashScrollView:(UIScrollView *)scrollView arrKeyBlock:(NetWorkDatePagingRelativeBlock)arrKeyBlock
 {
     
-//    normalize(scrollView)
+    //    normalize(scrollView)
     if ([scrollView.ttRefleshPage integerValue]==1) {
         if (model) {//如果返回的是模型
             scrollView.ttReflashModel = model;
@@ -916,7 +921,7 @@ static BOOL NetWorklogResponseResult;
     }
     
     finishblock(YES,responseObject);
-
+    
     
     if ([scrollView.ttRefleshPage integerValue]>1) {
         if (model) {

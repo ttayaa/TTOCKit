@@ -13,7 +13,7 @@
 
 @interface TTSignalWeakProperty : NSObject
 
-@property (weak, nonatomic) NSString *clickSignalName;
+@property (strong, nonatomic) NSString *clickSignalName;
 
 @property (weak, nonatomic) UIResponder *targetResponder;
 @property (weak, nonatomic) UIViewController *TTSignal_viewController;
@@ -47,8 +47,8 @@ static NSString const * havedSignal = @"TTSignal_";
 
 @end
 @implementation UIView (TTSignal)
-//
-//
+
+
 -(void)setClickSignalName:(NSString *)clickSignalName{
     
     self.WeakProperty.clickSignalName = clickSignalName;
@@ -317,8 +317,9 @@ static NSString const * havedSignal = @"TTSignal_";
     else{
         
         if (self.WeakProperty.TableViewCell||self.WeakProperty.CollectionViewCell) {
-            NSString * setStr = [NSString stringWithFormat:@"%@:",[havedSignal stringByAppendingString:self.WeakProperty.TableViewCell?self.WeakProperty.TableViewCell.clickSignalName:self.WeakProperty.CollectionViewCell.clickSignalName]];
+              NSString * setStr = [NSString stringWithFormat:@"%@:",[havedSignal stringByAppendingString:self.WeakProperty.TableViewCell?self.WeakProperty.TableViewCell.clickSignalName:self.WeakProperty.CollectionViewCell.clickSignalName]];
             SEL selctor = NSSelectorFromString(setStr);
+            
             if ([self.WeakProperty.targetObject respondsToSelector:selctor]||[self.WeakProperty.TTSignal_viewController respondsToSelector:selctor]) {
                 return nil;
             }

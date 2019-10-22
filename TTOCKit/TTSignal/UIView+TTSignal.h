@@ -13,7 +13,7 @@
 
 @interface UIView (TTSignal)
 /**signal name*/
-@property (nonatomic,copy)NSString *clickSignalName;
+@property (nonatomic,strong)NSString *clickSignalName;
 
 @property (nonatomic,readonly)NSIndexPath *indexPath;
 

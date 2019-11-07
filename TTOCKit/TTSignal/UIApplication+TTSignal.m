@@ -25,6 +25,24 @@
  
     
 }
+
+-(UISwitch *)isSwitchView:(UIView *)view
+{
+    if (view) {
+        if (([NSStringFromClass([view.superview class]) isEqualToString:@"UISwitch"])) {
+               return (UISwitch *)view.superview;
+           }
+           else {
+              UISwitch *sw = [self isSwitchView:view.superview];
+               if (sw) {
+                   return sw;
+               }
+           }
+    }
+    
+    return NO;
+}
+
 - (void)TTSignal_sendEvent:(UIEvent *)event
 {
     NSSet *set= event.allTouches;
@@ -32,15 +50,21 @@
     UITouch *touchEvent= [array lastObject];
     UIView *view=[touchEvent view];
     
- 
+//   BOOL isss = [self isSwitchView:view];
     //UISwitch很特殊如果按下超过0.1秒在UITouchPhaseEnded中就不存在view,我们只能截取UITouchPhaseBegan
     if (touchEvent.phase==UITouchPhaseBegan){
-        if ([NSStringFromClass([view.superview class]) containsString:@"UISwitch"]) {//如果是UISwitch的子类
+        
+
+        
+//        if ([NSStringFromClass([view.superview class]) containsString:@"UISwitch"]) {//如果是UISwitch的子类
+        UISwitch *sw =  [self isSwitchView:view];
+        if (sw) {//如果是UISwitch的子类
+       
             
-            if (!(view.superview.superview.userInteractionEnabled == NO || view.superview.superview.hidden == YES || view.superview.superview.alpha <= 0.01 )
+            if (!(sw.userInteractionEnabled == NO || sw.hidden == YES || sw.alpha <= 0.01 )
                 ){
                
-                UIView *fitview = [self findFitView:view.superview.superview];
+                UIView *fitview = [self findFitView:sw];
                 
                 if(fitview)
                 {

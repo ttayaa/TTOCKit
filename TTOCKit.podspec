@@ -114,8 +114,8 @@ Pod::Spec.new do |s|
         ss.dependency 'AFNetworking'
         ss.dependency 'YYModel'
         
-        ss.subspec 'NetChangeTools服务器切换' do |sss|
-            sss.source_files = 'TTOCKit/TTNetwork/NetChangeTools服务器切换/**/*.{h,m,mm}'
+        ss.subspec 'NetChangeTools' do |sss|
+            sss.source_files = 'TTOCKit/TTNetwork/NetChangeTools/**/*.{h,m,mm}'
         end
         
     end

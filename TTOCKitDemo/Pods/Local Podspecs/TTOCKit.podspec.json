@@ -1,6 +1,6 @@
 {
   "name": "TTOCKit",
-  "version": "1.2.9",
+  "version": "1.3.0",
   "summary": "mvc.",
   "description": "easy to mvc.",
   "homepage": "https://github.com/ttayaa/TTOCKit",
@@ -16,7 +16,7 @@
   },
   "source": {
     "git": "https://github.com/ttayaa/TTOCKit.git",
-    "tag": "v1.2.9"
+    "tag": "v1.3.0"
   },
   "source_files": "TTOCKit/**/*.{h,m,mm}",
   "requires_arc": true,
@@ -129,8 +129,8 @@
       },
       "subspecs": [
         {
-          "name": "NetChangeTools服务器切换",
-          "source_files": "TTOCKit/TTNetwork/NetChangeTools服务器切换/**/*.{h,m,mm}"
+          "name": "NetChangeTools",
+          "source_files": "TTOCKit/TTNetwork/NetChangeTools/**/*.{h,m,mm}"
         }
       ]
     },

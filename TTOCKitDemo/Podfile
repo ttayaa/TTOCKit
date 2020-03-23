@@ -13,6 +13,6 @@ pod 'SDWebImage'
 pod 'DZNEmptyDataSet'
 ##      pod 'TTOCKit'
 
-#pod 'TTOCKit', :path  => '../TTOCKit.podspec'
+#pod 'TTOCKit/TTMVVM', :path  => '../TTOCKit.podspec'
 
 end

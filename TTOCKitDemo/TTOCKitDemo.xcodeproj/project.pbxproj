@@ -294,13 +294,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		182D023520BD52810012EB01 /* TTAllowPush(多次push问题) */ = {
+		182D023520BD52810012EB01 /* TTAllowPush_lotsofpushquetion */ = {
 			isa = PBXGroup;
 			children = (
 				182D023620BD52810012EB01 /* UIViewController+TTAlowPush.h */,
 				182D023720BD52810012EB01 /* UIViewController+TTAlowPush.m */,
 			);
-			path = "TTAllowPush(多次push问题)";
+			path = TTAllowPush_lotsofpushquetion;
 			sourceTree = "<group>";
 		};
 		1898F4C1208F1B9700647FC9 = {
@@ -368,7 +368,7 @@
 		18BC1B7E2093082200D703F1 /* TTNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				18BC1B802093082200D703F1 /* NetChangeTools服务器切换 */,
+				18BC1B802093082200D703F1 /* NetChangeTools */,
 				18BC1B952093082200D703F1 /* TTNetwork.h */,
 				18BC1B7F2093082200D703F1 /* NetDataModel.h */,
 				18BC1B942093082200D703F1 /* NetDataModel.m */,
@@ -378,23 +378,23 @@
 			path = TTNetwork;
 			sourceTree = "<group>";
 		};
-		18BC1B802093082200D703F1 /* NetChangeTools服务器切换 */ = {
+		18BC1B802093082200D703F1 /* NetChangeTools */ = {
 			isa = PBXGroup;
 			children = (
-				18BC1B812093082200D703F1 /* TTIPManage(服务器切换) */,
-				18BC1B912093082200D703F1 /* TTAutoModel(万能模型) */,
+				18BC1B812093082200D703F1 /* TTIPChangeManage */,
+				18BC1B912093082200D703F1 /* TTAutoModel */,
 			);
-			path = "NetChangeTools服务器切换";
+			path = NetChangeTools;
 			sourceTree = "<group>";
 		};
-		18BC1B812093082200D703F1 /* TTIPManage(服务器切换) */ = {
+		18BC1B812093082200D703F1 /* TTIPChangeManage */ = {
 			isa = PBXGroup;
 			children = (
 				18BC1B822093082200D703F1 /* TTDataConfig.h */,
 				18BC1B832093082200D703F1 /* 缓存工具 */,
 				18BC1B862093082200D703F1 /* 网络切换工具 */,
 			);
-			path = "TTIPManage(服务器切换)";
+			path = TTIPChangeManage;
 			sourceTree = "<group>";
 		};
 		18BC1B832093082200D703F1 /* 缓存工具 */ = {
@@ -437,12 +437,12 @@
 			path = resource;
 			sourceTree = "<group>";
 		};
-		18BC1B912093082200D703F1 /* TTAutoModel(万能模型) */ = {
+		18BC1B912093082200D703F1 /* TTAutoModel */ = {
 			isa = PBXGroup;
 			children = (
 				18BC1B922093082200D703F1 /* TTAutoModel.h */,
 			);
-			path = "TTAutoModel(万能模型)";
+			path = TTAutoModel;
 			sourceTree = "<group>";
 		};
 		18BC1B972093082200D703F1 /* TTSignal */ = {
@@ -462,8 +462,8 @@
 			isa = PBXGroup;
 			children = (
 				18BC1B9D2093082200D703F1 /* TTRouterCategory */,
-				18BC1BA12093082200D703F1 /* PresentViewController(自定义modal动画) */,
-				18BC1BBC2093082300D703F1 /* PushViewController(自定义push动画) */,
+				18BC1BA12093082200D703F1 /* PresentViewController_CustomModal */,
+				18BC1BBC2093082300D703F1 /* PushViewController_Custom_Push */,
 				18BC1BBA2093082300D703F1 /* UINavigationController+TTRouter.h */,
 				18BC1BA02093082200D703F1 /* UINavigationController+TTRouter.m */,
 				18BC1BBB2093082300D703F1 /* TTRouter.h */,
@@ -480,18 +480,18 @@
 			path = TTRouterCategory;
 			sourceTree = "<group>";
 		};
-		18BC1BA12093082200D703F1 /* PresentViewController(自定义modal动画) */ = {
+		18BC1BA12093082200D703F1 /* PresentViewController_CustomModal */ = {
 			isa = PBXGroup;
 			children = (
-				18BC1BA22093082200D703F1 /* 上下控制器视图管理者 */,
+				18BC1BA22093082200D703F1 /* ModalAnimator */,
 				18BC1BB12093082300D703F1 /* UIViewController+CustomPopVc.h */,
 				18BC1BB22093082300D703F1 /* UIViewController+CustomPopVc.m */,
-				18BC1BB32093082300D703F1 /* 转场隔层设置 */,
+				18BC1BB32093082300D703F1 /* translate_mid_settingFrame */,
 			);
-			path = "PresentViewController(自定义modal动画)";
+			path = PresentViewController_CustomModal;
 			sourceTree = "<group>";
 		};
-		18BC1BA22093082200D703F1 /* 上下控制器视图管理者 */ = {
+		18BC1BA22093082200D703F1 /* ModalAnimator */ = {
 			isa = PBXGroup;
 			children = (
 				18BC1BA32093082200D703F1 /* ModalAnimator_downMenuAnimation_black.m */,
@@ -509,10 +509,10 @@
 				18BC1BAF2093082300D703F1 /* ModalAnimator_downMenuAnimation_clear.h */,
 				18BC1BB02093082300D703F1 /* ModalAnimator_Custom.h */,
 			);
-			path = "上下控制器视图管理者";
+			path = ModalAnimator;
 			sourceTree = "<group>";
 		};
-		18BC1BB32093082300D703F1 /* 转场隔层设置 */ = {
+		18BC1BB32093082300D703F1 /* translate_mid_settingFrame */ = {
 			isa = PBXGroup;
 			children = (
 				18BC1BB42093082300D703F1 /* PopPresentationController_AlphaBlack_frame.h */,
@@ -522,18 +522,18 @@
 				18BC1BB82093082300D703F1 /* PopPresentationController_fadeInAlphaBlack_frame.m */,
 				18BC1BB92093082300D703F1 /* PopPresentationController_AlphaBlack_frame.m */,
 			);
-			path = "转场隔层设置";
+			path = translate_mid_settingFrame;
 			sourceTree = "<group>";
 		};
-		18BC1BBC2093082300D703F1 /* PushViewController(自定义push动画) */ = {
+		18BC1BBC2093082300D703F1 /* PushViewController_Custom_Push */ = {
 			isa = PBXGroup;
 			children = (
-				18BC1BBD2093082300D703F1 /* 上下控制器视图管理者 */,
+				18BC1BBD2093082300D703F1 /* Animator */,
 			);
-			path = "PushViewController(自定义push动画)";
+			path = PushViewController_Custom_Push;
 			sourceTree = "<group>";
 		};
-		18BC1BBD2093082300D703F1 /* 上下控制器视图管理者 */ = {
+		18BC1BBD2093082300D703F1 /* Animator */ = {
 			isa = PBXGroup;
 			children = (
 				18BC1BBE2093082300D703F1 /* PushAnimator_downToupAnimation.m */,
@@ -543,7 +543,7 @@
 				18BC1BC22093082300D703F1 /* NavigationBarPop_push_Manager.h */,
 				18BC1BC32093082300D703F1 /* PopAnimator_upTpdownAnimation.h */,
 			);
-			path = "上下控制器视图管理者";
+			path = Animator;
 			sourceTree = "<group>";
 		};
 		18BC1BC42093082300D703F1 /* TTTools */ = {
@@ -757,18 +757,18 @@
 		18BC1C102093082300D703F1 /* TTControllerCategory */ = {
 			isa = PBXGroup;
 			children = (
-				182D023520BD52810012EB01 /* TTAllowPush(多次push问题) */,
-				18BC1C112093082300D703F1 /* AlphaBar(半透明导航栏) */,
-				18BC1C1C2093082300D703F1 /* DZNEmptyDataSet(空页面扩展) */,
-				18BC1C242093082300D703F1 /* NBarClick(导航栏点击) */,
-				18BC1C2D2093082300D703F1 /* bgScrollview(背景设置为scrollview) */,
+				182D023520BD52810012EB01 /* TTAllowPush_lotsofpushquetion */,
+				18BC1C112093082300D703F1 /* AlphaBar */,
+				18BC1C1C2093082300D703F1 /* DZNEmptyDataSet_ext */,
+				18BC1C242093082300D703F1 /* NBarClick */,
+				18BC1C2D2093082300D703F1 /* bgScrollview */,
 				18BC1C302093082300D703F1 /* TTControllerCategoryHeader.h */,
-				18BC1C312093082300D703F1 /* easyJump(控制器跳转) */,
+				18BC1C312093082300D703F1 /* easyJump */,
 			);
 			path = TTControllerCategory;
 			sourceTree = "<group>";
 		};
-		18BC1C112093082300D703F1 /* AlphaBar(半透明导航栏) */ = {
+		18BC1C112093082300D703F1 /* AlphaBar */ = {
 			isa = PBXGroup;
 			children = (
 				18BC1C122093082300D703F1 /* FBKVOController */,
@@ -777,7 +777,7 @@
 				18BC1C1B2093082300D703F1 /* UINavigationBar+ttAwesome.h */,
 				18BC1C192093082300D703F1 /* UINavigationBar+ttAwesome.m */,
 			);
-			path = "AlphaBar(半透明导航栏)";
+			path = AlphaBar;
 			sourceTree = "<group>";
 		};
 		18BC1C122093082300D703F1 /* FBKVOController */ = {
@@ -792,23 +792,23 @@
 			path = FBKVOController;
 			sourceTree = "<group>";
 		};
-		18BC1C1C2093082300D703F1 /* DZNEmptyDataSet(空页面扩展) */ = {
+		18BC1C1C2093082300D703F1 /* DZNEmptyDataSet_ext */ = {
 			isa = PBXGroup;
 			children = (
 				18BC1C1D2093082300D703F1 /* UIViewController+DZNEmptyDataSet.h */,
 				18BC1C1E2093082300D703F1 /* UIViewController+DZNEmptyDataSet.m */,
 			);
-			path = "DZNEmptyDataSet(空页面扩展)";
+			path = DZNEmptyDataSet_ext;
 			sourceTree = "<group>";
 		};
-		18BC1C242093082300D703F1 /* NBarClick(导航栏点击) */ = {
+		18BC1C242093082300D703F1 /* NBarClick */ = {
 			isa = PBXGroup;
 			children = (
 				18BC1C252093082300D703F1 /* UIViewController+NVBarClick.m */,
 				18BC1C262093082300D703F1 /* FBShimmering */,
 				18BC1C2C2093082300D703F1 /* UIViewController+NVBarClick.h */,
 			);
-			path = "NBarClick(导航栏点击)";
+			path = NBarClick;
 			sourceTree = "<group>";
 		};
 		18BC1C262093082300D703F1 /* FBShimmering */ = {
@@ -823,16 +823,16 @@
 			path = FBShimmering;
 			sourceTree = "<group>";
 		};
-		18BC1C2D2093082300D703F1 /* bgScrollview(背景设置为scrollview) */ = {
+		18BC1C2D2093082300D703F1 /* bgScrollview */ = {
 			isa = PBXGroup;
 			children = (
 				18BC1C2E2093082300D703F1 /* UIViewController+ViewIsScrollview.m */,
 				18BC1C2F2093082300D703F1 /* UIViewController+ViewIsScrollview.h */,
 			);
-			path = "bgScrollview(背景设置为scrollview)";
+			path = bgScrollview;
 			sourceTree = "<group>";
 		};
-		18BC1C312093082300D703F1 /* easyJump(控制器跳转) */ = {
+		18BC1C312093082300D703F1 /* easyJump */ = {
 			isa = PBXGroup;
 			children = (
 				18BC1C332093082300D703F1 /* ControllerCategoryOverride.h */,
@@ -841,7 +841,7 @@
 				18BC1C352093082300D703F1 /* UIViewController+easyJump.h */,
 				18BC1C322093082300D703F1 /* UIViewController+easyJump.m */,
 			);
-			path = "easyJump(控制器跳转)";
+			path = easyJump;
 			sourceTree = "<group>";
 		};
 		18BC1C372093082300D703F1 /* TTOCKitHeader */ = {

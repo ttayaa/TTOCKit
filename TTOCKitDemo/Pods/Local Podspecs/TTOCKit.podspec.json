@@ -1,6 +1,6 @@
 {
   "name": "TTOCKit",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "summary": "mvc.",
   "description": "easy to mvc.",
   "homepage": "https://github.com/ttayaa/TTOCKit",
@@ -16,11 +16,15 @@
   },
   "source": {
     "git": "https://github.com/ttayaa/TTOCKit.git",
-    "tag": "v1.2.8"
+    "tag": "v1.2.9"
   },
-  "source_files": "TTOCKit/TTOCKitHeader/TTOCKitConfig.h",
+  "source_files": "TTOCKit/**/*.{h,m,mm}",
   "requires_arc": true,
   "subspecs": [
+    {
+      "name": "TTOCKitHeader",
+      "source_files": "TTOCKit/TTOCKitHeader/TTOCKitConfig.h"
+    },
     {
       "name": "TTControllerCategory",
       "source_files": "TTOCKit/TTControllerCategory/**/*.{h,m,mm}",

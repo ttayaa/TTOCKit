@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
     s.name         = "TTOCKit"
-    s.version      = "1.2.9"
+    s.version      = "1.3.0"
     s.summary      = " mvc."
     s.description  = <<-DESC
                 easy to mvc.
@@ -29,7 +29,9 @@ Pod::Spec.new do |s|
 
     s.requires_arc = true
     
-    s.source_files = 'TTOCKit/TTOCKitHeader/TTOCKitConfig.h'
+    s.subspec 'TTOCKitHeader' do |ss|
+           ss.source_files = 'TTOCKit/TTOCKitHeader/TTOCKitConfig.h'
+       end
     
     
     s.subspec 'TTControllerCategory' do |ss|

@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		182D023820BD52820012EB01 /* UIViewController+TTAlowPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D023720BD52810012EB01 /* UIViewController+TTAlowPush.m */; };
+		186A27F22428958200A7CA95 /* DYYFloatWindow.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 186A27F12428958200A7CA95 /* DYYFloatWindow.bundle */; };
 		1890A2C021F9A6C7009C6803 /* UIApplication+TTSignal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1890A2BF21F9A6C6009C6803 /* UIApplication+TTSignal.m */; };
 		1898F4D5208F1B9700647FC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1898F4D3208F1B9700647FC9 /* Main.storyboard */; };
 		1898F4D7208F1B9800647FC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1898F4D6208F1B9800647FC9 /* Assets.xcassets */; };
@@ -25,7 +26,6 @@
 		1898F62C208F215300647FC9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898F62A208F215300647FC9 /* ViewController.m */; };
 		18BC1C492093082400D703F1 /* SandboxTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BC1B852093082200D703F1 /* SandboxTools.m */; };
 		18BC1C4A2093082400D703F1 /* DYYFloatWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BC1B892093082200D703F1 /* DYYFloatWindow.m */; };
-		18BC1C4B2093082400D703F1 /* TTNetwork.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18BC1B8B2093082200D703F1 /* TTNetwork.xcassets */; };
 		18BC1C4C2093082400D703F1 /* DebugMange.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BC1B8E2093082200D703F1 /* DebugMange.m */; };
 		18BC1C4D2093082400D703F1 /* IPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BC1B8F2093082200D703F1 /* IPModel.m */; };
 		18BC1C4E2093082400D703F1 /* NetDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BC1B942093082200D703F1 /* NetDataModel.m */; };
@@ -100,6 +100,7 @@
 /* Begin PBXFileReference section */
 		182D023620BD52810012EB01 /* UIViewController+TTAlowPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TTAlowPush.h"; sourceTree = "<group>"; };
 		182D023720BD52810012EB01 /* UIViewController+TTAlowPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TTAlowPush.m"; sourceTree = "<group>"; };
+		186A27F12428958200A7CA95 /* DYYFloatWindow.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DYYFloatWindow.bundle; sourceTree = "<group>"; };
 		1890A2BE21F9A6C4009C6803 /* UIApplication+TTSignal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+TTSignal.h"; sourceTree = "<group>"; };
 		1890A2BF21F9A6C6009C6803 /* UIApplication+TTSignal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+TTSignal.m"; sourceTree = "<group>"; };
 		1898F4CA208F1B9700647FC9 /* TTOCKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TTOCKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,7 +131,6 @@
 		18BC1B852093082200D703F1 /* SandboxTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SandboxTools.m; sourceTree = "<group>"; };
 		18BC1B882093082200D703F1 /* DYYFloatWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYYFloatWindow.h; sourceTree = "<group>"; };
 		18BC1B892093082200D703F1 /* DYYFloatWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYYFloatWindow.m; sourceTree = "<group>"; };
-		18BC1B8B2093082200D703F1 /* TTNetwork.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TTNetwork.xcassets; sourceTree = "<group>"; };
 		18BC1B8C2093082200D703F1 /* IPModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPModel.h; sourceTree = "<group>"; };
 		18BC1B8D2093082200D703F1 /* DebugMange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugMange.h; sourceTree = "<group>"; };
 		18BC1B8E2093082200D703F1 /* DebugMange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugMange.m; sourceTree = "<group>"; };
@@ -432,7 +432,7 @@
 		18BC1B8A2093082200D703F1 /* resource */ = {
 			isa = PBXGroup;
 			children = (
-				18BC1B8B2093082200D703F1 /* TTNetwork.xcassets */,
+				186A27F12428958200A7CA95 /* DYYFloatWindow.bundle */,
 			);
 			path = resource;
 			sourceTree = "<group>";
@@ -903,7 +903,6 @@
 				1898F4C7208F1B9700647FC9 /* Frameworks */,
 				1898F4C8208F1B9700647FC9 /* Resources */,
 				4ACCE48390D7C0572562901F /* [CP] Embed Pods Frameworks */,
-				612F74031FA3FC37ACA50B5C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -951,7 +950,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18BC1C4B2093082400D703F1 /* TTNetwork.xcassets in Resources */,
 				1898F4DA208F1B9800647FC9 /* LaunchScreen.storyboard in Resources */,
 				1898F4D7208F1B9800647FC9 /* Assets.xcassets in Resources */,
 				18BC1C732093082400D703F1 /* KVNProgressView.xib in Resources */,
@@ -961,6 +959,7 @@
 				18BC1C632093082400D703F1 /* TTQRScan.storyboard in Resources */,
 				1898F500208F1CC300647FC9 /* TableViewCel2.xib in Resources */,
 				1898F505208F1CC300647FC9 /* TableViewCell1.xib in Resources */,
+				186A27F22428958200A7CA95 /* DYYFloatWindow.bundle in Resources */,
 				18BC1C642093082400D703F1 /* TTQRScanController.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -973,77 +972,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TTOCKitDemo/Pods-TTOCKitDemo-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/YYModel/YYModel.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TTOCKitDemo/Pods-TTOCKitDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYModel.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TTOCKitDemo/Pods-TTOCKitDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TTOCKitDemo/Pods-TTOCKitDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		612F74031FA3FC37ACA50B5C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TTOCKitDemo/Pods-TTOCKitDemo-resources.sh",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTControllerCategory/DZNEmptyDataSet(空页面扩展)/DZNEmptyDataSet/placeholder_dropbox@2x.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTControllerCategory/DZNEmptyDataSet(空页面扩展)/DZNEmptyDataSet/placeholder_dropbox@3x.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTNetwork/NetChangeTools服务器切换/TTIPManage(服务器切换)/网络切换工具/DYYFloatWindow/resource/TTNetwork.bundle/ccc.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTNetwork/NetChangeTools服务器切换/TTIPManage(服务器切换)/网络切换工具/DYYFloatWindow/resource/TTNetwork.bundle/ddd.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTNetwork/NetChangeTools服务器切换/TTIPManage(服务器切换)/网络切换工具/DYYFloatWindow/resource/TTNetwork.bundle/eee.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTNetwork/NetChangeTools服务器切换/TTIPManage(服务器切换)/网络切换工具/DYYFloatWindow/resource/TTNetwork.bundle/fff.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTNetwork/NetChangeTools服务器切换/TTIPManage(服务器切换)/网络切换工具/DYYFloatWindow/resource/TTNetwork.bundle/z.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTNetwork/NetChangeTools服务器切换/TTIPManage(服务器切换)/网络切换工具/DYYFloatWindow/resource/TTNetwork.bundle/zzz.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTTools/TTProgress/kit/KVNProgress/Resources/KVNProgressView.xib",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTTools/TTQRScanController/TTQRScan.storyboard",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTTools/TTQRScanController/TTQRScanController.bundle/Nbar_black.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTTools/TTQRScanController/TTQRScanController.bundle/qrcode_tabbar_icon_barcode@3x.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTTools/TTQRScanController/TTQRScanController.bundle/qrcode_tabbar_icon_barcode_highlighted@3x.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTTools/TTQRScanController/TTQRScanController.bundle/qrcode_tabbar_icon_qrcode@3x.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTTools/TTQRScanController/TTQRScanController.bundle/qrcode_tabbar_icon_qrcode_highlighted@3x.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTTools/TTQRScanController/TTQRScanController.bundle/yu_sao_01@3x.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTTools/TTQRScanController/TTQRScanController.bundle/yu_sao_02@3x.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTTools/TTQRScanController/TTQRScanController.bundle/yu_sao_03@3x.png",
-				"${PODS_ROOT}/TTOCKit/TTOCKit/TTTools/TTQRScanController/TTQRScanController.bundle/yu_sao_04@3x.png",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/placeholder_dropbox@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/placeholder_dropbox@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ccc.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ddd.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/eee.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/fff.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/z.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zzz.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KVNProgressView.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TTQRScan.storyboardc",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Nbar_black.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/qrcode_tabbar_icon_barcode@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/qrcode_tabbar_icon_barcode_highlighted@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/qrcode_tabbar_icon_qrcode@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/qrcode_tabbar_icon_qrcode_highlighted@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/yu_sao_01@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/yu_sao_02@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/yu_sao_03@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/yu_sao_04@3x.png",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TTOCKitDemo/Pods-TTOCKitDemo-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TTOCKitDemo/Pods-TTOCKitDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		858AEF4C6C0769B5E6FB8A3D /* [CP] Check Pods Manifest.lock */ = {

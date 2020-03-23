@@ -15,9 +15,9 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - DZNEmptyDataSet (1.8.1)
-  - SDWebImage (4.4.4):
-    - SDWebImage/Core (= 4.4.4)
-  - SDWebImage/Core (4.4.4)
+  - SDWebImage (5.6.1):
+    - SDWebImage/Core (= 5.6.1)
+  - SDWebImage/Core (5.6.1)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
@@ -26,12 +26,19 @@ DEPENDENCIES:
   - SDWebImage
   - YYModel
 
+SPEC REPOS:
+  trunk:
+    - AFNetworking
+    - DZNEmptyDataSet
+    - SDWebImage
+    - YYModel
+
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  SDWebImage: c00ec18ab25d10e5ffac109b0f78d1b4341c9691
+  SDWebImage: 7edb9c3ea661e77a66661f7f044de8c1b55d1120
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 12e36daec3a10b5b5ab2dae4fb48465cf10ec167
+PODFILE CHECKSUM: c94331a9235b3a2dddb4d3c34606fcdeb318dd39
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.8.4

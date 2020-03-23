@@ -23,9 +23,6 @@
 
 implementationSingleton(DebugMange)
 static DYYFloatWindow *floatWindow;
-
-
-
 -(NSMutableArray<IPModel *> *)IpArr
 {
     if (!_IpArr) {

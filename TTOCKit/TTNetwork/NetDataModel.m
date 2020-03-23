@@ -265,6 +265,14 @@ static BOOL NetWorklogResponseResult;
                                                        block
                                                    }];
 }
++(void)networkConfigureStatusOtherKeyFromTask:(NSString *)OtherKey block:(NetWorkEachStatusKeyBlockFromTask)block;
+{
+    [statusKeyBlockDict addEntriesFromDictionary:@{
+                                                   OtherKey:
+                                                       block
+                                                   }];
+}
+
 
 /**
  分页时候的上传参数:默认是@"page"
@@ -418,7 +426,7 @@ static BOOL NetWorklogResponseResult;
             if (data) {
                 data = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                 
-                [self commonDoResponseObject:data success:success failure:failure isCatch:YES isShowHud:isshowhud];
+                [self commonDoResponseObject:data task:nil success:success failure:failure isCatch:YES isShowHud:isshowhud];
             }
         }
         
@@ -432,7 +440,7 @@ static BOOL NetWorklogResponseResult;
             
             [ShareAfnSessionMgr GET:URLString parameters:newDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 
-                [self doSuccess:responseObject Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
+                [self doSuccess:responseObject task:task Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
                 
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -446,7 +454,8 @@ static BOOL NetWorklogResponseResult;
             
             [ShareAfnSessionMgr POST:URLString parameters:newDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 
-                [self doSuccess:responseObject Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
+                [self doSuccess:responseObject
+                       task:task Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
                 
                 
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -458,7 +467,7 @@ static BOOL NetWorklogResponseResult;
         else if (requestType == NetWorkRequestTypePUT) {
             
             [ShareAfnSessionMgr PUT:URLString parameters:newDict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                [self doSuccess:responseObject Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
+                [self doSuccess:responseObject task:task Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 [self doFailure:failure IsShowHud:isshowhud Error:error];
             }];
@@ -466,7 +475,7 @@ static BOOL NetWorklogResponseResult;
         else if (requestType == NetWorkRequestTypePATCH) {
             
             [ShareAfnSessionMgr PATCH:URLString parameters:newDict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                [self doSuccess:responseObject Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
+                [self doSuccess:responseObject task:task Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 [self doFailure:failure IsShowHud:isshowhud Error:error];
             }];
@@ -474,7 +483,8 @@ static BOOL NetWorklogResponseResult;
         else if(requestType == NetWorkRequestTypeDELETE) {
             
             [ShareAfnSessionMgr DELETE:URLString parameters:newDict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                [self doSuccess:responseObject Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
+                [self doSuccess:responseObject task:task
+                        Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 [self doFailure:failure IsShowHud:isshowhud Error:error];
             }];
@@ -483,7 +493,9 @@ static BOOL NetWorklogResponseResult;
             
             
             [ShareAfnSessionMgr POST:URLString parameters:newDict constructingBodyWithBlock:formDatablock progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                [self doSuccess:responseObject Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
+                [self doSuccess:responseObject
+                           task:task
+                        Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 [self doFailure:failure IsShowHud:isshowhud Error:error];
             }];
@@ -509,7 +521,7 @@ static BOOL NetWorklogResponseResult;
     }
 }
 
-+(void)doSuccess:(id)responseObject Success:(NetWorkSuccess)success Failure:(NetWorkFailure)failure CatchFlag:(BOOL)catchFlag SaveKey:(NSString *)saveKey IsShowHud:(BOOL)isshowhud
++(void)doSuccess:(id)responseObject task:(NSURLSessionDataTask*)task Success:(NetWorkSuccess)success Failure:(NetWorkFailure)failure CatchFlag:(BOOL)catchFlag SaveKey:(NSString *)saveKey IsShowHud:(BOOL)isshowhud
 {
     
     //打印请求的结果信息
@@ -540,12 +552,13 @@ static BOOL NetWorklogResponseResult;
         }
     }
     
-    [self commonDoResponseObject:responseObject success:success failure:failure isCatch:NO isShowHud:isshowhud];
+    [self commonDoResponseObject:responseObject
+                            task:task success:success failure:failure isCatch:NO isShowHud:isshowhud];
     
 }
 
 
-+(void)commonDoResponseObject:(id )responseObject success:(NetWorkSuccess)success failure:(NetWorkFailure)failure isCatch:(BOOL)value isShowHud:(BOOL)isshowhud
++(void)commonDoResponseObject:(id )responseObject task:(NSURLSessionDataTask*)task success:(NetWorkSuccess)success failure:(NetWorkFailure)failure isCatch:(BOOL)value isShowHud:(BOOL)isshowhud
 {
     NSDictionary *resultDict = responseObject;
     
@@ -587,7 +600,7 @@ static BOOL NetWorklogResponseResult;
     }else {//token
         
         //        [self doOtherStatus:[NSString stringWithFormat:@"%@",resultDict[statusKeyName]]];
-        [self doOtherStatus:[NSString stringWithFormat:@"%@",[self getDictValueFromDotKeyStr:statusKeyName inDict:resultDict]]];
+        [self doOtherStatus:[NSString stringWithFormat:@"%@",[self getDictValueFromDotKeyStr:statusKeyName inDict:resultDict]] task:task];
         
         
         failure(nil,[self getDictValueFromDotKeyStr:msgKeyName inDict:resultDict],status);
@@ -654,12 +667,12 @@ static BOOL NetWorklogResponseResult;
 
 
 #pragma -mark othercode
-+(void)doOtherStatus:(NSString *)status{
++(void)doOtherStatus:(NSString *)status task:(NSURLSessionDataTask *)task{
     
-    NetWorkEachStatusKeyBlock block = statusKeyBlockDict[status];
+    NetWorkEachStatusKeyBlockFromTask block = statusKeyBlockDict[status];
     
     if (block) {
-        block();
+        block(task);
     }
     
 }

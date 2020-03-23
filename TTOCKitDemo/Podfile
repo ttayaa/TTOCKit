@@ -11,5 +11,8 @@ pod 'YYModel'
 pod 'AFNetworking'
 pod 'SDWebImage'
 pod 'DZNEmptyDataSet'
-#      pod 'TTOCKit'
+##      pod 'TTOCKit'
+
+#pod 'TTOCKit', :path  => '../TTOCKit.podspec'
+
 end

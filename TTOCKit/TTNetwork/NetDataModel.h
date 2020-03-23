@@ -76,6 +76,8 @@ typedef void (^NetWorkProgressError)(NSString *text);
 
 typedef void (^NetWorkEachStatusKeyBlock)(void);
 
+typedef void (^NetWorkEachStatusKeyBlockFromTask)(NSURLSessionDataTask * task);
+
 
 typedef NS_ENUM(NSInteger, NetWorkRequestType) {
     
@@ -133,7 +135,8 @@ typedef NS_ENUM(NSInteger, NetWorkRequestType) {
 /**
  其他状态值的处理
  */
-+(void)networkConfigureStatusOtherKey:(NSString *)OtherKey block:(NetWorkEachStatusKeyBlock)block;
++(void)networkConfigureStatusOtherKey:(NSString *)OtherKey block:(NetWorkEachStatusKeyBlock)block NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "如果需要过滤某些请求的处理请用networkConfigureStatusOtherKeyFromTask");
++(void)networkConfigureStatusOtherKeyFromTask:(NSString *)OtherKey block:(NetWorkEachStatusKeyBlockFromTask)block;
 
 
 /**

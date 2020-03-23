@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
     s.name         = "TTOCKit"
-    s.version      = "1.2.8"
+    s.version      = "1.2.9"
     s.summary      = " mvc."
     s.description  = <<-DESC
                 easy to mvc.
@@ -21,9 +21,13 @@ Pod::Spec.new do |s|
     s.source       = { :git => "https://github.com/ttayaa/TTOCKit.git", :tag => "v#{s.version}" }
     s.source_files  = "TTOCKit/**/*.{h,m,mm}"
     
-    s.resource  = "TTOCKit/**/*.{png,xib,storyboard,plist,der,js,json,strings,imageset,xcassets}"
+#    s.resource_bundles = {
+#        'View' => ['TTOCKit/**/*.{xib,storyboard,bundle}']
+#    }
+
+#    s.resource  = "TTOCKit/**/*.{png,xib,storyboard,plist,der,js,json,strings,imageset,xcassets}"
+
     s.requires_arc = true
-    
     
     s.source_files = 'TTOCKit/TTOCKitHeader/TTOCKitConfig.h'
     
@@ -50,6 +54,9 @@ Pod::Spec.new do |s|
         end
         ss.subspec 'TTQRScanController' do |sss|
             sss.source_files = 'TTOCKit/TTTools/TTQRScanController/**/*.{h,m,mm}'
+            sss.resource_bundles = {
+                  'View' => ['TTOCKit/TTTools/TTQRScanController/**/*.{xib,storyboard,bundle}']
+              }
 
         end
         ss.subspec 'TTPhotoBrowser' do |sss|
@@ -69,6 +76,9 @@ Pod::Spec.new do |s|
         end
         ss.subspec 'TTProgress' do |sss|
             sss.source_files = 'TTOCKit/TTTools/TTProgress/**/*.{h,m,mm}'
+            sss.resource_bundles = {
+                'View' => ['TTOCKit/TTTools/TTProgress/**/*.{xib,storyboard,bundle}']
+            }
 
         end
         ss.subspec 'TTLimitTextField' do |sss|
@@ -95,7 +105,10 @@ Pod::Spec.new do |s|
     
     s.subspec 'TTNetwork' do |ss|
         ss.source_files = 'TTOCKit/TTNetwork/*.{h,m,mm}'
-        ss.resource = 'TTOCKit/TTNetwork/**/*.{png,storyboard,xib,plist,der,js.json,strings,xcassets,imageset}'
+        
+        ss.resource_bundles = {
+            'View' => ['TTOCKit/TTNetwork/**/*.{xib,storyboard,bundle}']
+        }
         ss.dependency 'AFNetworking'
         ss.dependency 'YYModel'
         

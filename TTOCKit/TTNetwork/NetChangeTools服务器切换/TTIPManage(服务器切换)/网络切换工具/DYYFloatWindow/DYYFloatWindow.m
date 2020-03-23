@@ -41,6 +41,19 @@
 
 @implementation DYYFloatWindow
 
+
+
+- (NSBundle *)myBundle
+{
+    static NSBundle *bundle = nil;
+    if (bundle == nil) {
+        // 这里不使用mainBundle是为了适配pod 1.x和0.x
+        bundle = [NSBundle bundleWithPath:[[NSBundle bundleForClass:[DYYFloatWindow class]] pathForResource:@"DYYFloatWindow" ofType:@"bundle"]];
+    }
+    return bundle;
+}
+
+
 -(void)makeKeyWindow
 {
     [super makeKeyWindow];
@@ -130,7 +143,9 @@
         [button setFrame: CGRectMake(self.frameWidth * i , 0, self.frameWidth , self.frameWidth )];
         [button setBackgroundColor:[UIColor clearColor]];
         
-        UIImage *image = [UIImage imageNamed:key];
+//        UIImage *image = [UIImage imageNamed:key];
+         UIImage *image = [UIImage imageWithContentsOfFile:[[self myBundle] pathForResource:key ofType:@"png"]];
+        
         [button setTitle:_imagesAndTitle[key] forState:UIControlStateNormal];
         [button setImage:image forState:UIControlStateNormal];
         

@@ -18,60 +18,13 @@ PODS:
   - SDWebImage (5.6.1):
     - SDWebImage/Core (= 5.6.1)
   - SDWebImage/Core (5.6.1)
-  - TTOCKit (1.3.0):
-    - TTOCKit/TTControllerCategory (= 1.3.0)
-    - TTOCKit/TTMVVM (= 1.3.0)
-    - TTOCKit/TTNetwork (= 1.3.0)
-    - TTOCKit/TTOCKitHeader (= 1.3.0)
-    - TTOCKit/TTRouter (= 1.3.0)
-    - TTOCKit/TTSignal (= 1.3.0)
-    - TTOCKit/TTTools (= 1.3.0)
-  - TTOCKit/TTControllerCategory (1.3.0):
-    - DZNEmptyDataSet
-  - TTOCKit/TTMVVM (1.3.0)
-  - TTOCKit/TTNetwork (1.3.0):
-    - AFNetworking
-    - TTOCKit/TTNetwork/NetChangeTools (= 1.3.0)
-    - YYModel
-  - TTOCKit/TTNetwork/NetChangeTools (1.3.0):
-    - AFNetworking
-    - YYModel
-  - TTOCKit/TTOCKitHeader (1.3.0)
-  - TTOCKit/TTRouter (1.3.0):
-    - YYModel
-  - TTOCKit/TTSignal (1.3.0)
-  - TTOCKit/TTTools (1.3.0):
-    - TTOCKit/TTTools/TTAlertView (= 1.3.0)
-    - TTOCKit/TTTools/TTBtnArrSelected (= 1.3.0)
-    - TTOCKit/TTTools/TTButtonInnerRect (= 1.3.0)
-    - TTOCKit/TTTools/TTCommonTools (= 1.3.0)
-    - TTOCKit/TTTools/TTLimitTextField (= 1.3.0)
-    - TTOCKit/TTTools/TTLogVcDealloc (= 1.3.0)
-    - TTOCKit/TTTools/TTNSStringCategory (= 1.3.0)
-    - TTOCKit/TTTools/TTNumberTF (= 1.3.0)
-    - TTOCKit/TTTools/TTPhotoBrowser (= 1.3.0)
-    - TTOCKit/TTTools/TTPlaceholderPlace (= 1.3.0)
-    - TTOCKit/TTTools/TTProgress (= 1.3.0)
-    - TTOCKit/TTTools/TTQRScanController (= 1.3.0)
-    - TTOCKit/TTTools/TTWebView (= 1.3.0)
-  - TTOCKit/TTTools/TTAlertView (1.3.0)
-  - TTOCKit/TTTools/TTBtnArrSelected (1.3.0)
-  - TTOCKit/TTTools/TTButtonInnerRect (1.3.0)
-  - TTOCKit/TTTools/TTCommonTools (1.3.0)
-  - TTOCKit/TTTools/TTLimitTextField (1.3.0)
-  - TTOCKit/TTTools/TTLogVcDealloc (1.3.0)
-  - TTOCKit/TTTools/TTNSStringCategory (1.3.0)
-  - TTOCKit/TTTools/TTNumberTF (1.3.0)
-  - TTOCKit/TTTools/TTPhotoBrowser (1.3.0):
-    - SDWebImage
-  - TTOCKit/TTTools/TTPlaceholderPlace (1.3.0)
-  - TTOCKit/TTTools/TTProgress (1.3.0)
-  - TTOCKit/TTTools/TTQRScanController (1.3.0)
-  - TTOCKit/TTTools/TTWebView (1.3.0)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
-  - TTOCKit (from `../TTOCKit.podspec`)
+  - AFNetworking
+  - DZNEmptyDataSet
+  - SDWebImage
+  - YYModel
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -80,17 +33,12 @@ SPEC REPOS:
     - SDWebImage
     - YYModel
 
-EXTERNAL SOURCES:
-  TTOCKit:
-    :path: "../TTOCKit.podspec"
-
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   SDWebImage: 7edb9c3ea661e77a66661f7f044de8c1b55d1120
-  TTOCKit: 67e5e53e321205e8c18e238dd68be44b0d00bd7a
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 31dba4f787c2dd44e4408af0d5fb1bca9b336e3a
+PODFILE CHECKSUM: 2062d2f918b993f022bde72f018f05fcff27275a
 
 COCOAPODS: 1.8.4

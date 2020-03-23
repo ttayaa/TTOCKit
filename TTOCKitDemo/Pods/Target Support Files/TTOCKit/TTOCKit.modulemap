@@ -1,6 +1,0 @@
-framework module TTOCKit {
-  umbrella header "TTOCKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

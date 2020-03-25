@@ -101,17 +101,13 @@ static KVNProgressConfiguration *configuration;
 	static KVNProgress *sharedView = nil;
 	static dispatch_once_t onceToken;
 	
-	dispatch_once(&onceToken, ^{
-        
-        
-        
-        
+	dispatch_once(&onceToken, ^{  
         
 		UINib *nib = [UINib nibWithNibName:@"KVNProgressView"     bundle:[NSBundle bundleForClass:[self class]]];
         
 		NSArray *nibViews = [nib instantiateWithOwner:self options:0];
-//		sharedView = nibViews[0];
-        nibViews = sharedView;
+		sharedView = nibViews[0];
+//        nibViews = sharedView;
 	});
 	
 	return sharedView;

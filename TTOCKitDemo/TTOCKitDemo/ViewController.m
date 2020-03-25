@@ -238,7 +238,16 @@ TTSignal(textfield)
 {
     
 }
-
-
+TTSignal(scan)
+{
+    NSBundle *bundle = [NSBundle bundleForClass:TTQRScanController.class];
+           UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TTQRScan" bundle:bundle];
+           UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"TTQRScanController"];
+           [self presentViewController:vc animated:YES completion:nil];
+}
+TTSignal(alert)
+{
+    CommonProgressSucess(@"吾问无为谓多群无多群无多群无多群多")
+}
 @end
 

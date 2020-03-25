@@ -6,7 +6,7 @@
   "homepage": "https://github.com/ttayaa/TTOCKit",
   "license": {
     "type": "MIT",
-    "file": "LICENSE"
+    "file": "FILE_LICENSE"
   },
   "authors": {
     "ttayaa": "2087154267@qq.com"
@@ -53,7 +53,7 @@
           "name": "TTQRScanController",
           "source_files": "TTOCKit/TTTools/TTQRScanController/**/*.{h,m,mm,xib,storyboard}",
           "resource_bundles": {
-            "TTQRScanPng": [
+            "TTQRScanController": [
               "TTOCKit/TTTools/TTQRScanController/Assets/**/*"
             ]
           }

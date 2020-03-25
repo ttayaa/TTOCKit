@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *web;
 @property (weak, nonatomic) IBOutlet UIButton *alphaBar;
 @property (weak, nonatomic) IBOutlet UIButton *network;
+@property (weak, nonatomic) IBOutlet UIButton *scan;
+@property (weak, nonatomic) IBOutlet UIButton *alert;
 
 @end
 @implementation TableViewCell1

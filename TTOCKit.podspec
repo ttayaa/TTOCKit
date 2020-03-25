@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
                 easy to mvc.
                    DESC
     s.homepage     = "https://github.com/ttayaa/TTOCKit"
-    s.license      = { :type => "MIT", :file => "LICENSE" }
+    s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
     s.author       = { "ttayaa" => "2087154267@qq.com" }
     s.platform     = :ios, "8.0"
     s.source       = { :git => "https://github.com/ttayaa/TTOCKit.git", :tag => "v#{s.version}" }
@@ -57,7 +57,7 @@ Pod::Spec.new do |s|
         ss.subspec 'TTQRScanController' do |sss|
             sss.source_files = 'TTOCKit/TTTools/TTQRScanController/**/*.{h,m,mm,xib,storyboard}'
             sss.resource_bundles = {
-                   'TTQRScanPng' => ['TTOCKit/TTTools/TTQRScanController/Assets/**/*']
+                   'TTQRScanController' => ['TTOCKit/TTTools/TTQRScanController/Assets/**/*']
               }
 
 

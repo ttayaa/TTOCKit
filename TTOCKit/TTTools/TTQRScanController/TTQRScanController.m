@@ -17,14 +17,13 @@ BOOL LightOn;
 
 @property (weak, nonatomic) IBOutlet UIButton *xiangce;
 @property (weak, nonatomic) IBOutlet UIButton *diantong;
-@property (weak, nonatomic) IBOutlet UITabBarItem *erweima;
-@property (weak, nonatomic) IBOutlet UITabBarItem *tiaoxingma;
+@property (weak, nonatomic) IBOutlet UIButton *erweima;
+@property (weak, nonatomic) IBOutlet UIButton *tiaoxingma;
 
 
 
 @property (weak, nonatomic) IBOutlet UIButton *close_btn;
 
-@property (weak, nonatomic) IBOutlet UITabBar *customBar;
 @property (weak, nonatomic) IBOutlet UIImageView *scanLineImageView;
 //容器视图的高度
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerHeightConstraint;
@@ -44,6 +43,7 @@ BOOL LightOn;
 
 @property (weak, nonatomic) IBOutlet UIImageView *containterView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabbarBottomConstant;
 
 @end
 
@@ -58,25 +58,35 @@ BOOL LightOn;
 //    [self TTNVAlphaBar:TTAlphaNaviBarStyle1 BarColor:[UIColor blackColor] bindScrollView:nil];
 }
 
+#define hScreenWidth [UIScreen mainScreen].bounds.size.width
+#define hScreenHeight [UIScreen mainScreen].bounds.size.height
+#define isTTiPhoneX ( (hScreenHeight/hScreenWidth) < 2.1654 && (hScreenHeight/hScreenWidth) > 2.1642 )
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[UIImage imageWithContentsOfFile:[[TTQRScanController TTQRScanControllerBundle] pathForResource:@"yu_sao_01" ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [[UIImage imageWithContentsOfFile:[[TTQRScanController TTQRScanControllerBundle] pathForResource:@"yu_sao_02" ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [[UIImage imageWithContentsOfFile:[[TTQRScanController TTQRScanControllerBundle] pathForResource:@"yu_sao_03" ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [[UIImage imageWithContentsOfFile:[[TTQRScanController TTQRScanControllerBundle] pathForResource:@"yu_sao_04" ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [[UIImage imageWithContentsOfFile:[[TTQRScanController TTQRScanControllerBundle] pathForResource:@"qrcode_tabbar_icon_barcode_highlighted" ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [[UIImage imageWithContentsOfFile:[[TTQRScanController TTQRScanControllerBundle] pathForResource:@"qrcode_tabbar_icon_barcode" ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [[UIImage imageWithContentsOfFile:[[TTQRScanController TTQRScanControllerBundle] pathForResource:@"qrcode_tabbar_icon_qrcode_highlighted" ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [[UIImage imageWithContentsOfFile:[[TTQRScanController TTQRScanControllerBundle] pathForResource:@"qrcode_tabbar_icon_qrcode" ofType:@"png"]] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    if (isTTiPhoneX) {
+        self.tabbarBottomConstant.constant = 30;
+    }
+    else
+    {
+        self.tabbarBottomConstant.constant = 0;
+    }
+
+    self.containterView.image = [UIImage imageNamed:@"yu_sao_01" inBundle:[TTQRScanController TTQRScanControllerBundle] compatibleWithTraitCollection:nil];
     
-    self.containterView.image = [UIImage imageNamed:@"yu_sao_01"];
-    self.scanLineImageView.image = [UIImage imageNamed:@"yu_sao_02"];
-    [self.xiangce setImage:[UIImage imageNamed:@"yu_sao_03"] forState:UIControlStateNormal];
-     [self.diantong setImage:[UIImage imageNamed:@"yu_sao_04"] forState:UIControlStateNormal];
-    self.erweima.image = [UIImage imageNamed:@"qrcode_tabbar_icon_qrcode"];
-    self.tiaoxingma.image = [UIImage imageNamed:@"qrcode_tabbar_icon_barcode"];
-   
+    self.scanLineImageView.image = [UIImage imageNamed:@"yu_sao_02" inBundle:[TTQRScanController TTQRScanControllerBundle] compatibleWithTraitCollection:nil];
+    [self.xiangce setImage:[UIImage imageNamed:@"yu_sao_03" inBundle:[TTQRScanController TTQRScanControllerBundle] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+     [self.diantong setImage:[UIImage imageNamed:@"yu_sao_04" inBundle:[TTQRScanController TTQRScanControllerBundle] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    
+    [self.erweima setImage:[UIImage imageNamed:@"icon_ewm" inBundle:[TTQRScanController TTQRScanControllerBundle] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [self.erweima setImage:[UIImage imageNamed:@"icon_ewm_highlighted" inBundle:[TTQRScanController TTQRScanControllerBundle] compatibleWithTraitCollection:nil] forState:UIControlStateSelected];
+    [self.tiaoxingma setImage:[UIImage imageNamed:@"icon_txm" inBundle:[TTQRScanController TTQRScanControllerBundle] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [self.tiaoxingma setImage:[UIImage imageNamed:@"icon_txm_highlighted" inBundle:[TTQRScanController TTQRScanControllerBundle] compatibleWithTraitCollection:nil] forState:UIControlStateSelected];
+
+    self.erweima.selected = YES;
+   self.tiaoxingma.selected = NO;
+
     //处理左上角关闭按钮
     if (self.navigationController) {
         
@@ -100,8 +110,8 @@ BOOL LightOn;
     
     
     
-    self.customBar.selectedItem = self.customBar.items.firstObject;
-    self.customBar.delegate = self;
+//    self.customBar.selectedItem = self.customBar.items.firstObject;
+//    self.customBar.delegate = self;
 
     // 3.开始扫描二维码
     [self startScan];
@@ -446,11 +456,15 @@ BOOL LightOn;
     
     if ([btn.titleLabel.text isEqualToString:@"二维码"]) {
         self.containerHeightConstraint.constant = 250;
-        
+        self.erweima.selected = YES;
+        self.tiaoxingma.selected = NO;
+
     }
     if ([btn.titleLabel.text isEqualToString:@"条形码"]) {
         self.containerHeightConstraint.constant   =  125;
-        
+        self.tiaoxingma.selected = YES;
+        self.erweima.selected = NO;
+
     }
     
     // 刷新UI

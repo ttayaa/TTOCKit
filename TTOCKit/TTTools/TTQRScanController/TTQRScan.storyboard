@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,10 +22,10 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qrc-6N-19v" userLabel="容器视图">
                                 <rect key="frame" x="62.5" y="158.5" width="250" height="250"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yu_sao_01.png" translatesAutoresizingMaskIntoConstraints="NO" id="fp6-ra-N8R" userLabel="边框">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yu_sao_01" translatesAutoresizingMaskIntoConstraints="NO" id="fp6-ra-N8R" userLabel="边框">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yu_sao_02.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q3Y-Tz-mkY" userLabel="冲击波">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yu_sao_02" translatesAutoresizingMaskIntoConstraints="NO" id="Q3Y-Tz-mkY" userLabel="冲击波">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="10"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="10" id="STA-GU-gqP"/>
@@ -61,14 +60,14 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQ8-dg-qWC">
                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="80"/>
-                                        <state key="normal" title="相册" image="yu_sao_03.png"/>
+                                        <state key="normal" title="相册" image="TTQRScanPng.bundle/yu_sao_03.png"/>
                                         <connections>
                                             <action selector="openCameralClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ecW-tN-58x"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ipr-59-Nv0">
                                         <rect key="frame" x="187.5" y="0.0" width="187.5" height="80"/>
-                                        <state key="normal" title="电筒" image="yu_sao_04.png"/>
+                                        <state key="normal" title="电筒" image="TTQRScanPng.bundle/yu_sao_04.png"/>
                                         <connections>
                                             <action selector="FlashlightClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HzV-m1-TsI"/>
                                         </connections>
@@ -94,9 +93,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wex-jc-6Tx">
                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <inset key="titleEdgeInsets" minX="-50" minY="5" maxX="0.0" maxY="-30"/>
-                                        <inset key="imageEdgeInsets" minX="26" minY="-10" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="二维码" image="qrcode_tabbar_icon_qrcode.png"/>
+                                        <inset key="titleEdgeInsets" minX="-41" minY="5" maxX="0.0" maxY="-34"/>
+                                        <inset key="imageEdgeInsets" minX="37" minY="-15" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="二维码" image="icon_ewm"/>
                                         <connections>
                                             <action selector="bottomBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ked-UZ-s9x"/>
                                         </connections>
@@ -104,9 +103,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xFM-LI-n77">
                                         <rect key="frame" x="187.5" y="0.0" width="187.5" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <inset key="titleEdgeInsets" minX="-50" minY="5" maxX="0.0" maxY="-30"/>
-                                        <inset key="imageEdgeInsets" minX="26" minY="-10" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="条形码" image="qrcode_tabbar_icon_barcode.png"/>
+                                        <inset key="titleEdgeInsets" minX="-42" minY="5" maxX="0.0" maxY="-34"/>
+                                        <inset key="imageEdgeInsets" minX="36" minY="-15" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="条形码" image="icon_txm"/>
                                         <connections>
                                             <action selector="bottomBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S2d-kX-Wgm"/>
                                         </connections>
@@ -175,8 +174,11 @@
                         <outlet property="customContainerView" destination="Qrc-6N-19v" id="S7D-28-wgQ"/>
                         <outlet property="customLabel" destination="hUj-U2-2fo" id="4wA-oM-a9C"/>
                         <outlet property="diantong" destination="Ipr-59-Nv0" id="GsE-xj-7xx"/>
+                        <outlet property="erweima" destination="Wex-jc-6Tx" id="OHx-PI-Wqq"/>
                         <outlet property="scanLineImageView" destination="Q3Y-Tz-mkY" id="BpP-E7-n23"/>
                         <outlet property="scanLineTopConstraint" destination="Z25-xo-Cxe" id="gmn-qY-6eP"/>
+                        <outlet property="tabbarBottomConstant" destination="2wd-JT-tKi" id="hcV-9H-uf7"/>
+                        <outlet property="tiaoxingma" destination="xFM-LI-n77" id="VcT-h5-dIj"/>
                         <outlet property="xiangce" destination="lQ8-dg-qWC" id="7KR-C2-57e"/>
                     </connections>
                 </viewController>
@@ -186,11 +188,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="qrcode_tabbar_icon_barcode.png" width="40" height="40"/>
-        <image name="qrcode_tabbar_icon_qrcode.png" width="40" height="40"/>
-        <image name="yu_sao_01.png" width="260" height="260"/>
-        <image name="yu_sao_02.png" width="256" height="2"/>
-        <image name="yu_sao_03.png" width="46" height="46"/>
-        <image name="yu_sao_04.png" width="46" height="46"/>
+        <image name="TTQRScanPng.bundle/yu_sao_03.png" width="16" height="16"/>
+        <image name="TTQRScanPng.bundle/yu_sao_04.png" width="16" height="16"/>
+        <image name="icon_ewm" width="40" height="40"/>
+        <image name="icon_txm" width="40" height="40"/>
+        <image name="yu_sao_01" width="260" height="260"/>
+        <image name="yu_sao_02" width="256" height="2"/>
     </resources>
 </document>

@@ -9,17 +9,17 @@
 Pod::Spec.new do |s|
 
     s.name         = "TTOCKit"
-    s.version      = "1.3.0"
+    s.version      = "1.3.1"
     s.summary      = " mvc."
     s.description  = <<-DESC
                 easy to mvc.
                    DESC
     s.homepage     = "https://github.com/ttayaa/TTOCKit"
-    s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+    s.license      = { :type => "MIT", :file => "LICENSE" }
     s.author       = { "ttayaa" => "2087154267@qq.com" }
     s.platform     = :ios, "8.0"
     s.source       = { :git => "https://github.com/ttayaa/TTOCKit.git", :tag => "v#{s.version}" }
-    s.source_files  = "TTOCKit/**/*.{h,m,mm}"
+#    s.source_files  = "TTOCKit/**/*.{h,m,mm}"
     
 #    s.resource_bundles = {
 #        'View' => ['TTOCKit/**/*.{xib,storyboard,bundle}']
@@ -35,97 +35,94 @@ Pod::Spec.new do |s|
     
     
     s.subspec 'TTControllerCategory' do |ss|
-        ss.source_files = 'TTOCKit/TTControllerCategory/**/*.{h,m,mm}'
+        ss.source_files = 'TTOCKit/TTControllerCategory/**/*.{h,m,mm,xib,storyboard}'
         ss.dependency 'DZNEmptyDataSet'
     end
     
     s.subspec 'TTMVVM' do |ss|
-        ss.source_files = 'TTOCKit/TTMVVM/**/*.{h,m,mm}'
+        ss.source_files = 'TTOCKit/TTMVVM/**/*.{h,m,mm,xib,storyboard}'
     end
     
     s.subspec 'TTTools' do |ss|
         ss.source_files = 'TTOCKit/TTTools/TTTools.h'
         
         ss.subspec 'TTCommonTools' do |sss|
-            sss.source_files = 'TTOCKit/TTTools/TTCommonTools/**/*.{h,m,mm}'
+            sss.source_files = 'TTOCKit/TTTools/TTCommonTools/**/*.{h,m,mm,xib,storyboard}'
             
         end
         ss.subspec 'TTBtnArrSelected' do |sss|
-            sss.source_files = 'TTOCKit/TTTools/TTBtnArrSelected/**/*.{h,m,mm}'
+            sss.source_files = 'TTOCKit/TTTools/TTBtnArrSelected/**/*.{h,m,mm,xib,storyboard}'
 
         end
         ss.subspec 'TTQRScanController' do |sss|
-            sss.source_files = 'TTOCKit/TTTools/TTQRScanController/**/*.{h,m,mm}'
+            sss.source_files = 'TTOCKit/TTTools/TTQRScanController/**/*.{h,m,mm,xib,storyboard}'
             sss.resource_bundles = {
-                  'View' => ['TTOCKit/TTTools/TTQRScanController/**/*.{xib,storyboard,bundle}']
+                   'TTQRScanPng' => ['TTOCKit/TTTools/TTQRScanController/Assets/**/*']
               }
+
 
         end
         ss.subspec 'TTPhotoBrowser' do |sss|
-            sss.source_files = 'TTOCKit/TTTools/TTPhotoBrowser/**/*.{h,m,mm}'
+            sss.source_files = 'TTOCKit/TTTools/TTPhotoBrowser/**/*.{h,m,mm,xib,storyboard}'
             sss.dependency 'SDWebImage'
         end
         ss.subspec 'TTNSStringCategory' do |sss|
-             sss.source_files = 'TTOCKit/TTTools/TTNSStringCategory/**/*.{h,m,mm}'
+             sss.source_files = 'TTOCKit/TTTools/TTNSStringCategory/**/*.{h,m,mm,xib,storyboard}'
         end
         ss.subspec 'TTPlaceholderPlace' do |sss|
-            sss.source_files = 'TTOCKit/TTTools/TTPlaceholderPlace/**/*.{h,m,mm}'
+            sss.source_files = 'TTOCKit/TTTools/TTPlaceholderPlace/**/*.{h,m,mm,xib,storyboard}'
 
         end
         ss.subspec 'TTNumberTF' do |sss|
-            sss.source_files = 'TTOCKit/TTTools/TTNumberTF/**/*.{h,m,mm}'
+            sss.source_files = 'TTOCKit/TTTools/TTNumberTF/**/*.{h,m,mm,xib,storyboard}'
 
         end
         ss.subspec 'TTProgress' do |sss|
-            sss.source_files = 'TTOCKit/TTTools/TTProgress/**/*.{h,m,mm}'
-            sss.resource_bundles = {
-                'View' => ['TTOCKit/TTTools/TTProgress/**/*.{xib,storyboard,bundle}']
-            }
-
+            sss.source_files = 'TTOCKit/TTTools/TTProgress/**/*.{h,m,mm,xib,storyboard}'
+           
         end
         ss.subspec 'TTLimitTextField' do |sss|
-            sss.source_files = 'TTOCKit/TTTools/TTLimitTextField/**/*.{h,m,mm}'
+            sss.source_files = 'TTOCKit/TTTools/TTLimitTextField/**/*.{h,m,mm,xib,storyboard}'
 
         end
         ss.subspec 'TTAlertView' do |sss|
-            sss.source_files = 'TTOCKit/TTTools/TTAlertView/**/*.{h,m,mm}'
+            sss.source_files = 'TTOCKit/TTTools/TTAlertView/**/*.{h,m,mm,xib,storyboard}'
 
         end
         ss.subspec 'TTWebView' do |sss|
-            sss.source_files = 'TTOCKit/TTTools/TTWebView/**/*.{h,m,mm}'
+            sss.source_files = 'TTOCKit/TTTools/TTWebView/**/*.{h,m,mm,xib,storyboard}'
 
         end
         ss.subspec 'TTLogVcDealloc' do |sss|
-            sss.source_files = 'TTOCKit/TTTools/TTLogVcDealloc/**/*.{h,m,mm}'
+            sss.source_files = 'TTOCKit/TTTools/TTLogVcDealloc/**/*.{h,m,mm,xib,storyboard}'
 
         end
         ss.subspec 'TTButtonInnerRect' do |sss|
-            sss.source_files = 'TTOCKit/TTTools/TTButtonInnerRect/**/*.{h,m,mm}'
+            sss.source_files = 'TTOCKit/TTTools/TTButtonInnerRect/**/*.{h,m,mm,xib,storyboard}'
 
         end
     end
     
     s.subspec 'TTNetwork' do |ss|
-        ss.source_files = 'TTOCKit/TTNetwork/*.{h,m,mm}'
+        ss.source_files = 'TTOCKit/TTNetwork/*.{h,m,mm,xib,storyboard}'
         
-        ss.resource_bundles = {
-            'View' => ['TTOCKit/TTNetwork/**/*.{xib,storyboard,bundle}']
-        }
+        ss.resource = 'TTOCKit/TTNetwork/**/*.{bundle}'
+
         ss.dependency 'AFNetworking'
         ss.dependency 'YYModel'
         
         ss.subspec 'NetChangeTools' do |sss|
-            sss.source_files = 'TTOCKit/TTNetwork/NetChangeTools/**/*.{h,m,mm}'
+            sss.source_files = 'TTOCKit/TTNetwork/NetChangeTools/**/*.{h,m,mm,xib,storyboard}'
         end
         
     end
     
     s.subspec 'TTSignal' do |ss|
-        ss.source_files = 'TTOCKit/TTSignal/**/*.{h,m,mm}'
+        ss.source_files = 'TTOCKit/TTSignal/**/*.{h,m,mm,xib,storyboard}'
     end
     
     s.subspec 'TTRouter' do |ss|
-        ss.source_files = 'TTOCKit/TTRouter/**/*.{h,m,mm}'
+        ss.source_files = 'TTOCKit/TTRouter/**/*.{h,m,mm,xib,storyboard}'
         ss.dependency 'YYModel'
     end
     

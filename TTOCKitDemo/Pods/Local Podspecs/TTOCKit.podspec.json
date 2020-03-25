@@ -6,7 +6,7 @@
   "homepage": "https://github.com/ttayaa/TTOCKit",
   "license": {
     "type": "MIT",
-    "file": "FILE_LICENSE"
+    "file": "LICENSE"
   },
   "authors": {
     "ttayaa": "2087154267@qq.com"
@@ -18,7 +18,6 @@
     "git": "https://github.com/ttayaa/TTOCKit.git",
     "tag": "v1.3.0"
   },
-  "source_files": "TTOCKit/**/*.{h,m,mm}",
   "requires_arc": true,
   "subspecs": [
     {
@@ -27,7 +26,7 @@
     },
     {
       "name": "TTControllerCategory",
-      "source_files": "TTOCKit/TTControllerCategory/**/*.{h,m,mm}",
+      "source_files": "TTOCKit/TTControllerCategory/**/*.{h,m,mm,xib,storyboard}",
       "dependencies": {
         "DZNEmptyDataSet": [
 
@@ -36,7 +35,7 @@
     },
     {
       "name": "TTMVVM",
-      "source_files": "TTOCKit/TTMVVM/**/*.{h,m,mm}"
+      "source_files": "TTOCKit/TTMVVM/**/*.{h,m,mm,xib,storyboard}"
     },
     {
       "name": "TTTools",
@@ -44,24 +43,24 @@
       "subspecs": [
         {
           "name": "TTCommonTools",
-          "source_files": "TTOCKit/TTTools/TTCommonTools/**/*.{h,m,mm}"
+          "source_files": "TTOCKit/TTTools/TTCommonTools/**/*.{h,m,mm,xib,storyboard}"
         },
         {
           "name": "TTBtnArrSelected",
-          "source_files": "TTOCKit/TTTools/TTBtnArrSelected/**/*.{h,m,mm}"
+          "source_files": "TTOCKit/TTTools/TTBtnArrSelected/**/*.{h,m,mm,xib,storyboard}"
         },
         {
           "name": "TTQRScanController",
-          "source_files": "TTOCKit/TTTools/TTQRScanController/**/*.{h,m,mm}",
+          "source_files": "TTOCKit/TTTools/TTQRScanController/**/*.{h,m,mm,xib,storyboard}",
           "resource_bundles": {
-            "View": [
-              "TTOCKit/TTTools/TTQRScanController/**/*.{xib,storyboard,bundle}"
+            "TTQRScanPng": [
+              "TTOCKit/TTTools/TTQRScanController/Assets/**/*"
             ]
           }
         },
         {
           "name": "TTPhotoBrowser",
-          "source_files": "TTOCKit/TTTools/TTPhotoBrowser/**/*.{h,m,mm}",
+          "source_files": "TTOCKit/TTTools/TTPhotoBrowser/**/*.{h,m,mm,xib,storyboard}",
           "dependencies": {
             "SDWebImage": [
 
@@ -70,55 +69,46 @@
         },
         {
           "name": "TTNSStringCategory",
-          "source_files": "TTOCKit/TTTools/TTNSStringCategory/**/*.{h,m,mm}"
+          "source_files": "TTOCKit/TTTools/TTNSStringCategory/**/*.{h,m,mm,xib,storyboard}"
         },
         {
           "name": "TTPlaceholderPlace",
-          "source_files": "TTOCKit/TTTools/TTPlaceholderPlace/**/*.{h,m,mm}"
+          "source_files": "TTOCKit/TTTools/TTPlaceholderPlace/**/*.{h,m,mm,xib,storyboard}"
         },
         {
           "name": "TTNumberTF",
-          "source_files": "TTOCKit/TTTools/TTNumberTF/**/*.{h,m,mm}"
+          "source_files": "TTOCKit/TTTools/TTNumberTF/**/*.{h,m,mm,xib,storyboard}"
         },
         {
           "name": "TTProgress",
-          "source_files": "TTOCKit/TTTools/TTProgress/**/*.{h,m,mm}",
-          "resource_bundles": {
-            "View": [
-              "TTOCKit/TTTools/TTProgress/**/*.{xib,storyboard,bundle}"
-            ]
-          }
+          "source_files": "TTOCKit/TTTools/TTProgress/**/*.{h,m,mm,xib,storyboard}"
         },
         {
           "name": "TTLimitTextField",
-          "source_files": "TTOCKit/TTTools/TTLimitTextField/**/*.{h,m,mm}"
+          "source_files": "TTOCKit/TTTools/TTLimitTextField/**/*.{h,m,mm,xib,storyboard}"
         },
         {
           "name": "TTAlertView",
-          "source_files": "TTOCKit/TTTools/TTAlertView/**/*.{h,m,mm}"
+          "source_files": "TTOCKit/TTTools/TTAlertView/**/*.{h,m,mm,xib,storyboard}"
         },
         {
           "name": "TTWebView",
-          "source_files": "TTOCKit/TTTools/TTWebView/**/*.{h,m,mm}"
+          "source_files": "TTOCKit/TTTools/TTWebView/**/*.{h,m,mm,xib,storyboard}"
         },
         {
           "name": "TTLogVcDealloc",
-          "source_files": "TTOCKit/TTTools/TTLogVcDealloc/**/*.{h,m,mm}"
+          "source_files": "TTOCKit/TTTools/TTLogVcDealloc/**/*.{h,m,mm,xib,storyboard}"
         },
         {
           "name": "TTButtonInnerRect",
-          "source_files": "TTOCKit/TTTools/TTButtonInnerRect/**/*.{h,m,mm}"
+          "source_files": "TTOCKit/TTTools/TTButtonInnerRect/**/*.{h,m,mm,xib,storyboard}"
         }
       ]
     },
     {
       "name": "TTNetwork",
-      "source_files": "TTOCKit/TTNetwork/*.{h,m,mm}",
-      "resource_bundles": {
-        "View": [
-          "TTOCKit/TTNetwork/**/*.{xib,storyboard,bundle}"
-        ]
-      },
+      "source_files": "TTOCKit/TTNetwork/*.{h,m,mm,xib,storyboard}",
+      "resources": "TTOCKit/TTNetwork/**/*.{bundle}",
       "dependencies": {
         "AFNetworking": [
 
@@ -130,17 +120,17 @@
       "subspecs": [
         {
           "name": "NetChangeTools",
-          "source_files": "TTOCKit/TTNetwork/NetChangeTools/**/*.{h,m,mm}"
+          "source_files": "TTOCKit/TTNetwork/NetChangeTools/**/*.{h,m,mm,xib,storyboard}"
         }
       ]
     },
     {
       "name": "TTSignal",
-      "source_files": "TTOCKit/TTSignal/**/*.{h,m,mm}"
+      "source_files": "TTOCKit/TTSignal/**/*.{h,m,mm,xib,storyboard}"
     },
     {
       "name": "TTRouter",
-      "source_files": "TTOCKit/TTRouter/**/*.{h,m,mm}",
+      "source_files": "TTOCKit/TTRouter/**/*.{h,m,mm,xib,storyboard}",
       "dependencies": {
         "YYModel": [
 

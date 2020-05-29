@@ -2,7 +2,7 @@
 #source 'https://github.com/CocoaPods/Specs.git'
 source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git’
 
- platform :ios, '8.0'
+ platform :ios, '9.0'
 
 target 'TTOCKitDemo' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
@@ -11,10 +11,10 @@ target 'TTOCKitDemo' do
   # Pods for TTOCKitDemo
 
 #pod 'YYModel'
-pod 'AFNetworking','~> 4.0.0'
+#pod 'AFNetworking','~> 4.0.0'
 #pod 'SDWebImage'
 #pod 'DZNEmptyDataSet'
 ###      pod 'TTOCKit'
 
-#pod 'TTOCKit', :path  => '../TTOCKit.podspec'
+pod 'TTOCKit', :path  => '../TTOCKit.podspec'
 end

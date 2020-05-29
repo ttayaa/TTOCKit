@@ -438,7 +438,7 @@ static BOOL NetWorklogResponseResult;
         
         if (requestType == NetWorkRequestTypeGET) {
             
-            [ShareAfnSessionMgr GET:URLString parameters:newDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [ShareAfnSessionMgr GET:URLString parameters:newDict   headers:@{}  progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 
                 [self doSuccess:responseObject task:task Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
                 
@@ -452,21 +452,22 @@ static BOOL NetWorklogResponseResult;
         
         else if (requestType == NetWorkRequestTypePOST) {
             
-            [ShareAfnSessionMgr POST:URLString parameters:newDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [ShareAfnSessionMgr POST:URLString parameters:newDict headers:@{}  progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 
                 [self doSuccess:responseObject
-                       task:task Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
-                
-                
+                           task:task Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                [self doFailure:failure IsShowHud:isshowhud Error:error];
                 
+                [self doFailure:failure IsShowHud:isshowhud Error:error];
             }];
+            
+
         }
         
         else if (requestType == NetWorkRequestTypePUT) {
             
-            [ShareAfnSessionMgr PUT:URLString parameters:newDict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+          
+            [ShareAfnSessionMgr PUT:URLString parameters:newDict headers:@{}  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 [self doSuccess:responseObject task:task Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 [self doFailure:failure IsShowHud:isshowhud Error:error];
@@ -474,7 +475,7 @@ static BOOL NetWorklogResponseResult;
         }
         else if (requestType == NetWorkRequestTypePATCH) {
             
-            [ShareAfnSessionMgr PATCH:URLString parameters:newDict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [ShareAfnSessionMgr PATCH:URLString parameters:newDict headers:@{}   success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 [self doSuccess:responseObject task:task Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 [self doFailure:failure IsShowHud:isshowhud Error:error];
@@ -482,7 +483,7 @@ static BOOL NetWorklogResponseResult;
         }
         else if(requestType == NetWorkRequestTypeDELETE) {
             
-            [ShareAfnSessionMgr DELETE:URLString parameters:newDict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [ShareAfnSessionMgr DELETE:URLString parameters:newDict headers:@{}   success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 [self doSuccess:responseObject task:task
                         Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -491,8 +492,9 @@ static BOOL NetWorklogResponseResult;
         }
         else if(requestType == NetWorkRequestTypeUPLOAD) {
             
+      
             
-            [ShareAfnSessionMgr POST:URLString parameters:newDict constructingBodyWithBlock:formDatablock progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [ShareAfnSessionMgr POST:URLString parameters:newDict headers:@{}  constructingBodyWithBlock:formDatablock progress:progress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 [self doSuccess:responseObject
                            task:task
                         Success:success Failure:failure CatchFlag:catchFlag SaveKey:saveKey IsShowHud:isshowhud];

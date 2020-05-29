@@ -9,13 +9,13 @@
 Pod::Spec.new do |s|
 
     s.name         = "TTOCKit"
-    s.version      = "1.3.1"
+    s.version      = "1.3.2"
     s.summary      = " mvc."
     s.description  = <<-DESC
                 easy to mvc.
                    DESC
     s.homepage     = "https://github.com/ttayaa/TTOCKit"
-    s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+    s.license      = { :type => "MIT", :file => "LICENSE" }
     s.author       = { "ttayaa" => "2087154267@qq.com" }
     s.platform     = :ios, "8.0"
     s.source       = { :git => "https://github.com/ttayaa/TTOCKit.git", :tag => "v#{s.version}" }
@@ -108,7 +108,7 @@ Pod::Spec.new do |s|
         
         ss.resource = 'TTOCKit/TTNetwork/**/*.{bundle}'
 
-        ss.dependency 'AFNetworking'
+        ss.dependency 'AFNetworking','~> 4.0.0'
         ss.dependency 'YYModel'
         
         ss.subspec 'NetChangeTools' do |sss|

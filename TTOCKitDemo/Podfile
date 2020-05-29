@@ -1,5 +1,6 @@
 # Uncomment the next line to define a global platform for your project
-source 'https://github.com/CocoaPods/Specs.git'
+#source 'https://github.com/CocoaPods/Specs.git'
+source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git’
 
  platform :ios, '8.0'
 
@@ -10,11 +11,10 @@ target 'TTOCKitDemo' do
   # Pods for TTOCKitDemo
 
 #pod 'YYModel'
-#pod 'AFNetworking'
+pod 'AFNetworking','~> 4.0.0'
 #pod 'SDWebImage'
 #pod 'DZNEmptyDataSet'
 ###      pod 'TTOCKit'
 
-pod 'TTOCKit', :path  => '../TTOCKit.podspec'
-
+#pod 'TTOCKit', :path  => '../TTOCKit.podspec'
 end

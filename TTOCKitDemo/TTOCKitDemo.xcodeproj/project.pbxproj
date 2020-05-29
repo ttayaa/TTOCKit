@@ -20,6 +20,7 @@
 		1898F506208F1CC300647FC9 /* TableViewCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898F4FD208F1CC300647FC9 /* TableViewCell1.m */; };
 		1898F62B208F215300647FC9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898F627208F215200647FC9 /* AppDelegate.m */; };
 		1898F62C208F215300647FC9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898F62A208F215300647FC9 /* ViewController.m */; };
+		18CF48222480EEA30023D5CB /* TTOCKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 18CF48212480EEA30023D5CB /* TTOCKit.podspec */; };
 		D2CD3A8CAFDBE1F1016E66C1 /* Pods_TTOCKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE11FB83628B3001E0F2223A /* Pods_TTOCKitDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		1898F628208F215200647FC9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1898F629208F215300647FC9 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		1898F62A208F215300647FC9 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		18CF48212480EEA30023D5CB /* TTOCKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TTOCKit.podspec; path = ../../TTOCKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3B2045AFD3AF51BF34B7798C /* Pods-TTOCKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTOCKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TTOCKitDemo/Pods-TTOCKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		CE11FB83628B3001E0F2223A /* Pods_TTOCKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TTOCKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE465CB0BF6252462AB40D23 /* Pods-TTOCKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTOCKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TTOCKitDemo/Pods-TTOCKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		1898F4CC208F1B9700647FC9 /* TTOCKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				18CF48212480EEA30023D5CB /* TTOCKit.podspec */,
 				1898F4FE208F1CC300647FC9 /* TableViewCel2.h */,
 				1898F4F6208F1CC200647FC9 /* TableViewCel2.m */,
 				1898F4F5208F1CC200647FC9 /* TableViewCel2.xib */,
@@ -189,6 +192,7 @@
 				1898F4D5208F1B9700647FC9 /* Main.storyboard in Resources */,
 				1898F500208F1CC300647FC9 /* TableViewCel2.xib in Resources */,
 				1898F505208F1CC300647FC9 /* TableViewCell1.xib in Resources */,
+				18CF48222480EEA30023D5CB /* TTOCKit.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

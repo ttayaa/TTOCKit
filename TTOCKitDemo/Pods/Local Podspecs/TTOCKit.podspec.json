@@ -1,12 +1,12 @@
 {
   "name": "TTOCKit",
-  "version": "1.3.0",
+  "version": "1.3.2",
   "summary": "mvc.",
   "description": "easy to mvc.",
   "homepage": "https://github.com/ttayaa/TTOCKit",
   "license": {
     "type": "MIT",
-    "file": "FILE_LICENSE"
+    "file": "LICENSE"
   },
   "authors": {
     "ttayaa": "2087154267@qq.com"
@@ -16,7 +16,7 @@
   },
   "source": {
     "git": "https://github.com/ttayaa/TTOCKit.git",
-    "tag": "v1.3.0"
+    "tag": "v1.3.2"
   },
   "requires_arc": true,
   "subspecs": [
@@ -111,7 +111,7 @@
       "resources": "TTOCKit/TTNetwork/**/*.{bundle}",
       "dependencies": {
         "AFNetworking": [
-
+          "~> 4.0.0"
         ],
         "YYModel": [
 

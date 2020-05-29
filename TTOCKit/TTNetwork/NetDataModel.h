@@ -12,7 +12,6 @@
 #import "NSObject+tt_PrintProperty.h"
 @class NetDataModel;
 
-
 #define NetDataModelOverride(datamodelName)\
 \
 \

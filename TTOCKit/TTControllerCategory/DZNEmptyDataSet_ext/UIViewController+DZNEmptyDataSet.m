@@ -8,8 +8,10 @@
 
 #import "UIViewController+DZNEmptyDataSet.h"
 #import <objc/runtime.h>
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface UIViewController (DZNEmptyDataSetEXT)
+
+@interface UIViewController (DZNEmptyDataSetEXT)<DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 @property(nonatomic,copy)  DZNEmptyDataSet_viewClickBlock TTimgViewClickBlock;
 
 
@@ -28,16 +30,21 @@
 }
 
 @end
+
+@interface UIViewController (DZNEmptyDataSet)<DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+
+@end
+
 @implementation UIViewController (DZNEmptyDataSet)
 
-@dynamic TTisShowEmpty;
+//@dynamic TTisShowEmpty;
 -(BOOL)TTisShowEmpty
 {
     return [objc_getAssociatedObject(self, @selector(TTisShowEmpty)) boolValue] ;
 }
 
 
-@dynamic TTVerticalOffset;
+//@dynamic TTVerticalOffset;
 -(CGFloat)TTVerticalOffset
 {
     return [objc_getAssociatedObject(self, @selector(TTVerticalOffset)) floatValue] ;
@@ -46,7 +53,7 @@
 {
     objc_setAssociatedObject(self, @selector(TTVerticalOffset), @(TTVerticalOffset), OBJC_ASSOCIATION_RETAIN);
 }
-@dynamic TTSpaceHeight;
+//@dynamic TTSpaceHeight;
 -(CGFloat)TTSpaceHeight
 {
     return [objc_getAssociatedObject(self, @selector(TTSpaceHeight)) floatValue] ;
@@ -64,7 +71,7 @@
 
 
 
-@dynamic TTtitleForEmpty;
+//@dynamic TTtitleForEmpty;
 -(NSString *)TTtitleForEmpty
 {
     
@@ -82,7 +89,7 @@
     objc_setAssociatedObject(self, @selector(TTtitleForEmpty), TTtitleForEmpty, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-@dynamic TTtitleForEmptyAttributes;
+//@dynamic TTtitleForEmptyAttributes;
 -(NSDictionary *)TTtitleForEmptyAttributes
 {
     
@@ -109,7 +116,7 @@
 
 
 
-@dynamic TTdescriptionForEmpty;
+//@dynamic TTdescriptionForEmpty;
 
 -(NSString *)TTdescriptionForEmpty
 {
@@ -127,7 +134,7 @@
     objc_setAssociatedObject(self, @selector(TTdescriptionForEmpty), TTdescriptionForEmpty, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-@dynamic TTdescriptionForEmptyAttributes;
+//@dynamic TTdescriptionForEmptyAttributes;
 -(NSDictionary *)TTdescriptionForEmptyAttributes
 {
     
@@ -158,7 +165,7 @@
 
 
 
-@dynamic TTimageNameForEmpty;
+//@dynamic TTimageNameForEmpty;
 
 -(NSString *)TTimageNameForEmpty
 {
@@ -175,7 +182,7 @@
     objc_setAssociatedObject(self, @selector(TTimageNameForEmpty), TTimageNameForEmpty, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-@dynamic TTBackgroundColorForEmpty;
+//@dynamic TTBackgroundColorForEmpty;
 -(UIColor *)TTBackgroundColorForEmpty
 {
     

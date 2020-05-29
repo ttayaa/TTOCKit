@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIScrollView+EmptyDataSet.h"
+//#import "UIScrollView+EmptyDataSet.h"
 
 
 typedef void (^DZNEmptyDataSet_viewClickBlock)(UIView *view);
 
 
-@interface UIViewController (DZNEmptyDataSet)<DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+@interface UIViewController (DZNEmptyDataSet)
 
 /**
  *  是否展示空白页 默认为YES

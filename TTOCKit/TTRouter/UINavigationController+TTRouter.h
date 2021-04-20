@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "UIViewController+CustomPopVc.h"
 
+typedef void (^TTRouterCallBackBlock)(id parameter);
 typedef void (^NVWillPushBlock)(UIViewController *vc,NSMutableDictionary *dict);
 typedef void (^TTWillPresentCompletionBlock)(void);
-typedef void (^TTRouterCallBackBlock)(id parameter);
 @interface UIViewController (TTRouter)
 
 //回调的block

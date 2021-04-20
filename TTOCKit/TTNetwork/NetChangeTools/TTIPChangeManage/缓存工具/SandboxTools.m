@@ -144,11 +144,9 @@ static  NSMutableArray<NSMutableDictionary *> *KeyNameArr;
 {
     
     NSMutableDictionary *dict =  [self getAllPropertiesAndVaulesWithObj:obj];
+        
     
-//    NSMutableDictionary *archiverDict = [NSMutableDictionary dictionary];
-    
-    
-    [self convertModelArrInDict:dict];
+    [self convertDict:dict];
     
     
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dict];
@@ -158,15 +156,15 @@ static  NSMutableArray<NSMutableDictionary *> *KeyNameArr;
 }
 
 
-//递归处理字典(转换字典中的模型数组 为字典数组)
-+(void)convertModelArrInDict:(NSMutableDictionary *)dict
+//递归处理字典(转换字典中的模型数组和模型 )
++(void)convertDict:(NSMutableDictionary *)dict
 {
     
     //如果字典里面有数组
     [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         
+        //处理字典中的数组
         if ([obj isKindOfClass:[NSArray class]]) {
-            
             
             NSArray *arr = (NSArray *)obj;
             NSMutableArray * newArr = [NSMutableArray array];
@@ -191,7 +189,7 @@ static  NSMutableArray<NSMutableDictionary *> *KeyNameArr;
                     
                     [newArr addObject:Mdict];
                     
-                    [self convertModelArrInDict:Mdict];
+                    [self convertDict:Mdict];
                     
                 }
                 
@@ -207,6 +205,31 @@ static  NSMutableArray<NSMutableDictionary *> *KeyNameArr;
             
            
         }
+        
+        //处理字典中的模型
+        if (
+            ![obj isKindOfClass:[NSArray class]]
+            &&
+            ! [obj isKindOfClass:[NSDictionary class]]
+             &&
+            ! [obj isKindOfClass:[NSSet class]]
+             &&
+            ! [obj isKindOfClass:[NSString class]]
+            &&
+            ! [obj isKindOfClass:[NSValue class]]
+            &&
+            ! [obj isKindOfClass:[UIView class]]
+            ){
+            
+            //将模型转化为字典
+            NSMutableDictionary *Mdict =  [self getAllPropertiesAndVaulesWithObj:obj];
+            
+            [self convertDict:Mdict];
+            
+            dict[key] = Mdict;
+
+        }
+        
         
     }];
     
@@ -228,15 +251,33 @@ static  NSMutableArray<NSMutableDictionary *> *KeyNameArr;
         NSString * propertyName = [NSString stringWithUTF8String:char_f];
         
         id propertyValue;
-        
         @try {
             propertyValue = [obj valueForKey:(NSString *)propertyName];
         }
         @catch (NSException *exception) {
         }
-        if (propertyValue) [props setObject:propertyValue forKey:propertyName];
-        //如果是基本数据类型无法KVC
-        else [props setObject:[NSString stringWithFormat:@"%d",(int)propertyValue] forKey:propertyName];
+        if (propertyValue == nil || [propertyValue isEqual:[NSNull null]])
+        {
+            
+        }
+        else{
+            
+                [props setObject:propertyValue forKey:propertyName];
+        }
+        
+//        @try {
+//            propertyValue = [obj valueForKey:(NSString *)propertyName];
+//        }
+//        @catch (NSException *exception) {
+//        }
+//        if (propertyValue)
+//        {
+//            [props setObject:propertyValue forKey:propertyName];
+//        }
+//        //如果是基本数据类型无法KVC
+//        else {
+//            [props setObject:[NSString stringWithFormat:@"%d",(int)propertyValue] forKey:propertyName];
+//        }
     }
     free(properties);
     

@@ -13,6 +13,7 @@
 #import "tetController.h"
 
 #import "testmodel.h"
+#import "TTRouter.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -82,8 +83,19 @@
     
     self.tableView.tableFooterView = [UIView new];
     
+//    [TTRouter call:@"test" parms:^(NSMutableDictionary *dict) {
+//        
+//    } callback:^(id parameter) {
+//        
+//    }];
     
+ 
     
+//    [self.navigationController TTPushViewController:1 animated:0 SetupParms:^(UIViewController *vc, NSMutableDictionary *dict) {
+//
+//    } callback:(id) jumpError:^{
+//
+//    }
 }
 
 TTTableViewDatasoureDelegate

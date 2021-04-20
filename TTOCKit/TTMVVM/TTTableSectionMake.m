@@ -417,7 +417,9 @@
                     [view performSelector:sel withObject:data];
                 }
                 
-                CGFloat height = [self culAutoLayoutHeightWithtempView:view.contentView table:tableView];
+
+                CGFloat height = [self culAutoLayoutHeightWithtempView:view table:tableView];
+
                 
                 [tableView.HeightCatchDict addEntriesFromDictionary:@{
                                                                       @(section+11111):@(height)
@@ -492,7 +494,7 @@
                         [view performSelector:sel withObject:data];
                     }
                     
-                    CGFloat height = [self culAutoLayoutHeightWithtempView:view.contentView table:tableView];
+                    CGFloat height = [self culAutoLayoutHeightWithtempView:view table:tableView];
                     
                     [tableView.HeightCatchDict addEntriesFromDictionary:@{
                                                                           @(section+11111):@(height)
@@ -740,7 +742,7 @@
                     [view performSelector:sel withObject:data];
                 }
                 
-                CGFloat height = [self culAutoLayoutHeightWithtempView:view.contentView table:tableView];
+                CGFloat height = [self culAutoLayoutHeightWithtempView:view table:tableView];
                 
                 [tableView.HeightCatchDict addEntriesFromDictionary:@{
                                                                       @(section+9999):@(height)

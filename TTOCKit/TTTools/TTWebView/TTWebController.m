@@ -21,7 +21,11 @@
 @end
 
 @implementation TTWebController
-
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+}
 -(void)setupProgressView
 {
     UIProgressView *progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0)];
@@ -51,20 +55,28 @@
     
     if (self.navigationController) {
         if(self.tabBarController&&self.tabBarController.tabBar.userInteractionEnabled==NO) {
-            self.edgesForExtendedLayout=UIRectEdgeNone;
-            web.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - NbarHeight - 49);
+//            self.edgesForExtendedLayout=UIRectEdgeNone;
+//            web.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - NbarHeight - 49);
+//
+//            if (isTTiPhoneX) {
+//                web.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - NbarHeight - 83);
+//            }
             
-            if (isTTiPhoneX) {
-                web.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - NbarHeight - 83);
-            }
+            
+            web.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 49);
+            
+              if (isTTiPhoneX) {
+                  web.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height  - 83);
+              }
             
         }
         else
         {
-            self.edgesForExtendedLayout=UIRectEdgeBottom;
+//            self.edgesForExtendedLayout=UIRectEdgeBottom;
             
-            web.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - NbarHeight);
-            
+//            web.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - NbarHeight);
+            web.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height );
+//
         }
     }else{
         if(self.tabBarController&&self.tabBarController.tabBar.userInteractionEnabled==NO) {
@@ -154,11 +166,11 @@
 //        if (obj.frame.size.height == BarHeight&&obj.frame.size.width == [UIScreen mainScreen].bounds.size.width) {
 //            ishaveAnimatNavBar=YES;
 //        }
-//        
-//    }];
-//    
 //
-//    
+//    }];
+//
+//
+//
 //    if (!ishaveAnimatNavBar) {
 //        self.navigationController.navigationBar.subviews[1].frame = CGRectMake(0, self.navigationController.navigationBar.subviews[1].frame.origin.y-self.view.frame.origin.y, self.navigationController.navigationBar.subviews[1].frame.size.width, self.navigationController.navigationBar.subviews[1].frame.size.height);
 //            [self.view addSubview:self.navigationController.navigationBar.subviews[1]];
